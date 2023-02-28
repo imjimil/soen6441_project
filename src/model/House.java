@@ -6,23 +6,20 @@ package model;
  * Student 2: 	Jimil Suchitkumar Prajapati - 40205477
  * Student 3:   Anitha Ramakrishan			- 40231724
  * 
- * Condo class
+ * House class
  */
-public class Condo extends Property {
-
+public class House extends Property {
+	
 	private int streetNo;
 	
-	private int unitNo;
-	
-	public Condo() {
+	public House() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Condo(int streetNo, int unitNo) {
+	public House(int streetNo) {
 		super();
 		this.streetNo = streetNo;
-		this.unitNo = unitNo;
 	}
 
 	public int getStreetNo() {
@@ -31,14 +28,6 @@ public class Condo extends Property {
 
 	public void setStreetNo(int streetNo) {
 		this.streetNo = streetNo;
-	}
-
-	public int getUnitNo() {
-		return unitNo;
-	}
-
-	public void setUnitNo(int unitNo) {
-		this.unitNo = unitNo;
 	}
 
 	@Override
