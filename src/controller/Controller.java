@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import model.Lease;
 import model.Property;
 import model.PropertyFactory;
 import utility.Constant;
@@ -89,7 +90,18 @@ public class Controller {
 				}
 				break;
 			case 2:
-				// Add a tenant
+				// Add a tenants
+				ArrayList<Lease> LeaseNos = new ArrayList<>();
+				ArrayList<Property> InterestedProps = new ArrayList<>();
+				System.out.println("Enter the Tenant Name:");
+				scanner.nextLine();
+				String tenantName = scanner.nextLine();
+				System.out.println("Enter the Tenant Phone No:");
+				String phoneNo = scanner.nextLine();
+				System.out.println("Enter the Tenant Email:");
+				String emailID = scanner.nextLine();
+				System.out.println("Enter the UnitNo Rented:");
+				String unitNo = scanner.nextLine();
 				
 				break;
 			
