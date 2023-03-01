@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * 
  * Tenant class
  */
-public class Tenant implements IPropertyTenantLease {
+public class Tenant implements ITenantLease {
 
 	private int tenantId;
 	
@@ -103,6 +103,13 @@ public class Tenant implements IPropertyTenantLease {
 	public void display() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Object create(ArrayList<Object> data) {
+		Tenant tenant = new Tenant();
+		
+		return tenant;
 	}
 
 }

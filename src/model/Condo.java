@@ -1,5 +1,9 @@
 package model;
 
+import java.util.ArrayList;
+
+import utility.Constant;
+
 /**
  * Project Phase 1
  * Student 1: 	Quoc Phong Ngo 				- 40230574
@@ -15,12 +19,11 @@ public class Condo extends Property {
 	private int unitNo;
 	
 	public Condo() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Condo(int streetNo, int unitNo) {
-		super();
+	public Condo(int streetNo, int unitNo, int numberOfBedRoom, int numberOfBathRoom,
+			float squareFootage, String streetName, String city, String postalCode) {
+		super(numberOfBedRoom, numberOfBathRoom, squareFootage, streetName, city, postalCode);
 		this.streetNo = streetNo;
 		this.unitNo = unitNo;
 	}
@@ -42,9 +45,29 @@ public class Condo extends Property {
 	}
 
 	@Override
-	public void display() {
-		// TODO Auto-generated method stub
+	public String display() {
+		return Constant.CONDO + "- Street No:" + this.streetNo + ", Unit No: " + this.unitNo + ", No.BedRoom: " + this.numberOfBedRoom + ""
+				+ ", No.BathRoom: " + this.numberOfBathRoom + ", squareFootage: " + this.squareFootage + ", StreetName: " + this.streetName + ", City: " + this.city + ", postalCode: " + this.postalCode;
+	}
+
+	@Override
+	public Condo create(ArrayList<Object> data) {
+		// Add a new condo
+		if(data.size() > 0) {
+			int numberOfBedRoom = (int) data.get(0);
+			int numberOfBathRoom = (int) data.get(1);
+			float squareFootage = (float) data.get(2);
+			String streetName = (String) data.get(3);
+			String city = (String) data.get(4);
+			String postalCode = (String) data.get(5);
+			int streetNo = (int) data.get(6);
+			int unitNo = (int) data.get(7);
+			Condo condo = new Condo(streetNo, unitNo, numberOfBedRoom, numberOfBathRoom, squareFootage, streetName, city, postalCode);
+			
+			return condo;
+		}
 		
+		return null;
 	}
 
 }

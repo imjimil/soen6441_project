@@ -10,7 +10,7 @@ package model;
  * Property class
  */
 
-public abstract class Property implements IPropertyTenantLease {
+public abstract class Property implements IProperty {
 	
 	protected int numberOfBedRoom;
 	
@@ -25,4 +25,19 @@ public abstract class Property implements IPropertyTenantLease {
 	protected String postalCode;
 	
 	protected Boolean status;
+	
+	protected Property() {
+		
+	}
+	
+	protected Property(int numberOfBedRoom, int numberOfBathRoom,
+			float squareFootage, String streetName, String city, String postalCode) {
+		this.numberOfBedRoom = numberOfBedRoom;
+		this.numberOfBathRoom = numberOfBathRoom;
+		this.squareFootage = squareFootage;
+		this.streetName = streetName;
+		this.city = city;
+		this.postalCode = postalCode;
+		this.status = true;
+	}
 }

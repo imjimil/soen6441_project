@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Date;
  * 
  * Lease class
  */
-public class Lease implements IPropertyTenantLease {
+public class Lease implements ITenantLease {
 
 	private String leaseNo;
 	
@@ -92,6 +93,13 @@ public class Lease implements IPropertyTenantLease {
 	public void display() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Lease create(ArrayList<Object> data) {
+		Lease lease = new Lease();
+		
+		return lease;
 	}
 
 }
