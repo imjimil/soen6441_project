@@ -14,6 +14,6 @@ public interface ITenantLease {
 	
 	public Object create(ArrayList<Object> data);
 	
-	public void display();
+	public String display();
 
 }

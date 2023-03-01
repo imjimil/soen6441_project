@@ -100,9 +100,12 @@ public class Tenant implements ITenantLease {
 	}
 
 	@Override
-	public void display() {
+	public String display() {
 		// TODO Auto-generated method stub
-		
+		return "- tenant ID:" + this.tenantId + ", tenantName: " + this.tenantName + ""
+				+ ", tenantPhone: " + this.tenantPhone + ", tenantEmail: " + this.tenantEmail
+				+ ", unitRented: " + this.unitRented + ", leases: " + this.leases + ", interestedUnits: "
+				+ this.interestedUnits;
 	}
 
 	@Override

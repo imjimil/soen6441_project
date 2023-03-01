@@ -6,6 +6,7 @@ import java.util.Scanner;
 import model.Lease;
 import model.Property;
 import model.PropertyFactory;
+import model.Tenant;
 import utility.Constant;
 
 public class Controller {
@@ -13,6 +14,7 @@ public class Controller {
 	public void mainFunction() {
 		Scanner scanner = new Scanner(System.in);
 		ArrayList<Property> properties = new ArrayList<>();
+		ArrayList<Tenant> tenants = new ArrayList<>();
 		while(true) {
 			System.out.println("--------------------------");
 			System.out.println("1.  Add a property");
@@ -102,6 +104,11 @@ public class Controller {
 				String emailID = scanner.nextLine();
 				System.out.println("Enter the UnitNo Rented:");
 				String unitNo = scanner.nextLine();
+
+				int id = tenants.size()+1;
+				Tenant tnt = new Tenant(id,tenantName,phoneNo,emailID,unitNo,null, null );
+				tenants.add(tnt);
+				System.out.println("Tenant Added Successfully!");
 				
 				break;
 			
@@ -111,7 +118,15 @@ public class Controller {
 				break;
 			case 4:
 				// Display tenants
-				
+				if(tenants.size() > 0) {
+					for (int i = 0; i < tenants.size(); i++) {
+						if(tenants.get(i).toString() != null) {
+							System.out.println(tenants.get(i).display());
+						}
+					}
+				} else {
+					System.out.println("No tenants found.");
+				}
 				break;
 			case 5:
 				// Display properties

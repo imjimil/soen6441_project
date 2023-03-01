@@ -90,9 +90,9 @@ public class Lease implements ITenantLease {
 	}
 
 	@Override
-	public void display() {
+	public String display() {
 		// TODO Auto-generated method stub
-
+		return "";
 	}
 
 	@Override
