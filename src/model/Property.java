@@ -29,7 +29,7 @@ public abstract class Property implements IProperty {
 	protected Property() {
 		
 	}
-	
+		
 	protected Property(int numberOfBedRoom, int numberOfBathRoom,
 			float squareFootage, String streetName, String city, String postalCode) {
 		this.numberOfBedRoom = numberOfBedRoom;

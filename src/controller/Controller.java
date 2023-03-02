@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 import model.Lease;
@@ -12,8 +13,10 @@ import view.PropertyView;
 
 public class Controller {
 	private PropertyView propertyView;
-	public Controller(PropertyView propertyView) {
+	private Property propertyModel;
+	public Controller(PropertyView propertyView, Property propertyModel) {
 		this.propertyView = propertyView;
+		this.propertyModel = propertyModel;
 	}
 	
 	public void mainFunction() {
@@ -40,61 +43,21 @@ public class Controller {
 			switch (cmd){
 			case 1:
 				// Add a property
-				System.out.println("Enter property type (A for Apartment, C for Condo, H for House):");
-				scanner.nextLine();
-				String propertyType = scanner.nextLine();				
-				System.out.println("Enter number of bed room:");
-				int numberOfBedRoom = scanner.nextInt();
-				System.out.println("Enter number of bath room:");
-				int numberOfBathRoom = scanner.nextInt();
-				System.out.println("Enter square footage:");
-				scanner.nextLine();
-				Float squareFootage = scanner.nextFloat();
-				System.out.println("Enter street name:");
-				scanner.nextLine();
-				String streetName = scanner.nextLine();
-				System.out.println("Enter city:");
-				String city = scanner.nextLine();
-				System.out.println("Enter postal code:");
-				String postalCode = scanner.nextLine();
-				
-				ArrayList<Object> propertyData = new ArrayList<Object>();
-				propertyData.add(numberOfBedRoom);
-				propertyData.add(numberOfBathRoom);
-				propertyData.add(squareFootage);
-				propertyData.add(streetName);
-				propertyData.add(city);
-				propertyData.add(postalCode);
-				
 				PropertyFactory propertyFactory = new PropertyFactory();
-				if("A".equals(propertyType)) {
-					System.out.println("Enter civic address:");
-					String civicAddress = scanner.nextLine();
-					System.out.println("Enter apt No:");
-					int aptNo = scanner.nextInt();
-					propertyData.add(civicAddress);
-					propertyData.add(aptNo);
-					
-					Property apartment = propertyFactory.createProperty(Constant.APARTMENT);
-					properties.add(apartment.create(propertyData));
-				} else if ("C".equals(propertyType)) {
-					System.out.println("Enter Street No:");
-					int streetNo = scanner.nextInt();
-					System.out.println("Enter Unit No:");
-					int unitNo = scanner.nextInt();
-					propertyData.add(streetNo);
-					propertyData.add(unitNo);
-					
-					Property condo = propertyFactory.createProperty(Constant.CONDO);
-					properties.add(condo.create(propertyData));
-				} else if ("H".equals(propertyType)) {
-					System.out.println("Enter Street No:");
-					int streetNo = scanner.nextInt();
-					propertyData.add(streetNo);
-					
-					Property house = propertyFactory.createProperty(Constant.HOUSE);
-					properties.add(house.create(propertyData));
+				Map<String, ArrayList<Object>> inputPropertyData = propertyView.getPropertyInfo();
+				for (Map.Entry<String, ArrayList<Object>> pair : inputPropertyData.entrySet()) {
+					if("A".equals(pair.getKey())) {
+						propertyModel = propertyFactory.createProperty(Constant.APARTMENT);
+						properties.add(propertyModel.create(pair.getValue()));
+					} else if ("C".equals(pair.getKey())) {
+						propertyModel = propertyFactory.createProperty(Constant.CONDO);
+						properties.add(propertyModel.create(pair.getValue()));
+					} else if ("H".equals(pair.getKey())) {
+						propertyModel = propertyFactory.createProperty(Constant.HOUSE);
+						properties.add(propertyModel.create(pair.getValue()));
+					}
 				}
+				
 				break;
 			case 2:
 				// Add a tenants

@@ -1,4 +1,6 @@
 import controller.Controller;
+import model.Apartment;
+import model.Property;
 import view.PropertyView;
 
 /**
@@ -12,7 +14,8 @@ public class ProjectPhase1 {
 	
 	public static void main(String[] args) {
 		PropertyView view = new PropertyView();
-        Controller controller = new Controller(view);
+		Property propertyModel = new Apartment();
+        Controller controller = new Controller(view, propertyModel);
         controller.mainFunction();
 	}
 	
