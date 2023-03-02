@@ -188,7 +188,7 @@ public class Controller {
 				// Display all leases
 				if(leases.size() > 0) {
 					for (int i = 0; i < leases.size(); i++) {
-						System.out.println(leases.get(i).display());
+						System.out.println((i+1) + leases.get(i).display());
 					}
 				}
 				else {
