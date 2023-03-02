@@ -33,10 +33,29 @@ public class House extends Property {
 		this.streetNo = streetNo;
 	}
 
+
 	@Override
 	public String display() {
-		return Constant.HOUSE + "- Street No:" + this.streetNo + ", No.BedRoom: " + this.numberOfBedRoom + ""
-				+ ", No.BathRoom: " + this.numberOfBathRoom + ", squareFootage: " + this.squareFootage + ", StreetName: " + this.streetName + ", City: " + this.city + ", postalCode: " + this.postalCode;
+		return Constant.HOUSE + ", ID- "+propertyID + ", Street No:" + this.streetNo + ", No.BedRoom: " + this.numberOfBedRoom + ""
+				+ ", No.BathRoom: " + this.numberOfBathRoom + ", squareFootage: " + this.squareFootage + ", StreetName: " + this.streetName + ", City: " + this.city + ", postalCode: " + this.postalCode +"status- "+status;
+	}
+
+	public String displayVacant() {
+		if(status==true) {
+			return display();
+		}
+		else {
+			return "No Vacant Properties";
+		}
+	}
+
+	public String displayRented() {
+		if(status==false) {
+			return display();
+		}
+		else {
+			return "No Ranted Properties";
+		}	
 	}
 
 	@Override

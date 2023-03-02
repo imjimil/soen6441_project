@@ -16,4 +16,8 @@ public interface IProperty {
 	
 	public String display();
 
+	public String displayVacant();
+
+	public String displayRented();
+
 }

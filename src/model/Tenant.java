@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Project Phase 1
@@ -81,16 +82,20 @@ public class Tenant implements ITenantLease {
 	public void setInterestedUnits(ArrayList<Property> interestedUnits) {
 		this.interestedUnits = interestedUnits;
 	}
+
+	public int getID() {
+		return tenantId;
+	}
 	
 	public Tenant() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Tenant(int tenantId, String tenantName, String tenantPhone, String tenantEmail, String unitRented,
+	public Tenant(String tenantName, String tenantPhone, String tenantEmail, String unitRented,
 			ArrayList<Lease> leases, ArrayList<Property> interestedUnits) {
 		super();
-		this.tenantId = tenantId;
+		this.tenantId = new Random().nextInt(90000) + 10000;
 		this.tenantName = tenantName;
 		this.tenantPhone = tenantPhone;
 		this.tenantEmail = tenantEmail;
@@ -108,9 +113,23 @@ public class Tenant implements ITenantLease {
 				+ this.interestedUnits;
 	}
 
+	public Tenant getObjectByID(int ID, ArrayList<Tenant> tenant) {
+		for (Tenant tnt : tenant) {
+			if(tnt.getID() == ID) {
+				return tnt;
+			}
+		}
+		return null;
+	}
+
 	@Override
-	public Object create(ArrayList<Object> data) {
-		Tenant tenant = new Tenant();
+	public Tenant create(ArrayList<Object> data) {
+		String tName = (String) data.get(0);
+		String tPhone = (String) data.get(1);
+		String temail = (String) data.get(2);
+		String unitRented = (String) data.get(3); //Anitha do change this later, i've did this for working purpose.
+
+		Tenant tenant = new Tenant(tName, tPhone, temail, unitRented, null, null);
 		
 		return tenant;
 	}

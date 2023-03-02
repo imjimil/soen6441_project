@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Random;
 
 /**
  * Project Phase 1
@@ -11,6 +12,8 @@ package model;
  */
 
 public abstract class Property implements IProperty {
+
+	protected int propertyID;
 	
 	protected int numberOfBedRoom;
 	
@@ -29,9 +32,15 @@ public abstract class Property implements IProperty {
 	protected Property() {
 		
 	}
+
+	public int getID() {
+		return propertyID;
+	}
+
 		
 	protected Property(int numberOfBedRoom, int numberOfBathRoom,
 			float squareFootage, String streetName, String city, String postalCode) {
+		this.propertyID = new Random().nextInt(90000) + 10000;
 		this.numberOfBedRoom = numberOfBedRoom;
 		this.numberOfBathRoom = numberOfBathRoom;
 		this.squareFootage = squareFootage;

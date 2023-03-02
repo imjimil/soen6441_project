@@ -44,10 +44,29 @@ public class Apartment extends Property {
 		this.aptNo = aptNo;
 	}
 
+
 	@Override
 	public String display() {
-		return Constant.APARTMENT + "- Civic Address:" + this.civicAddress + ", Apt No: " + this.aptNo + ", No.BedRoom: " + this.numberOfBedRoom + ""
-				+ ", No.BathRoom: " + this.numberOfBathRoom + ", squareFootage: " + this.squareFootage + ", StreetName: " + this.streetName + ", City: " + this.city + ", postalCode: " + this.postalCode;
+		return Constant.APARTMENT + ", ID- "+propertyID +", Civic Address:" + this.civicAddress + ", Apt No: " + this.aptNo + ", No.BedRoom: " + this.numberOfBedRoom + ""
+				+ ", No.BathRoom: " + this.numberOfBathRoom + ", squareFootage: " + this.squareFootage + ", StreetName: " + this.streetName + ", City: " + this.city + ", postalCode: " + this.postalCode +"status- "+status;
+	}
+
+	public String displayVacant() {
+		if(status==true) {
+			return display();
+		}
+		else {
+			return "No Vacant Properties";
+		}	
+	}
+
+	public String displayRented() {
+		if(status==false) {
+			return display();
+		}
+		else {
+			return "No Ranted Properties";
+		}	
 	}
 
 	@Override

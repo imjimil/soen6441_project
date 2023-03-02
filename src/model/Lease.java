@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Project Phase 1
@@ -13,23 +14,25 @@ import java.util.Date;
  */
 public class Lease implements ITenantLease {
 
-	private String leaseNo;
+	private int leaseNo;
 	
 	private Date leaseStartDate;
 	
 	private Date leaseEndDate;
 	
-	private Float rentAmount;
+	private int rentAmount;
 	
 	private Boolean isRentPaid;
 	
 	private Tenant tenantInfo;
+
+	private Property propertyInfo;
 	
-	public String getLeaseNo() {
+	public int getLeaseNo() {
 		return leaseNo;
 	}
 
-	public void setLeaseNo(String leaseNo) {
+	public void setLeaseNo(int leaseNo) {
 		this.leaseNo = leaseNo;
 	}
 
@@ -49,11 +52,11 @@ public class Lease implements ITenantLease {
 		this.leaseEndDate = leaseEndDate;
 	}
 
-	public Float getRentAmount() {
+	public int getRentAmount() {
 		return rentAmount;
 	}
 
-	public void setRentAmount(Float rentAmount) {
+	public void setRentAmount(int rentAmount) {
 		this.rentAmount = rentAmount;
 	}
 
@@ -73,8 +76,8 @@ public class Lease implements ITenantLease {
 		this.tenantInfo = tenantInfo;
 	}
 
-	public Lease(String leaseNo, Date leaseStartDate, Date leaseEndDate, Float rentAmount, Boolean isRentPaid,
-			Tenant tenantInfo) {
+	public Lease(int leaseNo, Date leaseStartDate, Date leaseEndDate, int rentAmount, Boolean isRentPaid,
+			Tenant tenantInfo, Property propertyInfo) {
 		super();
 		this.leaseNo = leaseNo;
 		this.leaseStartDate = leaseStartDate;
@@ -82,6 +85,7 @@ public class Lease implements ITenantLease {
 		this.rentAmount = rentAmount;
 		this.isRentPaid = isRentPaid;
 		this.tenantInfo = tenantInfo;
+		this.propertyInfo = propertyInfo;
 	}
 	
 	public Lease() {
@@ -91,15 +95,26 @@ public class Lease implements ITenantLease {
 
 	@Override
 	public String display() {
-		// TODO Auto-generated method stub
-		return "";
+		return "Lease No-"+ leaseNo + ", Start Date- "+ leaseStartDate + ", End Date- "+ leaseEndDate 
+		+", Rent- "+ rentAmount + ", Rent paid- "+ isRentPaid + ", Tenant- "+ tenantInfo.getTenantName() +"\n"+" Property info- " + propertyInfo.display();
 	}
 
 	@Override
 	public Lease create(ArrayList<Object> data) {
-		Lease lease = new Lease();
+		if(data.size() > 0) {
+			int leaseNumber = new Random().nextInt(90000) + 10000;
+			Date start = (Date) data.get(0);
+			Date end = (Date) data.get(1);
+			int totalRent = (int) data.get(2);
+			Boolean rentStatus = (Boolean) data.get(3);
+			Tenant info = (Tenant) data.get(4);
+			Property propertyInfo = (Property) data.get(5);
+			Lease lease = new Lease(leaseNumber, start, end, totalRent, rentStatus, info, propertyInfo);
+			
+			return lease;
+		}
 		
-		return lease;
+		return null;
 	}
 
 }

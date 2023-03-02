@@ -46,8 +46,26 @@ public class Condo extends Property {
 
 	@Override
 	public String display() {
-		return Constant.CONDO + "- Street No:" + this.streetNo + ", Unit No: " + this.unitNo + ", No.BedRoom: " + this.numberOfBedRoom + ""
-				+ ", No.BathRoom: " + this.numberOfBathRoom + ", squareFootage: " + this.squareFootage + ", StreetName: " + this.streetName + ", City: " + this.city + ", postalCode: " + this.postalCode;
+		return Constant.CONDO + ", ID- "+propertyID + ", Street No:" + this.streetNo + ", Unit No: " + this.unitNo + ", No.BedRoom: " + this.numberOfBedRoom + ""
+				+ ", No.BathRoom: " + this.numberOfBathRoom + ", squareFootage: " + this.squareFootage + ", StreetName: " + this.streetName + ", City: " + this.city + ", postalCode: " + this.postalCode +"status- "+status;
+	}
+
+	public String displayVacant() {
+		if(status==true) {
+			return display();
+		}
+		else {
+			return "No Vacant Properties";
+		}
+	}
+
+	public String displayRented() {
+		if(status==false) {
+			return display();
+		}
+		else {
+			return "No Ranted Properties";
+		}	
 	}
 
 	@Override

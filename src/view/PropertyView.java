@@ -83,4 +83,25 @@ public class PropertyView {
 			}
 		}
     }
+
+	public void displayVacantProperty(ArrayList<Property> properties) {
+		for (int i = 0; i < properties.size(); i++) {
+			System.out.println(properties.get(i).displayVacant());
+		}
+	}
+
+	public void displayRantedProperty(ArrayList<Property> properties) {
+		for (int i = 0; i < properties.size(); i++) {
+			System.out.println(properties.get(i).displayRented());
+		}
+	}
+
+	public Property getObjectByID(int ID, ArrayList<Property> properties) {
+		for (Property property : properties) {
+			if(property.getID() == ID) {
+				return property;
+			}
+		}
+		return null;
+	}
 }
