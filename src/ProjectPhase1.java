@@ -1,4 +1,5 @@
 import controller.Controller;
+import view.PropertyView;
 
 /**
  * Project Phase 1
@@ -9,19 +10,10 @@ import controller.Controller;
  */
 public class ProjectPhase1 {
 	
-	private Controller controller;
-	
-	public ProjectPhase1() {
-		controller = new Controller();
-	}
-
 	public static void main(String[] args) {
-		ProjectPhase1 main = new ProjectPhase1();
-		main.demo();
+		PropertyView view = new PropertyView();
+        Controller controller = new Controller(view);
+        controller.mainFunction();
 	}
 	
-	public void demo() {
-		controller.mainFunction();
-	}
-
 }

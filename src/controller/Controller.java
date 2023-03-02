@@ -8,8 +8,13 @@ import model.Property;
 import model.PropertyFactory;
 import model.Tenant;
 import utility.Constant;
+import view.PropertyView;
 
 public class Controller {
+	private PropertyView propertyView;
+	public Controller(PropertyView propertyView) {
+		this.propertyView = propertyView;
+	}
 	
 	public void mainFunction() {
 		Scanner scanner = new Scanner(System.in);
@@ -131,11 +136,7 @@ public class Controller {
 			case 5:
 				// Display properties
 				if(properties.size() > 0) {
-					for (int i = 0; i < properties.size(); i++) {
-						if(properties.get(i).toString() != null) {
-							System.out.println(i+1 + ". " + properties.get(i).display());
-						}
-					}
+					propertyView.displayProperty(properties);
 				} else {
 					System.out.println("No properties found.");
 				}				
