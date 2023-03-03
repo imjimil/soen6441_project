@@ -37,6 +37,10 @@ public abstract class Property implements IProperty {
 		return propertyID;
 	}
 
+	public void setStatus(Boolean stat) {
+		this.status = stat;
+	}
+
 		
 	protected Property(int numberOfBedRoom, int numberOfBathRoom,
 			float squareFootage, String streetName, String city, String postalCode) {

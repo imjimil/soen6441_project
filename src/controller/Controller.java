@@ -106,6 +106,7 @@ public class Controller {
 				//so as i understand here i should display all availavle units and all tenets, then
 				//ask user which unit he wants to rent and for which tenent, take that property object and tenet 
 				//object and populate the info needed for lease 
+				ArrayList<Object> savedInfo = new ArrayList<>();
 
 				System.out.println("Here's the vacant properties.");
 				if(properties.size() > 0) {
@@ -116,7 +117,7 @@ public class Controller {
 
 				int selectedPropertyID = scanner.nextInt();
 				
-				Property rentedPropertyObject = propertyView.getObjectByID(selectedPropertyID, properties);
+				Property selectedPropertyObject = propertyView.getObjectByID(selectedPropertyID, properties);
 				
 				System.out.println();
 				System.out.println("Now select which tenant is buying the property.");
@@ -139,16 +140,40 @@ public class Controller {
 				System.out.println("Now enter the start date of lease.");
 				
 				Date startDate = getDateFromUser(scanner);
+				savedInfo.add(startDate);
+
 				System.out.println();
 				System.out.println("Now enter the ending date of the lease.");
 				Date endDate = getDateFromUser(scanner);
+				savedInfo.add(endDate);
 
-				Lease lease = new Lease(selectedPropertyID, startDate, endDate, selectedTenantID, null, selectedTenantObject, rentedPropertyObject);
+				System.out.println("Enter the total rent.");
+				int rent = scanner.nextInt();
+				savedInfo.add(rent);
+
+				scanner.nextLine();
+				System.out.println("Is rent paid? (Y/N)");
+				String rentPaid = scanner.nextLine();
+				boolean choice = true;
+				if(rentPaid.equals("Y")) {
+					choice = true;
+					savedInfo.add(choice);
+				}
+				else {
+					choice = false;
+					savedInfo.add(choice);
+				}
+				savedInfo.add(selectedTenantObject);
+				savedInfo.add(selectedPropertyObject);
+				Lease lease = new Lease();
+				Lease addedLease = lease.create(savedInfo);
 				System.out.println("Perfect!");
-				leases.add(lease);
+				leases.add(addedLease);
 
 				//now add that lease to tenant object field.
-				selectedTenantObject.setLeases(lease);
+				selectedTenantObject.setLeases(addedLease);
+				//make property unavailable
+				selectedPropertyObject.setStatus(false);
 
 				break;
 			case 4:
@@ -212,7 +237,7 @@ public class Controller {
 				// Display all leases
 				if(leases.size() > 0) {
 					for (int i = 0; i < leases.size(); i++) {
-						System.out.println((i+1) + leases.get(i).display());
+						System.out.println((i+1) +". "+ leases.get(i).display());
 					}
 				}
 				else {

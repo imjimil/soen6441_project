@@ -96,7 +96,7 @@ public class Lease implements ITenantLease {
 	@Override
 	public String display() {
 		return "Lease No-"+ leaseNo + ", Start Date- "+ leaseStartDate + ", End Date- "+ leaseEndDate 
-		+", Rent- "+ rentAmount + ", Rent paid- "+ isRentPaid + ", Tenant- "+ tenantInfo.getTenantName() +"\n"+" Property info- " + propertyInfo.display();
+		+", Rent- "+ rentAmount + ", Rent paid- "+ isRentPaid + ", Tenant- "+ tenantInfo.getTenantName() +"\n"+" Property info- " + propertyInfo.getID();
 	}
 
 	@Override
@@ -107,9 +107,9 @@ public class Lease implements ITenantLease {
 			Date end = (Date) data.get(1);
 			int totalRent = (int) data.get(2);
 			Boolean rentStatus = (Boolean) data.get(3);
-			Tenant info = (Tenant) data.get(4);
+			Tenant tenantInfo = (Tenant) data.get(4);
 			Property propertyInfo = (Property) data.get(5);
-			Lease lease = new Lease(leaseNumber, start, end, totalRent, rentStatus, info, propertyInfo);
+			Lease lease = new Lease(leaseNumber, start, end, totalRent, rentStatus, tenantInfo, propertyInfo);
 			
 			return lease;
 		}
