@@ -20,9 +20,7 @@ public class Tenant implements ITenantLease {
 	private String tenantPhone;
 	
 	private String tenantEmail;
-	
-	private String unitRented;
-	
+		
 	private ArrayList<Lease> leases;
 	
 	private ArrayList<Property> interestedUnits;
@@ -58,21 +56,13 @@ public class Tenant implements ITenantLease {
 	public void setTenantEmail(String tenantEmail) {
 		this.tenantEmail = tenantEmail;
 	}
-
-	public String getUnitRented() {
-		return unitRented;
-	}
-
-	public void setUnitRented(String unitRented) {
-		this.unitRented = unitRented;
-	}
 	
 	public ArrayList<Lease> getLeases() {
 		return leases;
 	}
 
-	public void setLeases(ArrayList<Lease> leases) {
-		this.leases = leases;
+	public void setLeases(Lease l) {
+		this.leases.add(l);
 	}
 
 	public ArrayList<Property> getInterestedUnits() {
@@ -92,16 +82,15 @@ public class Tenant implements ITenantLease {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Tenant(String tenantName, String tenantPhone, String tenantEmail, String unitRented,
+	public Tenant(String tenantName, String tenantPhone, String tenantEmail,
 			ArrayList<Lease> leases, ArrayList<Property> interestedUnits) {
 		super();
 		this.tenantId = new Random().nextInt(90000) + 10000;
 		this.tenantName = tenantName;
 		this.tenantPhone = tenantPhone;
 		this.tenantEmail = tenantEmail;
-		this.unitRented = unitRented;
-		this.leases = leases;
-		this.interestedUnits = interestedUnits;
+		this.leases = new ArrayList<>();
+		this.interestedUnits = new ArrayList<>();
 	}
 
 	@Override
@@ -109,8 +98,16 @@ public class Tenant implements ITenantLease {
 		// TODO Auto-generated method stub
 		return "- tenant ID:" + this.tenantId + ", tenantName: " + this.tenantName + ""
 				+ ", tenantPhone: " + this.tenantPhone + ", tenantEmail: " + this.tenantEmail
-				+ ", unitRented: " + this.unitRented + ", leases: " + this.leases + ", interestedUnits: "
+				+ ", leases: " + this.showLeases(leases) + ", interestedUnits: "
 				+ this.interestedUnits;
+	}
+
+	public ArrayList<Integer> showLeases(ArrayList<Lease> lease) {
+		ArrayList<Integer> result = new ArrayList<>(); 
+		for (Lease leaseInfo : lease) {
+			result.add(leaseInfo.getLeaseNo());
+		}
+		return result;
 	}
 
 	public Tenant getObjectByID(int ID, ArrayList<Tenant> tenant) {
@@ -127,9 +124,8 @@ public class Tenant implements ITenantLease {
 		String tName = (String) data.get(0);
 		String tPhone = (String) data.get(1);
 		String temail = (String) data.get(2);
-		String unitRented = (String) data.get(3); //Anitha do change this later, i've did this for working purpose.
 
-		Tenant tenant = new Tenant(tName, tPhone, temail, unitRented, null, null);
+		Tenant tenant = new Tenant(tName, tPhone, temail, null, null);
 		
 		return tenant;
 	}

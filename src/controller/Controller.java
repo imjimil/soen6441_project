@@ -1,6 +1,8 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -17,6 +19,21 @@ public class Controller {
 	public Controller(PropertyView propertyView, Property propertyModel) {
 		this.propertyView = propertyView;
 		this.propertyModel = propertyModel;
+	}
+
+	public static Date getDateFromUser(Scanner input) {
+		System.out.print("Enter day: ");
+		int day = input.nextInt();
+		
+		System.out.print("Enter month: ");
+		int month = input.nextInt();
+		
+		System.out.print("Enter year: ");
+		int year = input.nextInt();
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(year, month - 1, day);
+		return calendar.getTime();
 	}
 	
 	public void mainFunction() {
@@ -76,9 +93,6 @@ public class Controller {
 				System.out.println("Enter the Tenant Email:");
 				String emailID = scanner.nextLine();
 				details.add(emailID);
-				System.out.println("Enter the UnitNo Rented:");
-				String unitNo = scanner.nextLine();
-				details.add(unitNo);
 
 				Tenant tenant = new Tenant();
 				Tenant newTenant = tenant.create(details);
@@ -122,9 +136,19 @@ public class Controller {
 				Tenant tnt = new Tenant();
 				Tenant selectedTenantObject = tnt.getObjectByID(selectedTenantID, tenants);
 
-				Lease lease = new Lease(selectedPropertyID, null, null, selectedTenantID, null, selectedTenantObject, rentedPropertyObject);
-				System.out.println("perfect");
-				leases.add(lease);				
+				System.out.println("Now enter the start date of lease.");
+				
+				Date startDate = getDateFromUser(scanner);
+				System.out.println();
+				System.out.println("Now enter the ending date of the lease.");
+				Date endDate = getDateFromUser(scanner);
+
+				Lease lease = new Lease(selectedPropertyID, startDate, endDate, selectedTenantID, null, selectedTenantObject, rentedPropertyObject);
+				System.out.println("Perfect!");
+				leases.add(lease);
+
+				//now add that lease to tenant object field.
+				selectedTenantObject.setLeases(lease);
 
 				break;
 			case 4:
