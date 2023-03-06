@@ -12,13 +12,18 @@ import model.PropertyFactory;
 import model.Tenant;
 import utility.Constant;
 import view.PropertyView;
+import view.TenantView;
 
 public class Controller {
 	private PropertyView propertyView;
+	private TenantView tenantView;
 	private Property propertyModel;
-	public Controller(PropertyView propertyView, Property propertyModel) {
+	private Tenant tenantModel;
+	public Controller(PropertyView propertyView, TenantView tenantView, Property propertyModel, Tenant tenantModel) {
 		this.propertyView = propertyView;
 		this.propertyModel = propertyModel;
+		this.tenantView = tenantView;
+		this.tenantModel = tenantModel;
 	}
 
 	public static Date getDateFromUser(Scanner input) {
@@ -79,7 +84,7 @@ public class Controller {
 				
 				break;
 			case 2:
-				// Add a tenants
+				// Add a tenant
 				//ArrayList<Lease> LeaseNos = new ArrayList<>();
 				//ArrayList<Property> InterestedProps = new ArrayList<>();
 				ArrayList<Object> details = new ArrayList<>();
@@ -103,7 +108,7 @@ public class Controller {
 			
 			case 3:
 				// Rent a unit 
-				//so as i understand here i should display all availavle units and all tenets, then
+				//so as i understand here i should display all available units and all tenets, then
 				//ask user which unit he wants to rent and for which tenent, take that property object and tenet 
 				//object and populate the info needed for lease 
 				ArrayList<Object> savedInfo = new ArrayList<>();
@@ -179,11 +184,7 @@ public class Controller {
 			case 4:
 				// Display tenants
 				if(tenants.size() > 0) {
-					for (int i = 0; i < tenants.size(); i++) {
-						if(tenants.get(i).toString() != null) {
-							System.out.println((i+1)+". " + tenants.get(i).display());
-						}
-					}
+					tenantView.displayAllTenants(tenants);
 				} else {
 					System.out.println("No tenants found.");
 				}
@@ -205,7 +206,7 @@ public class Controller {
 			case 7:
 				// Display rented units
 				if(properties.size() > 0) {
-					propertyView.displayRantedProperty(properties);
+					propertyView.displayRentedProperty(properties);
 				}
 				break;
 			case 8:
@@ -231,6 +232,8 @@ public class Controller {
 				break;
 			case 9:
 				// Express an interest in a unit
+				String interestedData = tenantView.interestedInAUnit(properties, tenants);
+				tenantModel.interestedInAUnit(interestedData, tenants, properties);
 				
 				break;
 			case 10:

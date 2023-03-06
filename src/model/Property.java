@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -52,5 +53,14 @@ public abstract class Property implements IProperty {
 		this.city = city;
 		this.postalCode = postalCode;
 		this.status = true;
+	}
+	
+	public Property getPropertyByID(int ID, ArrayList<Property> properties) {
+		for (Property property : properties) {
+			if(property.getID() == ID) {
+				return property;
+			}
+		}
+		return null;
 	}
 }

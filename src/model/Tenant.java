@@ -11,7 +11,7 @@ import java.util.Random;
  * 
  * Tenant class
  */
-public class Tenant implements ITenantLease {
+public class Tenant extends TenantObservable implements ITenantLease {
 
 	private int tenantId;
 	
@@ -24,6 +24,8 @@ public class Tenant implements ITenantLease {
 	private ArrayList<Lease> leases;
 	
 	private ArrayList<Property> interestedUnits;
+	
+	private Property property;
 	
 	public int getTenantId() {
 		return tenantId;
@@ -110,13 +112,29 @@ public class Tenant implements ITenantLease {
 		return result;
 	}
 
-	public Tenant getObjectByID(int ID, ArrayList<Tenant> tenant) {
-		for (Tenant tnt : tenant) {
-			if(tnt.getID() == ID) {
+	public Tenant getObjectByID(int objectId, ArrayList<Tenant> tenants) {
+		for (Tenant tnt : tenants) {
+			if(tnt.getID() == objectId) {
 				return tnt;
 			}
 		}
 		return null;
+	}
+	
+	public void interestedInAUnit(String inputData, ArrayList<Tenant> tenants, ArrayList<Property> properties) {
+		if(!inputData.isEmpty()) {
+			String [] arrData = inputData.split("-");
+			int tenantId = Integer.parseInt(arrData[0]);
+			int propertyId = Integer.parseInt(arrData[1]);
+			// load tenant object
+			Tenant selectedTenant = getObjectByID(tenantId, tenants);
+			// load property object
+			Property selectedProperty = property.getPropertyByID(propertyId, properties);
+			ArrayList<Property> arrInterestedUnit = new ArrayList<Property>();
+			arrInterestedUnit.add(selectedProperty);
+			selectedTenant.setInterestedUnits(arrInterestedUnit);
+			notifyObserver(this);
+		}
 	}
 
 	@Override

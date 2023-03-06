@@ -90,7 +90,7 @@ public class PropertyView {
 		}
 	}
 
-	public void displayRantedProperty(ArrayList<Property> properties) {
+	public void displayRentedProperty(ArrayList<Property> properties) {
 		for (int i = 0; i < properties.size(); i++) {
 			System.out.println(properties.get(i).displayRented());
 		}

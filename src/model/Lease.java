@@ -20,7 +20,7 @@ public class Lease implements ITenantLease {
 	
 	private Date leaseEndDate;
 	
-	private int rentAmount;
+	private float rentAmount;
 	
 	private Boolean isRentPaid;
 	
@@ -52,11 +52,11 @@ public class Lease implements ITenantLease {
 		this.leaseEndDate = leaseEndDate;
 	}
 
-	public int getRentAmount() {
+	public float getRentAmount() {
 		return rentAmount;
 	}
 
-	public void setRentAmount(int rentAmount) {
+	public void setRentAmount(float rentAmount) {
 		this.rentAmount = rentAmount;
 	}
 

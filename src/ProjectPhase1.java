@@ -1,7 +1,9 @@
 import controller.Controller;
 import model.Apartment;
 import model.Property;
+import model.Tenant;
 import view.PropertyView;
+import view.TenantView;
 
 /**
  * Project Phase 1
@@ -15,7 +17,10 @@ public class ProjectPhase1 {
 	public static void main(String[] args) {
 		PropertyView view = new PropertyView();
 		Property propertyModel = new Apartment();
-        Controller controller = new Controller(view, propertyModel);
+		
+		Tenant tenantModel = new Tenant();
+		TenantView tenantView = new TenantView(tenantModel);
+        Controller controller = new Controller(view, tenantView, propertyModel, tenantModel);
         controller.mainFunction();
 	}
 	

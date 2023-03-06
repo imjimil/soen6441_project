@@ -52,21 +52,19 @@ public class Apartment extends Property {
 	}
 
 	public String displayVacant() {
-		if(status==true) {
+		if(status) {
 			return display();
 		}
-		else {
-			return "No Vacant Properties";
-		}	
+		
+		return "No Vacant Properties";
 	}
 
 	public String displayRented() {
-		if(status==false) {
+		if(!status) {
 			return display();
 		}
-		else {
-			return "No Ranted Properties";
-		}	
+		
+		return "No Rented Properties";
 	}
 
 	@Override
