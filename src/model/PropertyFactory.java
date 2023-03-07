@@ -1,16 +1,26 @@
 package model;
 
-import utility.Constant;
+import utility.PropertyType;
 
-public class PropertyFactory {
-	public Property createProperty(String propertyType) {
-		if(propertyType.equalsIgnoreCase(Constant.APARTMENT)) {
+public abstract class PropertyFactory {
+	public static Property createProperty(PropertyType propertyType) {
+		switch (propertyType) {
+		case APARTMENT:
 			return new Apartment();
-		} else if(propertyType.equalsIgnoreCase(Constant.CONDO)) {
+			
+		case CONDO:
 			return new Condo();
-		} else if(propertyType.equalsIgnoreCase(Constant.HOUSE)) {
+			
+		case HOUSE:
 			return new House();
 		}
+//		if(propertyType.equalsIgnoreCase(Constant.APARTMENT)) {
+//			return new Apartment();
+//		} else if(propertyType.equalsIgnoreCase(Constant.CONDO)) {
+//			return new Condo();
+//		} else if(propertyType.equalsIgnoreCase(Constant.HOUSE)) {
+//			return new House();
+//		}
 		
 		return null;
 	}

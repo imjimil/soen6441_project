@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-import utility.Constant;
+import utility.PropertyType;
 
 /**
  * Project Phase 1
@@ -36,7 +36,7 @@ public class House extends Property {
 
 	@Override
 	public String display() {
-		return Constant.HOUSE + ", ID- "+propertyID + ", Street No:" + this.streetNo + ", No.BedRoom: " + this.numberOfBedRoom + ""
+		return PropertyType.HOUSE + ", ID- "+propertyID + ", Street No:" + this.streetNo + ", No.BedRoom: " + this.numberOfBedRoom + ""
 				+ ", No.BathRoom: " + this.numberOfBathRoom + ", squareFootage: " + this.squareFootage + ", StreetName: " + this.streetName + ", City: " + this.city + ", postalCode: " + this.postalCode +", status- "+status;
 	}
 

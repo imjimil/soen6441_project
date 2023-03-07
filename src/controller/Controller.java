@@ -10,7 +10,7 @@ import model.Lease;
 import model.Property;
 import model.PropertyFactory;
 import model.Tenant;
-import utility.Constant;
+import utility.PropertyType;
 import view.PropertyView;
 import view.TenantView;
 
@@ -67,17 +67,17 @@ public class Controller {
 			switch (cmd){
 			case 1:
 				// Add a property
-				PropertyFactory propertyFactory = new PropertyFactory();
+//				PropertyFactory propertyFactory = new PropertyFactory();
 				Map<String, ArrayList<Object>> inputPropertyData = propertyView.getPropertyInfo();
 				for (Map.Entry<String, ArrayList<Object>> pair : inputPropertyData.entrySet()) {
 					if("A".equals(pair.getKey())) {
-						propertyModel = propertyFactory.createProperty(Constant.APARTMENT);
+						propertyModel = PropertyFactory.createProperty(PropertyType.APARTMENT);
 						properties.add(propertyModel.create(pair.getValue()));
 					} else if ("C".equals(pair.getKey())) {
-						propertyModel = propertyFactory.createProperty(Constant.CONDO);
+						propertyModel = PropertyFactory.createProperty(PropertyType.CONDO);
 						properties.add(propertyModel.create(pair.getValue()));
 					} else if ("H".equals(pair.getKey())) {
-						propertyModel = propertyFactory.createProperty(Constant.HOUSE);
+						propertyModel = PropertyFactory.createProperty(PropertyType.HOUSE);
 						properties.add(propertyModel.create(pair.getValue()));
 					}
 				}
