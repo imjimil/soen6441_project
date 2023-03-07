@@ -9,7 +9,7 @@ import model.TenantObservable;
 import model.TenantObserver;
 
 public class TenantView implements TenantObserver {
-	private PropertyView propertyView;
+	private PropertyView propertyView = new PropertyView();
 	
 	public TenantView(Tenant tenant) {
 		tenant.attach(this);
@@ -44,8 +44,11 @@ public class TenantView implements TenantObserver {
 
 	@Override
 	public void update(TenantObservable observable) {
-		// TODO Auto-generated method stub
+		System.out.println("List of interested units of Tenant Id: " + ((Tenant) observable).getID() + " - Name: " + ((Tenant) observable).getTenantName());
 		
+		for(Property property: ((Tenant) observable).getInterestedUnits()) {
+			System.out.println("Property Id: " + property.getID());
+		}
 	}
 
 }

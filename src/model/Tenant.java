@@ -27,6 +27,23 @@ public class Tenant extends TenantObservable implements ITenantLease {
 	
 	private Property property;
 	
+	public Tenant() {
+		super();
+		property = new Apartment();
+		interestedUnits = new ArrayList<Property>();
+	}
+
+	public Tenant(String tenantName, String tenantPhone, String tenantEmail,
+			ArrayList<Lease> leases, ArrayList<Property> interestedUnits) {
+		super();
+		this.tenantId = new Random().nextInt(90000) + 10000;
+		this.tenantName = tenantName;
+		this.tenantPhone = tenantPhone;
+		this.tenantEmail = tenantEmail;
+		this.leases = new ArrayList<>();
+		this.interestedUnits = new ArrayList<>();
+	}
+	
 	public int getTenantId() {
 		return tenantId;
 	}
@@ -79,22 +96,6 @@ public class Tenant extends TenantObservable implements ITenantLease {
 		return tenantId;
 	}
 	
-	public Tenant() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Tenant(String tenantName, String tenantPhone, String tenantEmail,
-			ArrayList<Lease> leases, ArrayList<Property> interestedUnits) {
-		super();
-		this.tenantId = new Random().nextInt(90000) + 10000;
-		this.tenantName = tenantName;
-		this.tenantPhone = tenantPhone;
-		this.tenantEmail = tenantEmail;
-		this.leases = new ArrayList<>();
-		this.interestedUnits = new ArrayList<>();
-	}
-
 	@Override
 	public String display() {
 		// TODO Auto-generated method stub
@@ -128,11 +129,12 @@ public class Tenant extends TenantObservable implements ITenantLease {
 			int propertyId = Integer.parseInt(arrData[1]);
 			// load tenant object
 			Tenant selectedTenant = getObjectByID(tenantId, tenants);
+			this.tenantId = selectedTenant.getID();
+			this.tenantName = selectedTenant.getTenantName();
 			// load property object
 			Property selectedProperty = property.getPropertyByID(propertyId, properties);
-			ArrayList<Property> arrInterestedUnit = new ArrayList<Property>();
-			arrInterestedUnit.add(selectedProperty);
-			selectedTenant.setInterestedUnits(arrInterestedUnit);
+			interestedUnits.add(selectedProperty);
+//			selectedTenant.setInterestedUnits(interestedUnits);
 			notifyObserver(this);
 		}
 	}
