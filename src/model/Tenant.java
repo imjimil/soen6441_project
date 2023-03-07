@@ -138,6 +138,10 @@ public class Tenant extends TenantObservable implements ITenantLease {
 			notifyObserver(this);
 		}
 	}
+	
+	public void displayPotentialTenants() {
+		notifyObserver(this);
+	}
 
 	@Override
 	public Tenant create(ArrayList<Object> data) {

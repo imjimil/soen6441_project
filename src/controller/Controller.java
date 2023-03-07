@@ -58,9 +58,9 @@ public class Controller {
 			System.out.println("7.  Display rented units");
 			System.out.println("8.  Display paid/not paid rent units");
 			System.out.println("9.  Express an interest in a unit");
-			System.out.println("10. Display all leases");
+			System.out.println("10. Display potential tenants and their units");
 			System.out.println("11. Display leases that will be ending");
-			System.out.println("12. Display potential tenants and their units");
+			System.out.println("12. Display all leases");
 			System.out.println("13. Exit");
 			System.out.print("Your choice:");
 			int cmd = scanner.nextInt();
@@ -237,6 +237,14 @@ public class Controller {
 				
 				break;
 			case 10:
+				// Display potential tenants and their units
+				tenantModel.displayPotentialTenants();
+				break;
+			case 11:
+				// Display leases that will be ending
+				
+				break;
+			case 12:
 				// Display all leases
 				if(leases.size() > 0) {
 					for (int i = 0; i < leases.size(); i++) {
@@ -247,15 +255,6 @@ public class Controller {
 					System.out.println("No lease found!");
 				}
 				break;
-			case 11:
-				// Display leases that will be ending
-				
-				break;
-			case 12:
-				// Display potential tenants and their units
-				
-				break;
-				
 			case 13:
 				// Exit
 				scanner.close();
