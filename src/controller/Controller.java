@@ -1,8 +1,10 @@
 package controller;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -242,7 +244,18 @@ public class Controller {
 				break;
 			case 11:
 				// Display leases that will be ending
-				
+				int year = LocalDate.now().getYear();
+				int mon = LocalDate.now().getMonthValue();
+				if(leases.size() > 0) {
+					for (int i = 0; i < leases.size(); i++) {
+						if((leases.get(i).getLeaseEndDate().getMonth() == mon) && (leases.get(i).getLeaseEndDate().getYear() == year)) {
+						System.out.println((i+1) +". Leases Ending::"+ leases.get(i).display());
+						}
+					}
+				}
+				else {
+					System.out.println("No lease found!");
+				}
 				break;
 			case 12:
 				// Display all leases
