@@ -95,8 +95,8 @@ public class Lease implements ITenantLease {
 
 	@Override
 	public String display() {
-		return "Lease No-"+ leaseNo + ", Start Date- "+ leaseStartDate + ", End Date- "+ leaseEndDate 
-		+", Rent- "+ rentAmount + ", Rent paid- "+ isRentPaid + ", Tenant- "+ tenantInfo.getTenantName() +"\n"+" Property info- " + propertyInfo.getID();
+		return "Lease No-"+ this.leaseNo + ", Start Date- "+ this.leaseStartDate + ", End Date- "+ this.leaseEndDate 
+		+", Rent- "+ this.rentAmount + ", Rent paid- "+ this.isRentPaid + ", Tenant- "+ this.tenantInfo.getTenantName() +"\n"+" Property info- " + this.propertyInfo.getID();
 	}
 
 	@Override

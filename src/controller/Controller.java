@@ -1,7 +1,11 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -183,17 +187,22 @@ public class Controller {
 				break;
 			case 11:
 				// Display leases that will be ending
-				int year = LocalDate.now().getYear();
-				int mon = LocalDate.now().getMonthValue();
-				if(leases.size() > 0) {
-					for (int i = 0; i < leases.size(); i++) {
-						if((leases.get(i).getLeaseEndDate().getMonth() == mon) && (leases.get(i).getLeaseEndDate().getYear() == year)) {
-						System.out.println((i+1) +". Leases Ending::"+ leases.get(i).display());
-						}
+
+				LocalDateTime now = LocalDateTime.now();
+
+				LocalDate startThisMonth = LocalDate.of(now.getYear(), now.getMonth(), 1);
+				LocalDate endThisMonth = startThisMonth.with(TemporalAdjusters.lastDayOfMonth());
+				LocalDate startNextMonth = startThisMonth.plusMonths(1);
+				LocalDate endNextMonth = startNextMonth.with(TemporalAdjusters.lastDayOfMonth());
+
+
+				for (Lease obj : leases) {
+					Date endDate = obj.getLeaseEndDate();
+					LocalDateTime endDateTime = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+					if ((endDateTime.isAfter(startThisMonth.atStartOfDay()) && endDateTime.isBefore(endThisMonth.plusDays(1).atStartOfDay())) ||
+						(endDateTime.isAfter(startNextMonth.atStartOfDay()) && endDateTime.isBefore(endNextMonth.plusDays(1).atStartOfDay()))) {
+							System.out.println(obj.display());
 					}
-				}
-				else {
-					System.out.println("No lease found!");
 				}
 				break;
 			case 12:
