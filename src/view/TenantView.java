@@ -14,7 +14,23 @@ public class TenantView implements TenantObserver {
 	public TenantView(Tenant tenant) {
 		tenant.attach(this);
 	}
-	
+
+	public ArrayList<Object> getTenantInfo(){
+		Scanner scanner = new Scanner(System.in);
+		ArrayList<Object> details = new ArrayList<>();
+		System.out.println("Enter the Tenant Name:");
+		//scanner.nextLine();
+		String tenantName = scanner.nextLine();
+		details.add(tenantName);
+		System.out.println("Enter the Tenant Phone No:");
+		String phoneNo = scanner.nextLine();
+		details.add(phoneNo);
+		System.out.println("Enter the Tenant Email:");
+		String emailID = scanner.nextLine();
+		details.add(emailID);
+
+		return details;
+	}
 	public String interestedInAUnit(ArrayList<Property> properties, ArrayList<Tenant> tenants) {
 		Scanner scanner = new Scanner(System.in);
 		String result = "";

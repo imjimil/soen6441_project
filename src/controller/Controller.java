@@ -72,22 +72,10 @@ public class Controller {
 				break;
 			case 2:
 				// Add a tenant
-				//ArrayList<Lease> LeaseNos = new ArrayList<>();
-				//ArrayList<Property> InterestedProps = new ArrayList<>();
-				ArrayList<Object> details = new ArrayList<>();
-				System.out.println("Enter the Tenant Name:");
-				scanner.nextLine();
-				String tenantName = scanner.nextLine();
-				details.add(tenantName);
-				System.out.println("Enter the Tenant Phone No:");
-				String phoneNo = scanner.nextLine();
-				details.add(phoneNo);
-				System.out.println("Enter the Tenant Email:");
-				String emailID = scanner.nextLine();
-				details.add(emailID);
-
+				ArrayList<Object> tenantInfo = new ArrayList<>();
+				tenantInfo = tenantView.getTenantInfo();
 				Tenant tenant = new Tenant();
-				Tenant newTenant = tenant.create(details);
+				Tenant newTenant = tenant.create(tenantInfo);
 				tenants.add(newTenant);
 				System.out.println("Tenant Added Successfully!");
 				
@@ -178,7 +166,7 @@ public class Controller {
 				else {
 					System.out.println("No leases to Show!");
 				}
-				
+
 				break;
 			case 12:
 				// Display all leases
