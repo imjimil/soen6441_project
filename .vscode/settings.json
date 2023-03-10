@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\Imjimil\\Downloads\\mockito-all-1.9.5.jar\\mockito-all-1.9.5.jar"
+    ]
+}

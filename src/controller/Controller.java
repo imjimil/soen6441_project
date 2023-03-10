@@ -1,9 +1,6 @@
 package controller;
 
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.Scanner;
@@ -14,33 +11,22 @@ import model.PropertyFactory;
 import model.Tenant;
 import utility.PropertyType;
 import view.PropertyView;
+import view.RentalView;
 import view.TenantView;
 
 public class Controller {
 	private PropertyView propertyView;
 	private TenantView tenantView;
+	private RentalView rentalView;
 	private Property propertyModel;
 	private Tenant tenantModel;
-	public Controller(PropertyView propertyView, TenantView tenantView, Property propertyModel, Tenant tenantModel) {
+
+	public Controller(PropertyView propertyView, TenantView tenantView, RentalView rentalView,Property propertyModel, Tenant tenantModel) {
 		this.propertyView = propertyView;
 		this.propertyModel = propertyModel;
 		this.tenantView = tenantView;
+		this.rentalView = rentalView;
 		this.tenantModel = tenantModel;
-	}
-
-	public static Date getDateFromUser(Scanner input) {
-		System.out.print("Enter day: ");
-		int day = input.nextInt();
-		
-		System.out.print("Enter month: ");
-		int month = input.nextInt();
-		
-		System.out.print("Enter year: ");
-		int year = input.nextInt();
-		
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(year, month - 1, day);
-		return calendar.getTime();
 	}
 	
 	public void mainFunction() {
@@ -110,66 +96,19 @@ public class Controller {
 			
 			case 3:
 				// Rent a unit 
-				//so as i understand here i should display all available units and all tenets, then
-				//ask user which unit he wants to rent and for which tenent, take that property object and tenet 
-				//object and populate the info needed for lease 
-				ArrayList<Object> savedInfo = new ArrayList<>();
-
-				System.out.println("Here's the vacant properties.");
-				if(properties.size() > 0) {
-					propertyView.displayVacantProperty(properties);
-				}
-				System.out.println();
-				System.out.println("Please enter property ID you want to rent.");
-
-				int selectedPropertyID = scanner.nextInt();
 				
+				ArrayList<Object> userInput = new ArrayList<>();
+				userInput = rentalView.askBasicInfo(properties, propertyView, tenants);
+				ArrayList<Object> savedInfo = (ArrayList<Object>) userInput.get(0);
+				int selectedPropertyID = (int) userInput.get(1);
+				int selectedTenantID = (int) userInput.get(2);
+
+
 				Property selectedPropertyObject = propertyView.getObjectByID(selectedPropertyID, properties);
 				
-				System.out.println();
-				System.out.println("Now select which tenant is buying the property.");
-
-				if(tenants.size() > 0) {
-					for (int i = 0; i < tenants.size(); i++) {
-						if(tenants.get(i).toString() != null) {
-							System.out.println((i+1) +". "+tenants.get(i).display());
-						}
-					}
-				} else {
-					System.out.println("No tenants found.");
-				}
-
-				System.out.println("Enter ID of the Tenant");
-				int selectedTenantID = scanner.nextInt();
 				Tenant tnt = new Tenant();
 				Tenant selectedTenantObject = tnt.getObjectByID(selectedTenantID, tenants);
 
-				System.out.println("Now enter the start date of lease.");
-				
-				Date startDate = getDateFromUser(scanner);
-				savedInfo.add(startDate);
-
-				System.out.println();
-				System.out.println("Now enter the ending date of the lease.");
-				Date endDate = getDateFromUser(scanner);
-				savedInfo.add(endDate);
-
-				System.out.println("Enter the total rent.");
-				int rent = scanner.nextInt();
-				savedInfo.add(rent);
-
-				scanner.nextLine();
-				System.out.println("Is rent paid? (Y/N)");
-				String rentPaid = scanner.nextLine();
-				boolean choice = true;
-				if(rentPaid.equals("Y")) {
-					choice = true;
-					savedInfo.add(choice);
-				}
-				else {
-					choice = false;
-					savedInfo.add(choice);
-				}
 				savedInfo.add(selectedTenantObject);
 				savedInfo.add(selectedPropertyObject);
 				Lease lease = new Lease();
@@ -181,7 +120,7 @@ public class Controller {
 				selectedTenantObject.setLeases(addedLease);
 				//make property unavailable
 				selectedPropertyObject.setStatus(false);
-
+				selectedPropertyObject.setTenent(selectedTenantObject);
 				break;
 			case 4:
 				// Display tenants

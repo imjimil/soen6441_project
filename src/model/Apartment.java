@@ -47,7 +47,7 @@ public class Apartment extends Property {
 	@Override
 	public String display() {
 		return PropertyType.APARTMENT + ", ID- "+propertyID +", Civic Address:" + this.civicAddress + ", Apt No: " + this.aptNo + ", No.BedRoom: " + this.numberOfBedRoom + ""
-				+ ", No.BathRoom: " + this.numberOfBathRoom + ", squareFootage: " + this.squareFootage + ", StreetName: " + this.streetName + ", City: " + this.city + ", postalCode: " + this.postalCode +", status- "+status;
+				+ ", No.BathRoom: " + this.numberOfBathRoom + ", squareFootage: " + this.squareFootage + ", StreetName: " + this.streetName + ", City: " + this.city + ", postalCode: " + this.postalCode +", Owner- "+ ((this.tenent) != null ? this.tenent.getTenantName() : "null") +", status- "+status;
 	}
 
 	public String displayVacant() {

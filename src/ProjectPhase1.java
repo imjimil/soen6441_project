@@ -3,6 +3,7 @@ import model.Apartment;
 import model.Property;
 import model.Tenant;
 import view.PropertyView;
+import view.RentalView;
 import view.TenantView;
 
 /**
@@ -20,7 +21,8 @@ public class ProjectPhase1 {
 		
 		Tenant tenantModel = new Tenant();
 		TenantView tenantView = new TenantView(tenantModel);
-        Controller controller = new Controller(view, tenantView, propertyModel, tenantModel);
+		RentalView rentalView = new RentalView();
+        Controller controller = new Controller(view, tenantView,rentalView, propertyModel, tenantModel);
         controller.mainFunction();
 	}
 	

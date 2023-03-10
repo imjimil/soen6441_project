@@ -37,7 +37,7 @@ public class House extends Property {
 	@Override
 	public String display() {
 		return PropertyType.HOUSE + ", ID- "+propertyID + ", Street No:" + this.streetNo + ", No.BedRoom: " + this.numberOfBedRoom + ""
-				+ ", No.BathRoom: " + this.numberOfBathRoom + ", squareFootage: " + this.squareFootage + ", StreetName: " + this.streetName + ", City: " + this.city + ", postalCode: " + this.postalCode +", status- "+status;
+				+ ", No.BathRoom: " + this.numberOfBathRoom + ", squareFootage: " + this.squareFootage + ", StreetName: " + this.streetName + ", City: " + this.city + ", postalCode: " + this.postalCode + ", Owner- " + ((this.tenent) != null ? this.tenent.getTenantName() : "null")  +", status- "+status;
 	}
 
 	public String displayVacant() {

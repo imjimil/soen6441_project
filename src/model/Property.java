@@ -29,6 +29,8 @@ public abstract class Property implements IProperty {
 	protected String postalCode;
 	
 	protected Boolean status;
+
+	protected Tenant tenent;
 	
 	protected Property() {
 		
@@ -36,6 +38,10 @@ public abstract class Property implements IProperty {
 
 	public int getID() {
 		return propertyID;
+	}
+
+	public void setTenent(Tenant owner) {
+		this.tenent = owner;
 	}
 
 	public void setStatus(Boolean stat) {
@@ -53,6 +59,7 @@ public abstract class Property implements IProperty {
 		this.city = city;
 		this.postalCode = postalCode;
 		this.status = true;
+		this.tenent = null;
 	}
 	
 	public Property getPropertyByID(int ID, ArrayList<Property> properties) {
