@@ -1,5 +1,9 @@
 package model;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -115,6 +119,47 @@ public class Lease implements ITenantLease {
 		}
 		
 		return null;
+	}
+
+	public void getPaidOrNotPaidRentProperty(ArrayList<Lease> leases) {
+		
+		System.out.println("Rent Paid: ");
+		for (int i = 0; i < leases.size(); i++) {
+			if(leases.get(i).getIsRentPaid() == true) {
+				System.out.println((i+1) + ". " + leases.get(i).display());
+			}
+		}
+		System.out.println("Unpaid Rent: ");
+		for (int i = 0; i < leases.size(); i++) {
+			if(leases.get(i).getIsRentPaid() != true) {
+				System.out.println((i+1) + ". " + leases.get(i).display());
+			}
+		}
+	}
+
+	public void getAllLeases(ArrayList<Lease> leases) {
+		for (int i = 0; i < leases.size(); i++) {
+			System.out.println((i+1) +". "+ leases.get(i).display());
+		}
+	}
+
+	public void getEndingLeases(ArrayList<Lease> leases) {
+		LocalDateTime now = LocalDateTime.now();
+
+		LocalDate startThisMonth = LocalDate.of(now.getYear(), now.getMonth(), 1);
+		LocalDate endThisMonth = startThisMonth.with(TemporalAdjusters.lastDayOfMonth());
+		LocalDate startNextMonth = startThisMonth.plusMonths(1);
+		LocalDate endNextMonth = startNextMonth.with(TemporalAdjusters.lastDayOfMonth());
+
+
+		for (Lease obj : leases) {
+			Date endDate = obj.getLeaseEndDate();
+			LocalDateTime endDateTime = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+			if ((endDateTime.isAfter(startThisMonth.atStartOfDay()) && endDateTime.isBefore(endThisMonth.plusDays(1).atStartOfDay())) ||
+				(endDateTime.isAfter(startNextMonth.atStartOfDay()) && endDateTime.isBefore(endNextMonth.plusDays(1).atStartOfDay()))) {
+					System.out.println(obj.display());
+			}
+		}
 	}
 
 }

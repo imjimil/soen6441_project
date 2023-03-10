@@ -1,11 +1,6 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.temporal.TemporalAdjusters;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -157,19 +152,8 @@ public class Controller {
 			case 8:
 				// Display paid/not paid rent units
 				if(leases.size() > 0) {
-					System.out.println("Rent paid: ");
-
-					for (int i = 0; i < leases.size(); i++) {
-						if(leases.get(i).getIsRentPaid() == true) {
-							System.out.println(leases.get(i).display());
-						}
-					}
-					System.out.println("Rent Unpaid: ");
-					for (int i = 0; i < leases.size(); i++) {
-						if(leases.get(i).getIsRentPaid() != true) {
-							System.out.println(leases.get(i).display());
-						}
-					}
+					Lease getLeases = new Lease();
+					getLeases.getPaidOrNotPaidRentProperty(leases);
 				}
 				else {
 					System.out.println("No leases to show!");
@@ -187,30 +171,20 @@ public class Controller {
 				break;
 			case 11:
 				// Display leases that will be ending
-
-				LocalDateTime now = LocalDateTime.now();
-
-				LocalDate startThisMonth = LocalDate.of(now.getYear(), now.getMonth(), 1);
-				LocalDate endThisMonth = startThisMonth.with(TemporalAdjusters.lastDayOfMonth());
-				LocalDate startNextMonth = startThisMonth.plusMonths(1);
-				LocalDate endNextMonth = startNextMonth.with(TemporalAdjusters.lastDayOfMonth());
-
-
-				for (Lease obj : leases) {
-					Date endDate = obj.getLeaseEndDate();
-					LocalDateTime endDateTime = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-					if ((endDateTime.isAfter(startThisMonth.atStartOfDay()) && endDateTime.isBefore(endThisMonth.plusDays(1).atStartOfDay())) ||
-						(endDateTime.isAfter(startNextMonth.atStartOfDay()) && endDateTime.isBefore(endNextMonth.plusDays(1).atStartOfDay()))) {
-							System.out.println(obj.display());
-					}
+				if(leases.size() > 0) {
+					Lease getLease = new Lease();
+					getLease.getEndingLeases(leases);
 				}
+				else {
+					System.out.println("No leases to Show!");
+				}
+				
 				break;
 			case 12:
 				// Display all leases
 				if(leases.size() > 0) {
-					for (int i = 0; i < leases.size(); i++) {
-						System.out.println((i+1) +". "+ leases.get(i).display());
-					}
+					Lease getLease = new Lease();
+					getLease.getAllLeases(leases);
 				}
 				else {
 					System.out.println("No lease found!");
