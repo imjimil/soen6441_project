@@ -14,18 +14,29 @@ class TenantTest {
 		tenantData.add("51423425");
 		tenantData.add("ani@gmail.com");
 
-
 		// Create a mock Tenant object
 		Tenant testTenant = Mockito.mock(Tenant.class);
 
 		// Create a Tenant object
-		Tenant tenantObj = new Tenant();
-
+		Tenant tenantObj = new Tenant("Anitha","51423425","ani@gmail.com",null,null);
+		Mockito.when(testTenant.create(tenantData)).thenReturn(tenantObj);
 		// Call the create an Tenant method with the mock Tenant object
-		Tenant newTenant = tenantObj.create(tenantData);
+		Tenant newTenant = new Tenant().create(tenantData);
 
-		// Verify that the createTenant method returned the not null object
-		assertNotNull(newTenant);
+		// Verify the create method with Tenant object (Mock object)
+		assertEquals(newTenant.getTenantName(), tenantObj.getTenantName());
 
+	}
+	@Test
+	void testDisplayTenant() {
+		// Create a mock Apartment object
+		Tenant tenantObj = Mockito.mock(Tenant.class);
+		Mockito.when(tenantObj.display()).thenReturn("tenantName: Anitha, tenantPhone: 51423425, tenantEmail: ani@gmail.com, leases: [], interestedUnits: []");
+
+		Tenant newTenant = new Tenant("Anitha","51423425","ani@gmail.com", null, null);
+		String[] outputArr = newTenant.display().split(",");
+		String[] newOutputArr = Arrays.copyOfRange(outputArr, 1, outputArr.length);
+		String output = String.join(",", newOutputArr).trim();
+		assertEquals(output, tenantObj.display());
 	}
 }
