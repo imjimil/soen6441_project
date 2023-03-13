@@ -16,24 +16,30 @@ public class RentalView {
     Scanner scanner = new Scanner(System.in);
 
     public static Date getDateFromUser(Scanner input) {
-		System.out.print("Enter day: ");
-		int day = input.nextInt();
-		
-		System.out.print("Enter month: ");
-		int month = input.nextInt();
-		
-		System.out.print("Enter year: ");
-		int year = input.nextInt();
-		
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(year, month - 1, day);
-		return calendar.getTime();
+        try{
+            System.out.print("Enter day: ");
+            int day = input.nextInt();
+
+            System.out.print("Enter month: ");
+            int month = input.nextInt();
+
+            System.out.print("Enter year: ");
+            int year = input.nextInt();
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year, month - 1, day);
+
+            return calendar.getTime();
+        }catch(Exception e){
+            System.out.println("An error occurred,please try again");
+            return null;
+        }
 	}
 
     public ArrayList<Object> askBasicInfo(ArrayList<Property> properties, PropertyView propertyView, ArrayList<Tenant> tenants) {
 
         ArrayList<Object> savedInfo = new ArrayList<>();
-
+        try{
         System.out.println("Here's the vacant properties.");
         if (properties.size() > 0) {
             propertyView.displayVacantProperty(properties);
@@ -92,6 +98,10 @@ public class RentalView {
         userInput.add(selectedTenantID);
         
         return userInput;
+        }catch(Exception e){
+            System.out.println("An error occurred,please try again!!!");
+            return null;
+        }
     }
 
 }

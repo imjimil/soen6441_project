@@ -7,7 +7,7 @@ import java.util.Random;
  * Project Phase 1
  * Student 1: 	Quoc Phong Ngo 				- 40230574
  * Student 2: 	Jimil Suchitkumar Prajapati - 40205477
- * Student 3:   Anitha Ramakrishan			- 40231724
+ * Student 3:   Anitha Ramakrishnan			- 40231724
  * 
  * Tenant class
  */
@@ -123,18 +123,22 @@ public class Tenant extends TenantObservable implements ITenantLease {
 	}
 	
 	public void interestedInAUnit(String inputData, ArrayList<Tenant> tenants, ArrayList<Property> properties) {
-		if(!inputData.isEmpty()) {
-			String [] arrData = inputData.split("-");
-			int tenantId = Integer.parseInt(arrData[0]);
-			int propertyId = Integer.parseInt(arrData[1]);
-			// load tenant object
-			Tenant selectedTenant = getObjectByID(tenantId, tenants);
-			this.tenantId = selectedTenant.getID();
-			this.tenantName = selectedTenant.getTenantName();
-			// load property object
-			Property selectedProperty = property.getPropertyByID(propertyId, properties);
-			interestedUnits.add(selectedProperty);
-			notifyObserver(this);
+		try{
+			if(!inputData.isEmpty()) {
+				String [] arrData = inputData.split("-");
+				int tenantId = Integer.parseInt(arrData[0]);
+				int propertyId = Integer.parseInt(arrData[1]);
+				// load tenant object
+				Tenant selectedTenant = getObjectByID(tenantId, tenants);
+				this.tenantId = selectedTenant.getID();
+				this.tenantName = selectedTenant.getTenantName();
+				// load property object
+				Property selectedProperty = property.getPropertyByID(propertyId, properties);
+				interestedUnits.add(selectedProperty);
+				notifyObserver(this);
+			}
+		}catch(Exception e){
+			System.out.println("An error occurred,please try again!!!");
 		}
 	}
 	

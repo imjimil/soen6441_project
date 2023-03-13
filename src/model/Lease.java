@@ -12,7 +12,7 @@ import java.util.Random;
  * Project Phase 1
  * Student 1: 	Quoc Phong Ngo 				- 40230574
  * Student 2: 	Jimil Suchitkumar Prajapati - 40205477
- * Student 3:   Anitha Ramakrishan			- 40231724
+ * Student 3:   Anitha Ramakrishnan			- 40231724
  * 
  * Lease class
  */
@@ -122,33 +122,41 @@ public class Lease implements ITenantLease {
 	}
 
 	public void getPaidOrNotPaidRentProperty(ArrayList<Lease> leases) {
-		
-		System.out.println("Rent Paid: ");
-		for (int i = 0; i < leases.size(); i++) {
-			if(leases.get(i).getIsRentPaid() == true) {
-				System.out.println((i+1) + ". " + leases.get(i).display());
+		try{
+			System.out.println("Rent Paid: ");
+			for (int i = 0; i < leases.size(); i++) {
+				if(leases.get(i).getIsRentPaid() == true) {
+					System.out.println((i+1) + ". " + leases.get(i).display());
+				}
 			}
-		}
-		System.out.println("Unpaid Rent: ");
-		for (int i = 0; i < leases.size(); i++) {
-			if(leases.get(i).getIsRentPaid() != true) {
-				System.out.println((i+1) + ". " + leases.get(i).display());
+			System.out.println("Unpaid Rent: ");
+			for (int i = 0; i < leases.size(); i++) {
+				if(leases.get(i).getIsRentPaid() != true) {
+					System.out.println((i+1) + ". " + leases.get(i).display());
+				}
 			}
+		}catch(Exception e){
+			System.out.println("An error occurred,please try again!!!");
 		}
 	}
 
 	public String getAllLeases(ArrayList<Lease> leases) {
 		String output = "";
-		for (int i = 0; i < leases.size(); i++) {
-			output = output.concat((i+1) +". "+ leases.get(i).display());
+		try{
+			for (int i = 0; i < leases.size(); i++) {
+				output = output.concat((i+1) +". "+ leases.get(i).display());
+			}
+			if(output.isEmpty()) {
+				System.out.println("No leases found.");
+			} else {
+				System.out.println(output);
+			}
+
+			return output;
+		}catch(Exception e){
+			System.out.println("An error occurred,please try again!!!");
+			return "";
 		}
-		if(output.isEmpty()) {
-			System.out.println("No leases found.");
-		} else {
-			System.out.println(output);
-		}
-		
-		return output;
 	}
 
 	public void getEndingLeases(ArrayList<Lease> leases) {
@@ -159,14 +167,17 @@ public class Lease implements ITenantLease {
 		LocalDate startNextMonth = startThisMonth.plusMonths(1);
 		LocalDate endNextMonth = startNextMonth.with(TemporalAdjusters.lastDayOfMonth());
 
-
-		for (Lease obj : leases) {
-			Date endDate = obj.getLeaseEndDate();
-			LocalDateTime endDateTime = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-			if ((endDateTime.isAfter(startThisMonth.atStartOfDay()) && endDateTime.isBefore(endThisMonth.plusDays(1).atStartOfDay())) ||
-				(endDateTime.isAfter(startNextMonth.atStartOfDay()) && endDateTime.isBefore(endNextMonth.plusDays(1).atStartOfDay()))) {
-					System.out.println(obj.display());
+		try{
+			for (Lease obj : leases) {
+				Date endDate = obj.getLeaseEndDate();
+				LocalDateTime endDateTime = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+				if ((endDateTime.isAfter(startThisMonth.atStartOfDay()) && endDateTime.isBefore(endThisMonth.plusDays(1).atStartOfDay())) ||
+					(endDateTime.isAfter(startNextMonth.atStartOfDay()) && endDateTime.isBefore(endNextMonth.plusDays(1).atStartOfDay()))) {
+						System.out.println(obj.display());
+				}
 			}
+		}catch(Exception e){
+			System.out.println("An error occurred,please try again!!!");
 		}
 	}
 
