@@ -35,7 +35,7 @@ class TenantTest {
 	}
 	@Test
 	void testDisplayTenant() {
-		// Create a mock Apartment object
+		// Create a mock Tenant object
 		Tenant tenantObj = Mockito.mock(Tenant.class);
 		Mockito.when(tenantObj.display()).thenReturn("tenantName: Anitha, tenantPhone: 51423425, tenantEmail: ani@gmail.com, leases: [], interestedUnits: []");
 

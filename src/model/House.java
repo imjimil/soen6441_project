@@ -37,25 +37,23 @@ public class House extends Property {
 	@Override
 	public String display() {
 		return PropertyType.HOUSE + ", ID- "+propertyID + ", Street No:" + this.streetNo + ", No.BedRoom: " + this.numberOfBedRoom + ""
-				+ ", No.BathRoom: " + this.numberOfBathRoom + ", squareFootage: " + this.squareFootage + ", StreetName: " + this.streetName + ", City: " + this.city + ", postalCode: " + this.postalCode + ", Owner- " + ((this.tenent) != null ? this.tenent.getTenantName() : "null")  +", status- "+status;
+				+ ", No.BathRoom: " + this.numberOfBathRoom + ", squareFootage: " + this.squareFootage + ", StreetName: " + this.streetName + ", City: " + this.city + ", postalCode: " + this.postalCode + ", Owner- " + ((this.tenent) != null ? this.tenent.getTenantName() : "null")  +", status- "+status+"\n";
 	}
 
 	public String displayVacant() {
-		if(status==true) {
+		if(status) {
 			return display();
 		}
-		else {
-			return "No Vacant Properties";
-		}
+		
+		return "";
 	}
 
 	public String displayRented() {
-		if(status==false) {
+		if(!status) {
 			return display();
 		}
-		else {
-			return "No Ranted Properties";
-		}	
+		
+		return "";
 	}
 
 	@Override

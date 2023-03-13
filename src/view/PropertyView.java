@@ -84,16 +84,32 @@ public class PropertyView {
 		}
     }
 
-	public void displayVacantProperty(ArrayList<Property> properties) {
+	public String displayVacantProperty(ArrayList<Property> properties) {
+		String output = "";
 		for (int i = 0; i < properties.size(); i++) {
-			System.out.println(properties.get(i).displayVacant());
+			output = output.concat(properties.get(i).displayVacant());
 		}
+		if(output.isEmpty()) {
+			System.out.println("No vacant properties found!");
+		} else {
+			System.out.println(output);
+		}
+		
+		return output;
 	}
 
-	public void displayRentedProperty(ArrayList<Property> properties) {
+	public String displayRentedProperty(ArrayList<Property> properties) {
+		String output = "";
 		for (int i = 0; i < properties.size(); i++) {
-			System.out.println(properties.get(i).displayRented());
+			output = output.concat(properties.get(i).displayRented());
 		}
+		if(output.isEmpty()) {
+			System.out.println("No rented properties found!");
+		} else {
+			System.out.println(output);
+		}
+		
+		return output;
 	}
 
 	public Property getObjectByID(int ID, ArrayList<Property> properties) {

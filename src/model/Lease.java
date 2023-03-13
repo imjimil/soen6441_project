@@ -137,10 +137,18 @@ public class Lease implements ITenantLease {
 		}
 	}
 
-	public void getAllLeases(ArrayList<Lease> leases) {
+	public String getAllLeases(ArrayList<Lease> leases) {
+		String output = "";
 		for (int i = 0; i < leases.size(); i++) {
-			System.out.println((i+1) +". "+ leases.get(i).display());
+			output = output.concat((i+1) +". "+ leases.get(i).display());
 		}
+		if(output.isEmpty()) {
+			System.out.println("No leases found.");
+		} else {
+			System.out.println(output);
+		}
+		
+		return output;
 	}
 
 	public void getEndingLeases(ArrayList<Lease> leases) {

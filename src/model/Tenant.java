@@ -134,7 +134,6 @@ public class Tenant extends TenantObservable implements ITenantLease {
 			// load property object
 			Property selectedProperty = property.getPropertyByID(propertyId, properties);
 			interestedUnits.add(selectedProperty);
-//			selectedTenant.setInterestedUnits(interestedUnits);
 			notifyObserver(this);
 		}
 	}
