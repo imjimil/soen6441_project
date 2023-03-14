@@ -16,14 +16,18 @@ import view.TenantView;
 public class ProjectPhase1 {
 	
 	public static void main(String[] args) {
-		PropertyView view = new PropertyView();
-		Property propertyModel = new Apartment();
-		
-		Tenant tenantModel = new Tenant();
-		TenantView tenantView = new TenantView(tenantModel);
-		RentalView rentalView = new RentalView();
-        Controller controller = new Controller(view, tenantView,rentalView, propertyModel, tenantModel);
-        controller.mainFunction();
+		try {
+			PropertyView view = new PropertyView();
+			Property propertyModel = new Apartment();
+
+			Tenant tenantModel = new Tenant();
+			TenantView tenantView = new TenantView(tenantModel);
+			RentalView rentalView = new RentalView();
+			Controller controller = new Controller(view, tenantView, rentalView, propertyModel, tenantModel);
+			controller.mainFunction();
+		}catch(Exception e){
+			System.out.println("Please input correctly!!!");
+		}
 	}
 	
 }
