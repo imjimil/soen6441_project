@@ -153,6 +153,7 @@ public class Lease implements ITenantLease {
 		try{
 			for (int i = 0; i < leases.size(); i++) {
 				output = output.concat((i+1) +". "+ leases.get(i).display());
+				output = output.concat("\n");
 			}
 			if(output.isEmpty()) {
 				System.out.println("No leases found.");
