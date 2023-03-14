@@ -80,7 +80,7 @@ public class Lease implements ITenantLease {
 		this.tenantInfo = tenantInfo;
 	}
 
-	public Lease(int leaseNo, Date leaseStartDate, Date leaseEndDate, int rentAmount, Boolean isRentPaid,
+	public Lease(int leaseNo, Date leaseStartDate, Date leaseEndDate, float rentAmount, Boolean isRentPaid,
 			Tenant tenantInfo, Property propertyInfo) {
 		super();
 		this.leaseNo = leaseNo;
@@ -99,8 +99,16 @@ public class Lease implements ITenantLease {
 
 	@Override
 	public String display() {
-		return "Lease No-"+ this.leaseNo + ", Start Date- "+ this.leaseStartDate + ", End Date- "+ this.leaseEndDate 
-		+", Rent- "+ this.rentAmount + ", Rent paid- "+ this.isRentPaid + ", Tenant- "+ this.tenantInfo.getTenantName() +"\n"+" Property info- " + this.propertyInfo.getID();
+		String output = "";
+		if(this.tenantInfo != null && this.propertyInfo != null) {
+			output = output.concat("Lease No-"+ this.leaseNo + ", Start Date- "+ this.leaseStartDate + ", End Date- "+ this.leaseEndDate 
+					+", Rent- "+ this.rentAmount + ", Rent paid- "+ this.isRentPaid + ", Tenant- "+ this.tenantInfo.getTenantName() +"\n"+" Property info- " + this.propertyInfo.getID());
+		} else {
+			output = output.concat("Lease No-"+ this.leaseNo + ", Start Date- "+ this.leaseStartDate + ", End Date- "+ this.leaseEndDate 
+					+", Rent- "+ this.rentAmount + ", Rent paid- "+ this.isRentPaid);
+		}
+		
+		return output;
 	}
 
 	@Override
@@ -135,8 +143,8 @@ public class Lease implements ITenantLease {
 					System.out.println((i+1) + ". " + leases.get(i).display());
 				}
 			}
-		}catch(Exception e){
-			System.out.println("An error occurred,please try again!!!");
+		} catch(Exception e){
+			System.out.println("An error occurred, Please try again!!!");
 		}
 	}
 
@@ -153,8 +161,8 @@ public class Lease implements ITenantLease {
 			}
 
 			return output;
-		}catch(Exception e){
-			System.out.println("An error occurred,please try again!!!");
+		} catch(Exception e){
+			System.out.println("An error occurred,please try again!!!" + e.getMessage());
 			return "";
 		}
 	}

@@ -82,7 +82,7 @@ class PropertyTest {
 	}
 
 	@Test
-	void testPrintProperty() {
+	void testPrintApartment() {
 		// Create a mock Apartment object
         Apartment apartment = Mockito.mock(Apartment.class);
         Mockito.when(apartment.display()).thenReturn("Civic Address:A1, Apt No: 30, No.BedRoom: 2, No.BathRoom: 4, squareFootage: 100.0, StreetName: Jarry, City: Edmonton, postalCode: K1L, Owner- null, status- true");
@@ -91,6 +91,18 @@ class PropertyTest {
         String[] newOutputArr = Arrays.copyOfRange(outputArr, 2, outputArr.length);
         String output = String.join(",", newOutputArr).trim();
         assertEquals(output, apartment.display());
+	}
+	
+	@Test
+	void testPrintCondo() {
+		// Create a mock Condo object
+        Condo condo = Mockito.mock(Condo.class);
+        Mockito.when(condo.display()).thenReturn("Street No:120, Unit No: 130, No.BedRoom: 2, No.BathRoom: 4, squareFootage: 100.0, StreetName: Kaiser, City: Alberta, postalCode: L9H, Owner- null, status- true");
+        Condo newCondo = new Condo(120, 130, 2, 4, 100f, "Kaiser", "Alberta", "L9H");
+        String[] outputArr = newCondo.display().split(",");
+        String[] newOutputArr = Arrays.copyOfRange(outputArr, 2, outputArr.length);
+        String output = String.join(",", newOutputArr).trim();
+        assertEquals(output, condo.display());
 	}
 	
 	@Test
@@ -118,13 +130,4 @@ class PropertyTest {
         assertEquals(output, apartment.displayRented());
 	}
 	
-	@Test
-	void testDisplayPaidRentUnits() {
-		
-	}
-	
-	@Test
-	void testDisplayNotPaidRentUnits() {
-		
-	}
 }
