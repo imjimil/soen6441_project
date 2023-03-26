@@ -4,7 +4,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.application.Application;
 import model.Property;
 
 /**
@@ -15,7 +29,7 @@ import model.Property;
  * 
  * PropertyView class
  */
-public class PropertyView {
+public class PropertyView extends Application {
 	
 	public Map<String, ArrayList<Object>> getPropertyInfo() {
 		Scanner scanner = new Scanner(System.in);
@@ -136,5 +150,27 @@ public class PropertyView {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void start(Stage stageThree) throws Exception {
+		Text txtCivicAddress = new Text(80, 80, "Civic address:");
+		TextField txtAptNo = new TextField();
+		HBox h1 = new HBox(txtCivicAddress, txtAptNo);
+		
+		Button btnSubmit = new Button("Submit");
+		VBox hBoxProperty = new VBox(h1, btnSubmit);
+	    hBoxProperty.setSpacing(25);
+	    hBoxProperty.setPadding(new Insets(95, 12, 15, 12));
+	    hBoxProperty.setAlignment(Pos.CENTER);
+		Pane addPropertyPane = new Pane();
+	    // Hold buttons in an HBox
+	    
+		BorderPane borderPropertyPane = new BorderPane(addPropertyPane);
+	    borderPropertyPane.setTop(hBoxProperty);
+		Scene apartmentScene = new Scene(borderPropertyPane, 500, 350);
+		stageThree.setTitle("Add an apartment"); // Set title
+	    stageThree.setScene(apartmentScene); // Place the scene in the stage
+	    stageThree.show(); // Display the stage
 	}
 }
