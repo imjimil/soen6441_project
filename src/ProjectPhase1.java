@@ -57,7 +57,6 @@ public class ProjectPhase1 extends Application {
 		borderPane.setBottom(hBoxLine3);
 	    // Create and register the handler
 	    btnAddProperty.setOnAction(e -> {
-			hBoxLine1.setVisible(false);
 			PropertyView propertyView = new PropertyView();
 			try {
 				propertyView.start(primaryStage);

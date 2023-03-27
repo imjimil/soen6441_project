@@ -13,6 +13,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.BorderPane;
@@ -156,6 +157,8 @@ public class PropertyView extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		Map<String, ArrayList<Object>> result = new HashMap<>();
+		ArrayList<Object> propertyData = new ArrayList<Object>();
 		// Hold buttons in an HBox
 		Button btnAddApartment = new Button("Apartment");
 		Button btnAddCondo = new Button("Condo");
@@ -172,6 +175,13 @@ public class PropertyView extends Application {
 
 		btnAddApartment.setOnAction(e -> {
 			hBoxProperty.setVisible(false);
+
+			Button btnMainMenu = new Button("Main Menu");
+			HBox hMainMenu = new HBox(btnMainMenu);
+
+			Label statusMessage = new Label();
+			HBox hStatus = new HBox(statusMessage);
+
 			Text txtCivicAddress = new Text(80, 80, "Civic address: *");
 			TextField tfCivicAddress = new TextField();
 			HBox hCivicAddress = new HBox(txtCivicAddress, tfCivicAddress);
@@ -183,7 +193,6 @@ public class PropertyView extends Application {
 			Text txtNoBedRoom = new Text(80, 80, "Number of bed room:");
 			TextField tfNoBedRoom = new TextField();
 			HBox hBedRoom = new HBox(txtNoBedRoom, tfNoBedRoom);
-
 			Text txtNoBathRoom = new Text(80, 80, "Number of bath room:");
 			TextField tfNoBathRoom = new TextField();
 			HBox hBathRoom = new HBox(txtNoBathRoom, tfNoBathRoom);
@@ -205,7 +214,7 @@ public class PropertyView extends Application {
 			HBox hPostalCode = new HBox(txtPostalCode, tfPostalCode);
 
 			Button btnSubmit = new Button("Submit");
-			VBox vBoxProperty = new VBox(hCivicAddress, hAptNo, hBedRoom, hBathRoom,
+			VBox vBoxProperty = new VBox(hMainMenu, hStatus, hCivicAddress, hAptNo, hBedRoom, hBathRoom,
 					hFootage, hStreet, hCity, hPostalCode, btnSubmit);
 			vBoxProperty.setSpacing(25);
 			vBoxProperty.setPadding(new Insets(95, 12, 15, 12));
@@ -219,8 +228,26 @@ public class PropertyView extends Application {
 			primaryStage.setScene(apartmentScene);
 
 			btnSubmit.setOnAction(event -> {
+				propertyData.add(Integer.parseInt(tfNoBedRoom.getText()));
+				propertyData.add(Integer.parseInt(tfNoBathRoom.getText()));
+				propertyData.add(Float.parseFloat(tfFootage.getText()));
+				propertyData.add(tfStreetName.getText());
+				propertyData.add(tfCity.getText());
+				propertyData.add(tfPostalCode.getText());
+				propertyData.add(tfCivicAddress.getText());
+				propertyData.add(Integer.parseInt(tfAptNo.getText()));
+				result.put("A", propertyData);
+
 				PropertyController propertyController = new PropertyController();
-				propertyController.addNewProperty();
+				boolean returnResult = propertyController.addNewProperty(result);
+				if(returnResult) {
+					statusMessage.setText("Added new property successfully!");
+					statusMessage.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
+				}
+			});
+
+			btnMainMenu.setOnAction(event -> {
+
 			});
 		});
 //
