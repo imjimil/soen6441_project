@@ -7,8 +7,6 @@ import java.util.Scanner;
 
 import controller.PropertyController;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,7 +19,6 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.application.Application;
 import model.Property;
 
 /**
@@ -32,7 +29,7 @@ import model.Property;
  * 
  * PropertyView class
  */
-public class PropertyView extends Application {
+public class PropertyView extends Application implements AppBase {
 	
 	public Map<String, ArrayList<Object>> getPropertyInfo() {
 		Scanner scanner = new Scanner(System.in);
@@ -160,6 +157,9 @@ public class PropertyView extends Application {
 		Map<String, ArrayList<Object>> result = new HashMap<>();
 		ArrayList<Object> propertyData = new ArrayList<Object>();
 		// Hold buttons in an HBox
+		Button btnMainMenu = new Button("Main Menu");
+		HBox hMainMenu = new HBox(btnMainMenu);
+
 		Button btnAddApartment = new Button("Apartment");
 		Button btnAddCondo = new Button("Condo");
 		Button btnAddHouse = new Button("House");
@@ -168,17 +168,18 @@ public class PropertyView extends Application {
 		hBoxProperty.setPadding(new Insets(95, 12, 15, 12));
 		hBoxProperty.setAlignment(Pos.CENTER);
 		BorderPane borderPane = new BorderPane(new Pane());
-		borderPane.setTop(hBoxProperty);
+		borderPane.setTop(hMainMenu);
+		borderPane.setCenter(hBoxProperty);
 		Scene scene = new Scene(borderPane, 500, 350);
 		primaryStage.setTitle("Add a property"); // Set title
 		primaryStage.setScene(scene);
 
+		btnMainMenu.setOnAction(event -> {
+			primaryStage.setTitle("Project Phase 2 Demo");
+			primaryStage.setScene(propertyController.getPreScene());
+		});
 		btnAddApartment.setOnAction(e -> {
-			hBoxProperty.setVisible(false);
-
-			Button btnMainMenu = new Button("Main Menu");
-			HBox hMainMenu = new HBox(btnMainMenu);
-
+//			hBoxProperty.setVisible(false);
 			Label statusMessage = new Label();
 			HBox hStatus = new HBox(statusMessage);
 
@@ -244,10 +245,6 @@ public class PropertyView extends Application {
 					statusMessage.setText("Added new property successfully!");
 					statusMessage.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
 				}
-			});
-
-			btnMainMenu.setOnAction(event -> {
-
 			});
 		});
 //

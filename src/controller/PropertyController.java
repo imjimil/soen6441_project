@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.scene.Scene;
 import model.Apartment;
 import model.Property;
 import model.PropertyFactory;
@@ -13,9 +14,16 @@ public class PropertyController {
     ArrayList<Property> properties = new ArrayList<>();
     private PropertyView propertyView;
     private Property propertyModel;
+    private Scene preScene;
     public PropertyController() {
         propertyView = new PropertyView();
         propertyModel = new Apartment();
+    }
+    public void setPreScene(Scene preScene) {
+        this.preScene = preScene;
+    }
+    public Scene getPreScene() {
+        return this.preScene;
     }
     public boolean addNewProperty(Map<String, ArrayList<Object>> result) {
         Boolean isSuccess = true;

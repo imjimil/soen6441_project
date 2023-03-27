@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import view.AppBase;
 import view.PropertyView;
 import javafx.scene.layout.Pane;
 
@@ -19,7 +20,7 @@ import javafx.scene.layout.Pane;
  * 
  */
 
-public class ProjectPhase1 extends Application {
+public class ProjectPhase1 extends Application implements AppBase {
 	 @Override // Override the start method in the Application class
 	  public void start(Stage primaryStage) {
 	    Pane pane = new Pane();
@@ -60,6 +61,7 @@ public class ProjectPhase1 extends Application {
 			PropertyView propertyView = new PropertyView();
 			try {
 				propertyView.start(primaryStage);
+				propertyController.setPreScene(btnAddProperty.getScene());
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
