@@ -12,7 +12,7 @@ import view.PropertyView;
 import javafx.scene.layout.Pane;
 
 /**
- * Project Phase 1
+ * Project Phase 2
  * Student 1: 	Quoc Phong Ngo 				- 40230574
  * Student 2: 	Jimil Suchitkumar Prajapati - 40205477
  * Student 3:   Anitha Ramakrishnan			- 40231724
@@ -22,54 +22,48 @@ import javafx.scene.layout.Pane;
 public class ProjectPhase1 extends Application {
 	 @Override // Override the start method in the Application class
 	  public void start(Stage primaryStage) {
-//	    Text text = new Text(40, 40, "Programming is fun");
 	    Pane pane = new Pane();
-	    
 	    // Hold four buttons in an HBox
 	    Button btnAddProperty = new Button("Add a property");
 	    Button btnAddTenant = new Button("Add a tenant");
 	    Button btnRentUnit = new Button("Rent a unit");
 	    Button btnDisplayTenants = new Button("Display tenants");
-	    HBox hBox = new HBox(btnAddProperty, btnAddTenant, btnRentUnit, btnDisplayTenants);
-	    hBox.setSpacing(25);
-	    hBox.setPadding(new Insets(35, 12, 15, 12));
-
-	    
-	    hBox.setAlignment(Pos.CENTER);
+	    HBox hBoxLine1 = new HBox(btnAddProperty, btnAddTenant, btnRentUnit, btnDisplayTenants);
+	    hBoxLine1.setSpacing(20);
+	    hBoxLine1.setPadding(new Insets(35, 12, 15, 12));
+	    hBoxLine1.setAlignment(Pos.CENTER);
+		// Line 2
+		 Button btnDisplayProperties = new Button("Display properties");
+		 Button btnVacantUnits = new Button("Display vacant units");
+		 Button btnRentedUnits = new Button("Display rented units");
+		 Button btnIsPaidRentUnits = new Button("Display paid/not paid rent units");
+		 HBox hBoxLine2 = new HBox(btnDisplayProperties, btnVacantUnits, btnRentedUnits, btnIsPaidRentUnits);
+		 hBoxLine2.setSpacing(20);
+		 hBoxLine2.setPadding(new Insets(0, 12, 15, 12));
+		 hBoxLine2.setAlignment(Pos.CENTER);
+		 // Line 3
+		 Button btnExpressInterest = new Button("Express an interest in a unit");
+		 Button btnPotentialTenants = new Button("Display potential tenants and their units");
+		 Button btnEndingLeases = new Button("Display leases that will be ending");
+		 Button btnAllLeases = new Button("Display all leases");
+		 HBox hBoxLine3 = new HBox(btnExpressInterest, btnPotentialTenants, btnEndingLeases, btnAllLeases);
+		 hBoxLine3.setSpacing(20);
+		 hBoxLine3.setPadding(new Insets(0, 12, 40, 12));
+		 hBoxLine3.setAlignment(Pos.CENTER);
 	    
 	    BorderPane borderPane = new BorderPane(pane);
-	    borderPane.setTop(hBox);
-	    
+	    borderPane.setTop(hBoxLine1);
+	    borderPane.setCenter(hBoxLine2);
+		borderPane.setBottom(hBoxLine3);
 	    // Create and register the handler
 	    btnAddProperty.setOnAction(e -> {
-	    	Pane addPropertyPane = new Pane();
-		    
-		    // Hold buttons in an HBox
-		    Button btnAddApartment = new Button("Add an apartment");
-		    Button btnAddCondo = new Button("Add a condo");
-		    Button btnAddHouse = new Button("Add a house");
-		    HBox hBoxProperty = new HBox(btnAddApartment, btnAddCondo, btnAddHouse);
-		    hBoxProperty.setSpacing(25);
-		    hBoxProperty.setPadding(new Insets(95, 12, 15, 12));
-		    hBoxProperty.setAlignment(Pos.CENTER);
-		    
-		    BorderPane borderPropertyPane = new BorderPane(addPropertyPane);
-		    borderPropertyPane.setTop(hBoxProperty);
-		    Scene propertyScene = new Scene(borderPropertyPane, 500, 350);
-		    Stage stageTwo = new Stage();
-		    stageTwo.setTitle("Add a property"); // Set title
-		    stageTwo.setScene(propertyScene); // Place the scene in the stage
-		    stageTwo.show(); // Display the stage
-		    
-		    btnAddApartment.setOnAction(eventA -> {
-		    	PropertyView p = new PropertyView();
-		    	try {
-		    		Stage stageThree = new Stage();
-					p.start(stageThree);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-		    });
+			hBoxLine1.setVisible(false);
+			PropertyView propertyView = new PropertyView();
+			try {
+				propertyView.start(primaryStage);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 	    });
 
 	    btnAddTenant.setOnAction(new EventHandler<ActionEvent>() {
@@ -91,7 +85,7 @@ public class ProjectPhase1 extends Application {
 	    });
 
 	    // Create a scene and place it in the stage
-	    Scene scene = new Scene(borderPane, 500, 350);
+	    Scene scene = new Scene(borderPane, 800, 350);
 	    primaryStage.setTitle("Project Phase 2 Demo"); // Set title
 	    primaryStage.setScene(scene); // Place the scene in the stage
 	    primaryStage.show(); // Display the stage

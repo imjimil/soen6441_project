@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
+import controller.PropertyController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,7 +24,7 @@ import javafx.application.Application;
 import model.Property;
 
 /**
- * Project Phase 1
+ * Project Phase 2
  * Student 1: 	Quoc Phong Ngo 				- 40230574
  * Student 2: 	Jimil Suchitkumar Prajapati - 40205477
  * Student 3:   Anitha Ramakrishnan			- 40231724
@@ -153,24 +155,74 @@ public class PropertyView extends Application {
 	}
 
 	@Override
-	public void start(Stage stageThree) throws Exception {
-		Text txtCivicAddress = new Text(80, 80, "Civic address:");
-		TextField txtAptNo = new TextField();
-		HBox h1 = new HBox(txtCivicAddress, txtAptNo);
-		
-		Button btnSubmit = new Button("Submit");
-		VBox hBoxProperty = new VBox(h1, btnSubmit);
-	    hBoxProperty.setSpacing(25);
-	    hBoxProperty.setPadding(new Insets(95, 12, 15, 12));
-	    hBoxProperty.setAlignment(Pos.CENTER);
-		Pane addPropertyPane = new Pane();
-	    // Hold buttons in an HBox
-	    
-		BorderPane borderPropertyPane = new BorderPane(addPropertyPane);
-	    borderPropertyPane.setTop(hBoxProperty);
-		Scene apartmentScene = new Scene(borderPropertyPane, 500, 350);
-		stageThree.setTitle("Add an apartment"); // Set title
-	    stageThree.setScene(apartmentScene); // Place the scene in the stage
-	    stageThree.show(); // Display the stage
+	public void start(Stage primaryStage) throws Exception {
+		// Hold buttons in an HBox
+		Button btnAddApartment = new Button("Apartment");
+		Button btnAddCondo = new Button("Condo");
+		Button btnAddHouse = new Button("House");
+		HBox hBoxProperty = new HBox(btnAddApartment, btnAddCondo, btnAddHouse);
+		hBoxProperty.setSpacing(25);
+		hBoxProperty.setPadding(new Insets(95, 12, 15, 12));
+		hBoxProperty.setAlignment(Pos.CENTER);
+		BorderPane borderPane = new BorderPane(new Pane());
+		borderPane.setTop(hBoxProperty);
+		Scene scene = new Scene(borderPane, 500, 350);
+		primaryStage.setTitle("Add a property"); // Set title
+		primaryStage.setScene(scene);
+
+		btnAddApartment.setOnAction(e -> {
+			hBoxProperty.setVisible(false);
+			Text txtCivicAddress = new Text(80, 80, "Civic address: *");
+			TextField tfCivicAddress = new TextField();
+			HBox hCivicAddress = new HBox(txtCivicAddress, tfCivicAddress);
+
+			Text txtAptNo = new Text(80, 80, "Apt No: *");
+			TextField tfAptNo = new TextField();
+			HBox hAptNo = new HBox(txtAptNo, tfAptNo);
+
+			Text txtNoBedRoom = new Text(80, 80, "Number of bed room:");
+			TextField tfNoBedRoom = new TextField();
+			HBox hBedRoom = new HBox(txtNoBedRoom, tfNoBedRoom);
+
+			Text txtNoBathRoom = new Text(80, 80, "Number of bath room:");
+			TextField tfNoBathRoom = new TextField();
+			HBox hBathRoom = new HBox(txtNoBathRoom, tfNoBathRoom);
+
+			Text txtFootage = new Text(80, 80, "Square Footage:");
+			TextField tfFootage = new TextField();
+			HBox hFootage = new HBox(txtFootage, tfFootage);
+
+			Text txtStreetName = new Text(80, 80, "Street Name:");
+			TextField tfStreetName = new TextField();
+			HBox hStreet = new HBox(txtStreetName, tfStreetName);
+
+			Text txtCity = new Text(80, 80, "City:");
+			TextField tfCity = new TextField();
+			HBox hCity = new HBox(txtCity, tfCity);
+
+			Text txtPostalCode = new Text(80, 80, "Postal Code:");
+			TextField tfPostalCode = new TextField();
+			HBox hPostalCode = new HBox(txtPostalCode, tfPostalCode);
+
+			Button btnSubmit = new Button("Submit");
+			VBox vBoxProperty = new VBox(hCivicAddress, hAptNo, hBedRoom, hBathRoom,
+					hFootage, hStreet, hCity, hPostalCode, btnSubmit);
+			vBoxProperty.setSpacing(25);
+			vBoxProperty.setPadding(new Insets(95, 12, 15, 12));
+			vBoxProperty.setAlignment(Pos.CENTER);
+			Pane addPropertyPane = new Pane();
+			// Hold buttons in an HBox
+			BorderPane borderPropertyPane = new BorderPane(addPropertyPane);
+			borderPropertyPane.setTop(vBoxProperty);
+			Scene apartmentScene = new Scene(borderPropertyPane, 500, 350);
+			primaryStage.setTitle("Add an apartment"); // Set title
+			primaryStage.setScene(apartmentScene);
+
+			btnSubmit.setOnAction(event -> {
+				PropertyController propertyController = new PropertyController();
+				propertyController.addNewProperty();
+			});
+		});
+//
 	}
 }
