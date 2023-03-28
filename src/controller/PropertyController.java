@@ -5,18 +5,18 @@ import model.Apartment;
 import model.Property;
 import model.PropertyFactory;
 import utility.PropertyType;
-import view.PropertyView;
+import view.Property.PropertyTypeView;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 public class PropertyController {
     ArrayList<Property> properties = new ArrayList<>();
-    private PropertyView propertyView;
+    private PropertyTypeView propertyTypeView;
     private Property propertyModel;
     private Scene preScene;
     public PropertyController() {
-        propertyView = new PropertyView();
+        propertyTypeView = new PropertyTypeView();
         propertyModel = new Apartment();
     }
     public void setPreScene(Scene preScene) {
@@ -24,6 +24,9 @@ public class PropertyController {
     }
     public Scene getPreScene() {
         return this.preScene;
+    }
+    public ArrayList<Property> getProperties() {
+        return this.properties;
     }
     public boolean addNewProperty(Map<String, ArrayList<Object>> result) {
         Boolean isSuccess = true;
@@ -46,4 +49,5 @@ public class PropertyController {
 
         return  isSuccess;
     }
+
 }

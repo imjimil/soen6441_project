@@ -48,9 +48,32 @@ public abstract class Property implements IProperty {
 		this.status = stat;
 	}
 
-		
+	public int getNumberOfBedRoom() {
+		return numberOfBedRoom;
+	}
+
+	public int getNumberOfBathRoom() {
+		return numberOfBathRoom;
+	}
+
+	public float getSquareFootage() {
+		return squareFootage;
+	}
+
+	public String getStreetName() {
+		return streetName;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
 	protected Property(int numberOfBedRoom, int numberOfBathRoom,
-			float squareFootage, String streetName, String city, String postalCode) {
+					   float squareFootage, String streetName, String city, String postalCode) {
 		this.propertyID = new Random().nextInt(90000) + 10000;
 		this.numberOfBedRoom = numberOfBedRoom;
 		this.numberOfBathRoom = numberOfBathRoom;

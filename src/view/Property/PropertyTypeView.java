@@ -1,11 +1,10 @@
-package view;
+package view.Property;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import controller.PropertyController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,6 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.Property;
+import view.AppBase;
 
 /**
  * Project Phase 2
@@ -29,7 +29,7 @@ import model.Property;
  * 
  * PropertyView class
  */
-public class PropertyView extends Application implements AppBase {
+public class PropertyTypeView extends Application implements AppBase {
 	
 	public Map<String, ArrayList<Object>> getPropertyInfo() {
 		Scanner scanner = new Scanner(System.in);
@@ -154,8 +154,7 @@ public class PropertyView extends Application implements AppBase {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Map<String, ArrayList<Object>> result = new HashMap<>();
-		ArrayList<Object> propertyData = new ArrayList<Object>();
+		AddPropertyView addPropertyView = new AddPropertyView();
 		// Hold buttons in an HBox
 		Button btnMainMenu = new Button("Main Menu");
 		HBox hMainMenu = new HBox(btnMainMenu);
@@ -179,74 +178,18 @@ public class PropertyView extends Application implements AppBase {
 			primaryStage.setScene(propertyController.getPreScene());
 		});
 		btnAddApartment.setOnAction(e -> {
-//			hBoxProperty.setVisible(false);
-			Label statusMessage = new Label();
-			HBox hStatus = new HBox(statusMessage);
-
-			Text txtCivicAddress = new Text(80, 80, "Civic address: *");
-			TextField tfCivicAddress = new TextField();
-			HBox hCivicAddress = new HBox(txtCivicAddress, tfCivicAddress);
-
-			Text txtAptNo = new Text(80, 80, "Apt No: *");
-			TextField tfAptNo = new TextField();
-			HBox hAptNo = new HBox(txtAptNo, tfAptNo);
-
-			Text txtNoBedRoom = new Text(80, 80, "Number of bed room:");
-			TextField tfNoBedRoom = new TextField();
-			HBox hBedRoom = new HBox(txtNoBedRoom, tfNoBedRoom);
-			Text txtNoBathRoom = new Text(80, 80, "Number of bath room:");
-			TextField tfNoBathRoom = new TextField();
-			HBox hBathRoom = new HBox(txtNoBathRoom, tfNoBathRoom);
-
-			Text txtFootage = new Text(80, 80, "Square Footage:");
-			TextField tfFootage = new TextField();
-			HBox hFootage = new HBox(txtFootage, tfFootage);
-
-			Text txtStreetName = new Text(80, 80, "Street Name:");
-			TextField tfStreetName = new TextField();
-			HBox hStreet = new HBox(txtStreetName, tfStreetName);
-
-			Text txtCity = new Text(80, 80, "City:");
-			TextField tfCity = new TextField();
-			HBox hCity = new HBox(txtCity, tfCity);
-
-			Text txtPostalCode = new Text(80, 80, "Postal Code:");
-			TextField tfPostalCode = new TextField();
-			HBox hPostalCode = new HBox(txtPostalCode, tfPostalCode);
-
-			Button btnSubmit = new Button("Submit");
-			VBox vBoxProperty = new VBox(hMainMenu, hStatus, hCivicAddress, hAptNo, hBedRoom, hBathRoom,
-					hFootage, hStreet, hCity, hPostalCode, btnSubmit);
-			vBoxProperty.setSpacing(25);
-			vBoxProperty.setPadding(new Insets(95, 12, 15, 12));
-			vBoxProperty.setAlignment(Pos.CENTER);
-			Pane addPropertyPane = new Pane();
-			// Hold buttons in an HBox
-			BorderPane borderPropertyPane = new BorderPane(addPropertyPane);
-			borderPropertyPane.setTop(vBoxProperty);
-			Scene apartmentScene = new Scene(borderPropertyPane, 500, 350);
-			primaryStage.setTitle("Add an apartment"); // Set title
-			primaryStage.setScene(apartmentScene);
-
-			btnSubmit.setOnAction(event -> {
-				propertyData.add(Integer.parseInt(tfNoBedRoom.getText()));
-				propertyData.add(Integer.parseInt(tfNoBathRoom.getText()));
-				propertyData.add(Float.parseFloat(tfFootage.getText()));
-				propertyData.add(tfStreetName.getText());
-				propertyData.add(tfCity.getText());
-				propertyData.add(tfPostalCode.getText());
-				propertyData.add(tfCivicAddress.getText());
-				propertyData.add(Integer.parseInt(tfAptNo.getText()));
-				result.put("A", propertyData);
-
-				PropertyController propertyController = new PropertyController();
-				boolean returnResult = propertyController.addNewProperty(result);
-				if(returnResult) {
-					statusMessage.setText("Added new property successfully!");
-					statusMessage.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
-				}
-			});
+			primaryStage.setUserData("A");
+			addPropertyView.start(primaryStage);
 		});
-//
+
+		btnAddCondo.setOnAction(e -> {
+			primaryStage.setUserData("C");
+			addPropertyView.start(primaryStage);
+		});
+
+		btnAddHouse.setOnAction(e -> {
+			primaryStage.setUserData("H");
+			addPropertyView.start(primaryStage);
+		});
 	}
 }
