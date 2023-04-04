@@ -1,3 +1,4 @@
+import controller.PropertyController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,15 +8,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Apartment;
+import model.Property;
 import model.Tenant;
+import utility.Constant;
 import view.AppBase;
 import view.Property.PropertyTypeView;
-import javafx.scene.layout.Pane;
 import view.Property.DisplayPropertyView;
 import view.TenantView;
 
@@ -85,6 +86,10 @@ public class ProjectPhase1 extends Application implements AppBase {
 					 Tenant tenantModel = new Tenant();
 					 TenantView tenantView = new TenantView(tenantModel);
 					 ArrayList<Object> tenantData = new ArrayList<Object>();
+			 		propertyController.setPreScene(btnAddProperty.getScene());
+
+					 Button btnMainMenu = new Button("Main Menu");
+					 HBox hMainMenu = new HBox(btnMainMenu);
 					 Label statusMessage = new Label();
 					 HBox hStatus = new HBox(statusMessage);
 
@@ -101,7 +106,7 @@ public class ProjectPhase1 extends Application implements AppBase {
 					 HBox hEmailID = new HBox(txtEmailID, tfEmailID);
 
 					 Button btnSubmit = new Button("Submit");
-					 VBox vBoxProperty = new VBox(hStatus, hTenantName, hTenantPhone, hEmailID, btnSubmit);
+					 VBox vBoxProperty = new VBox(hMainMenu, hStatus, hTenantName, hTenantPhone, hEmailID, btnSubmit);
 					 vBoxProperty.setSpacing(25);
 					 vBoxProperty.setPadding(new Insets(95, 12, 15, 12));
 					 vBoxProperty.setAlignment(Pos.CENTER);
@@ -113,18 +118,24 @@ public class ProjectPhase1 extends Application implements AppBase {
 					 primaryStage.setTitle("Add an Teannat"); // Set title
 					 primaryStage.setScene(apartmentScene);
 
+			 btnMainMenu.setOnAction(event -> {
+				 primaryStage.setTitle("Project Phase 2 Demo");
+				 primaryStage.setScene(propertyController.getPreScene());
+			 });
+
 					 btnSubmit.setOnAction(event -> {
 						 tenantData.add(tfTenantName.getText());
 						 tenantData.add(tfTenantPhone.getText());
 						 tenantData.add(tfEmailID.getText());
 						 //result.put("A", propertyData);
 
-						 //PropertyController propertyController = new PropertyController();
-						 //boolean returnResult = propertyController.addNewProperty(result);
-						 //if(returnResult) {
+						 PropertyController propertyController = new PropertyController();
+						 boolean returnResult = propertyController.addNewTenant(tenantData);
+						 if(returnResult) {
+							 //statusMessage.setText(tenantData.toString());
 						 statusMessage.setText("Added new Tenant successfully!");
 						 statusMessage.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
-						 // }
+						 }
 					 });
 				 });
 
@@ -135,11 +146,60 @@ public class ProjectPhase1 extends Application implements AppBase {
 	      }
 	    });
 	    
-	    btnDisplayTenants.setOnAction(new EventHandler<ActionEvent>() {
+	  /*  btnDisplayTenants.setOnAction(new EventHandler<ActionEvent>() {
 	      @Override // Override the handle method
 	      public void handle(ActionEvent e) {
 	      }
-	    });
+	    });*/
+		 btnDisplayTenants.setOnAction(actionEvent -> {
+			 Label statusMessage = new Label();
+			 statusMessage.setText(propertyController.getTenants().toString());
+			 ArrayList<Tenant> tenants = propertyController.getTenants();
+
+			 Button btnMainMenu = new Button("Main Menu");
+			 HBox hMainMenu = new HBox(btnMainMenu);
+			 btnMainMenu.setOnAction(event -> {
+				 primaryStage.setTitle("Project Phase 2 Demo");
+				 primaryStage.setScene(propertyController.getPreScene());
+			 });
+
+			 if(tenants.size() > 0) {
+				 HBox hTenantName = null;
+				 HBox hTenantPhone = null;
+				 HBox hTenantEmail = null;
+				 Label lblHeader;
+				 HBox hHeader;
+				 FlowPane fpanes = new FlowPane();
+				 VBox vBoxTenant = null;
+				 ArrayList<VBox> vBoxArray = new ArrayList<>();
+
+				 for (int i = 0; i < tenants.size(); i++) {
+					lblHeader = new Label();
+					lblHeader.setText("Tenants LIST:");
+				 	Text txtTenantName = new Text(180, 180, "Tenant Name: " + ((Tenant) tenants.get(i)).getTenantName());
+					txtTenantName.setStyle("-fx-text-fill: red;");
+					hTenantName = new HBox(txtTenantName);
+					hTenantName.setSpacing(10);
+
+					 Text txtTenantPhone = new Text(80, 80, "Tenant Pone: "+((Tenant) tenants.get(i)).getTenantPhone());
+					 hTenantPhone = new HBox(txtTenantPhone);
+					 hTenantPhone.setSpacing(10);
+
+					 Text txtTenantEmail = new Text(80, 80, "Tenant Email: "+((Tenant) tenants.get(i)).getTenantEmail());
+					 hTenantEmail = new HBox(txtTenantEmail);
+					 hTenantEmail.setSpacing(10);
+
+					 hHeader = new HBox(lblHeader);
+					 hHeader.setSpacing(10);
+					 vBoxTenant = new VBox(hHeader, hTenantName, hTenantPhone, hTenantEmail);
+
+					 vBoxTenant.setSpacing(25);
+					 vBoxTenant.setPadding(new Insets(35, 12, 15, 20));
+					 vBoxTenant.setAlignment(Pos.CENTER);
+					 vBoxArray.add(vBoxTenant);
+				 }
+			 }
+				 });
 
 		 btnDisplayProperties.setOnAction(actionEvent -> {
 			 DisplayPropertyView displayPropertyView = new DisplayPropertyView();
