@@ -1,3 +1,4 @@
+import controller.PropertyController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -5,12 +6,20 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Tenant;
 import view.AppBase;
 import view.PropertyView;
 import javafx.scene.layout.Pane;
+import view.TenantView;
+
+import java.util.ArrayList;
 
 /**
  * Project Phase 2
@@ -67,13 +76,60 @@ public class ProjectPhase1 extends Application implements AppBase {
 			}
 	    });
 
-	    btnAddTenant.setOnAction(new EventHandler<ActionEvent>() {
+	    /*btnAddTenant.setOnAction(new EventHandler<ActionEvent>() {
 	      @Override // Override the handle method
 	      public void handle(ActionEvent e) {
 	      }
-	    });
-	    
-	    btnRentUnit.setOnAction(new EventHandler<ActionEvent>() {
+	    });*/
+		 btnAddTenant.setOnAction(e -> {
+					 Tenant tenantModel = new Tenant();
+					 TenantView tenantView = new TenantView(tenantModel);
+					 ArrayList<Object> tenantData = new ArrayList<Object>();
+					 Label statusMessage = new Label();
+					 HBox hStatus = new HBox(statusMessage);
+
+					 Text txtTenantName = new Text(80, 80, "TenantName");
+					 TextField tfTenantName = new TextField();
+					 HBox hTenantName = new HBox(txtTenantName, tfTenantName);
+
+					 Text txtTenantPhone = new Text(80, 80, "Tenant PhoneNo:");
+					 TextField tfTenantPhone = new TextField();
+					 HBox hTenantPhone = new HBox(txtTenantPhone, tfTenantPhone);
+
+					 Text txtEmailID = new Text(80, 80, "Tenant EmailID:");
+					 TextField tfEmailID = new TextField();
+					 HBox hEmailID = new HBox(txtEmailID, tfEmailID);
+
+					 Button btnSubmit = new Button("Submit");
+					 VBox vBoxProperty = new VBox(hStatus, hTenantName, hTenantPhone, hEmailID, btnSubmit);
+					 vBoxProperty.setSpacing(25);
+					 vBoxProperty.setPadding(new Insets(95, 12, 15, 12));
+					 vBoxProperty.setAlignment(Pos.CENTER);
+					 Pane addPropertyPane = new Pane();
+					 // Hold buttons in an HBox
+					 BorderPane borderPropertyPane = new BorderPane(addPropertyPane);
+					 borderPropertyPane.setTop(vBoxProperty);
+					 Scene apartmentScene = new Scene(borderPropertyPane, 500, 350);
+					 primaryStage.setTitle("Add an Teannat"); // Set title
+					 primaryStage.setScene(apartmentScene);
+
+					 btnSubmit.setOnAction(event -> {
+						 tenantData.add(tfTenantName.getText());
+						 tenantData.add(tfTenantPhone.getText());
+						 tenantData.add(tfEmailID.getText());
+						 //result.put("A", propertyData);
+
+						 //PropertyController propertyController = new PropertyController();
+						 //boolean returnResult = propertyController.addNewProperty(result);
+						 //if(returnResult) {
+						 statusMessage.setText("Added new Tenant successfully!");
+						 statusMessage.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
+						 // }
+					 });
+				 });
+
+
+		 btnRentUnit.setOnAction(new EventHandler<ActionEvent>() {
 	      @Override // Override the handle method
 	      public void handle(ActionEvent e) {
 	      }
