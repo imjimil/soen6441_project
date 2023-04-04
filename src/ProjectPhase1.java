@@ -1,4 +1,3 @@
-import controller.PropertyController;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,8 +14,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Tenant;
 import view.AppBase;
-import view.PropertyView;
+import view.Property.PropertyTypeView;
 import javafx.scene.layout.Pane;
+import view.Property.DisplayPropertyView;
 import view.TenantView;
 
 import java.util.ArrayList;
@@ -67,9 +67,9 @@ public class ProjectPhase1 extends Application implements AppBase {
 		borderPane.setBottom(hBoxLine3);
 	    // Create and register the handler
 	    btnAddProperty.setOnAction(e -> {
-			PropertyView propertyView = new PropertyView();
+			PropertyTypeView propertyTypeView = new PropertyTypeView();
 			try {
-				propertyView.start(primaryStage);
+				propertyTypeView.start(primaryStage);
 				propertyController.setPreScene(btnAddProperty.getScene());
 			} catch (Exception ex) {
 				ex.printStackTrace();
@@ -140,6 +140,15 @@ public class ProjectPhase1 extends Application implements AppBase {
 	      public void handle(ActionEvent e) {
 	      }
 	    });
+
+		 btnDisplayProperties.setOnAction(actionEvent -> {
+			 DisplayPropertyView displayPropertyView = new DisplayPropertyView();
+			 try {
+				 displayPropertyView.start(primaryStage);
+			 } catch (Exception ex) {
+				 ex.printStackTrace();
+			 }
+		 });
 
 	    // Create a scene and place it in the stage
 	    Scene scene = new Scene(borderPane, 800, 350);

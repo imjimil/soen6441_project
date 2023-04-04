@@ -9,19 +9,19 @@ import model.Property;
 import model.PropertyFactory;
 import model.Tenant;
 import utility.PropertyType;
-import view.PropertyView;
+import view.Property.PropertyTypeView;
 import view.RentalView;
 import view.TenantView;
 
 public class Controller {
-	private PropertyView propertyView;
+	private PropertyTypeView propertyTypeView;
 	private TenantView tenantView;
 	private RentalView rentalView;
 	private Property propertyModel;
 	private Tenant tenantModel;
 
-	public Controller(PropertyView propertyView, TenantView tenantView, RentalView rentalView,Property propertyModel, Tenant tenantModel) {
-		this.propertyView = propertyView;
+	public Controller(PropertyTypeView propertyTypeView, TenantView tenantView, RentalView rentalView, Property propertyModel, Tenant tenantModel) {
+		this.propertyTypeView = propertyTypeView;
 		this.propertyModel = propertyModel;
 		this.tenantView = tenantView;
 		this.rentalView = rentalView;
@@ -55,7 +55,7 @@ public class Controller {
 			case 1:
 				// Add a property
 //				PropertyFactory propertyFactory = new PropertyFactory();
-				Map<String, ArrayList<Object>> inputPropertyData = propertyView.getPropertyInfo();
+				Map<String, ArrayList<Object>> inputPropertyData = propertyTypeView.getPropertyInfo();
 				for (Map.Entry<String, ArrayList<Object>> pair : inputPropertyData.entrySet()) {
 					if("A".equals(pair.getKey())) {
 						propertyModel = PropertyFactory.createProperty(PropertyType.APARTMENT);
@@ -85,13 +85,13 @@ public class Controller {
 				// Rent a unit 
 				
 				ArrayList<Object> userInput = new ArrayList<>();
-				userInput = rentalView.askBasicInfo(properties, propertyView, tenants);
+				userInput = rentalView.askBasicInfo(properties, propertyTypeView, tenants);
 				ArrayList<Object> savedInfo = (ArrayList<Object>) userInput.get(0);
 				int selectedPropertyID = (int) userInput.get(1);
 				int selectedTenantID = (int) userInput.get(2);
 
 
-				Property selectedPropertyObject = propertyView.getObjectByID(selectedPropertyID, properties);
+				Property selectedPropertyObject = propertyTypeView.getObjectByID(selectedPropertyID, properties);
 				
 				Tenant tnt = new Tenant();
 				Tenant selectedTenantObject = tnt.getObjectByID(selectedTenantID, tenants);
@@ -120,7 +120,7 @@ public class Controller {
 			case 5:
 				// Display properties
 				if(properties.size() > 0) {
-					propertyView.displayProperty(properties);
+					propertyTypeView.displayProperty(properties);
 				} else {
 					System.out.println("No properties found.");
 				}				
@@ -128,13 +128,13 @@ public class Controller {
 			case 6:
 				// Display vacant units
 				if(properties.size() > 0) {
-					propertyView.displayVacantProperty(properties);
+					propertyTypeView.displayVacantProperty(properties);
 				}
 				break;
 			case 7:
 				// Display rented units
 				if(properties.size() > 0) {
-					propertyView.displayRentedProperty(properties);
+					propertyTypeView.displayRentedProperty(properties);
 				}
 				break;
 			case 8:

@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import model.Property;
 import model.Tenant;
+import view.Property.PropertyTypeView;
 
 public class RentalView {
     public RentalView() {
@@ -40,13 +41,13 @@ public class RentalView {
         }
 	}
 
-    public ArrayList<Object> askBasicInfo(ArrayList<Property> properties, PropertyView propertyView, ArrayList<Tenant> tenants) {
+    public ArrayList<Object> askBasicInfo(ArrayList<Property> properties, PropertyTypeView propertyTypeView, ArrayList<Tenant> tenants) {
 
         ArrayList<Object> savedInfo = new ArrayList<>();
         try{
         System.out.println("Here's the vacant properties.");
         if (properties.size() > 0) {
-            propertyView.displayVacantProperty(properties);
+            propertyTypeView.displayVacantProperty(properties);
         }
         System.out.println();
         System.out.println("Please enter property ID you want to rent.");

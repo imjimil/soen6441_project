@@ -7,9 +7,10 @@ import model.Property;
 import model.Tenant;
 import model.TenantObservable;
 import model.TenantObserver;
+import view.Property.PropertyTypeView;
 
 public class TenantView implements TenantObserver {
-	private PropertyView propertyView = new PropertyView();
+	private PropertyTypeView propertyTypeView = new PropertyTypeView();
 	
 	public TenantView(Tenant tenant) {
 		tenant.attach(this);
@@ -41,7 +42,7 @@ public class TenantView implements TenantObserver {
 		try{
 			// display all properties
 			if(properties.size() > 0) {
-				this.propertyView.displayProperty(properties);
+				this.propertyTypeView.displayProperty(properties);
 			}
 			// display all tenants
 			displayAllTenants(tenants);
