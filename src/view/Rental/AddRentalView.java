@@ -2,6 +2,7 @@ package view.Rental;
 
 import java.util.ArrayList;
 
+import controller.TenantController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -18,7 +19,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import model.Lease;
+import model.Tenant;
 import view.AppBase;
+import view.TenantView;
 
 public class AddRentalView extends Application implements AppBase {
 
@@ -33,6 +36,10 @@ public class AddRentalView extends Application implements AppBase {
         HBox hMainMenu = new HBox(btnMainMenu);
         Label statusMessage = new Label();
         HBox hStatus = new HBox(statusMessage);
+
+        //showing tenants
+        TenantController tenantController = new TenantController();
+        ArrayList<Tenant> tenants = tenantController.getTenants();
 
         Text txtAppartmentID = new Text(80, 80, "Appartment ID you want to lease: ");
         TextField tfAppartmentID = new TextField();
