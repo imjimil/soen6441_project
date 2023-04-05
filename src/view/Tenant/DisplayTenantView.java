@@ -73,7 +73,7 @@ public class DisplayTenantView extends Application implements AppBase {
             BorderPane borderPropertyPane = new BorderPane(pMenu);
             borderPropertyPane.setTop(fpanes);
             Scene tenantScene = new Scene(borderPropertyPane, 650, 850);
-            primaryStage.setTitle("All tennnnnants"); // Set title
+            primaryStage.setTitle("All tenants"); // Set title
             primaryStage.setScene(tenantScene);
         }
     }

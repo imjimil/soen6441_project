@@ -70,7 +70,6 @@ public class AddTenantView extends Application implements AppBase {
                 tenantData.add(tfTenantPhone.getText());
                 tenantData.add(tfEmailID.getText());
 
-                TenantController tenantController = new TenantController();
                 boolean returnResult = tenantController.addNewTenant(tenantData);
                 if(returnResult) {
                     //statusMessage.setText(tenantData.toString());

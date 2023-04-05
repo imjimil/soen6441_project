@@ -22,11 +22,11 @@ import java.util.Map;
 public class AddPropertyView extends Application implements AppBase {
     @Override
     public void start(Stage primaryStage) {
+        Button btnMainMenu = new Button("Main Menu");
+        HBox hMainMenu = new HBox(btnMainMenu);
         Map<String, ArrayList<Object>> result = new HashMap<>();
         ArrayList<Object> propertyData = new ArrayList<Object>();
 
-        Button btnMainMenu = new Button("Main Menu");
-        HBox hMainMenu = new HBox(btnMainMenu);
         Label statusMessage = new Label();
         HBox hStatus = new HBox(statusMessage);
 
@@ -113,11 +113,6 @@ public class AddPropertyView extends Application implements AppBase {
         Scene propertyScene = new Scene(borderPropertyPane, 650, 850);
         primaryStage.setScene(propertyScene);
 
-        btnMainMenu.setOnAction(event -> {
-            primaryStage.setTitle("Project Phase 2 Demo");
-            primaryStage.setScene(propertyController.getPreScene());
-        });
-
         btnSubmit.setOnAction(event -> {
             propertyData.add(Integer.parseInt(tfNoBedRoom.getText()));
             propertyData.add(Integer.parseInt(tfNoBathRoom.getText()));
@@ -144,5 +139,11 @@ public class AddPropertyView extends Application implements AppBase {
                 statusMessage.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
             }
         });
+
+        btnMainMenu.setOnAction(event -> {
+            primaryStage.setTitle("Project Phase 2 Demo");
+            primaryStage.setScene(propertyController.getPreScene());
+        });
     }
 }
+
