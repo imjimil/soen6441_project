@@ -7,7 +7,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -56,9 +58,15 @@ public class AddTenantView extends Application implements AppBase {
             // Hold buttons in an HBox
             BorderPane borderPropertyPane = new BorderPane(addPropertyPane);
             borderPropertyPane.setTop(vBoxProperty);
-            Scene apartmentScene = new Scene(borderPropertyPane, 500, 350);
+            Scene apartmentScene = new Scene(borderPropertyPane, 500, 550);
             primaryStage.setTitle("Add a New Tenant"); // Set title
             primaryStage.setScene(apartmentScene);
+
+            ScrollPane scrollPane = new ScrollPane(vBoxProperty);
+            scrollPane.setMaxWidth(Double.MAX_VALUE);
+            scrollPane.setMaxHeight(Double.MAX_VALUE);
+            scrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+            borderPropertyPane.setCenter(scrollPane);
 
             btnMainMenu.setOnAction(event -> {
                 primaryStage.setTitle("Project Phase 2 Demo");

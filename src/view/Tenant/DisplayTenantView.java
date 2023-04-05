@@ -39,27 +39,27 @@ public class DisplayTenantView extends Application implements AppBase {
             }
 
             if(target == 1) {
-                
-            ScrollPane scrollPane = new ScrollPane(tenantsVBox);
-    
-            // main menu button
-            Button btnMainMenu = new Button("Main Menu");
-            HBox hMainMenu = new HBox(btnMainMenu);
-            btnMainMenu.setOnAction(event -> {
-                // go back to previous scene
-                primaryStage.setScene(tenantController.getPreScene());
-            });
-            Pane pMenu = new Pane();
-            hMainMenu.setPadding(new Insets(20));
-            pMenu.getChildren().add(hMainMenu);
-    
-            // Build scene
-            BorderPane borderPropertyPane = new BorderPane();
-            borderPropertyPane.setTop(scrollPane);
-            borderPropertyPane.setBottom(pMenu);
-            Scene tenantScene = new Scene(borderPropertyPane, 550, 550);
-            primaryStage.setTitle("All tenants"); // Set title
-            primaryStage.setScene(tenantScene);
+                    
+                ScrollPane scrollPane = new ScrollPane(tenantsVBox);
+        
+                // main menu button
+                Button btnMainMenu = new Button("Main Menu");
+                HBox hMainMenu = new HBox(btnMainMenu);
+                btnMainMenu.setOnAction(event -> {
+                    // go back to previous scene
+                    primaryStage.setScene(tenantController.getPreScene());
+                });
+                Pane pMenu = new Pane();
+                hMainMenu.setPadding(new Insets(20));
+                pMenu.getChildren().add(hMainMenu);
+        
+                // Build scene
+                BorderPane borderPropertyPane = new BorderPane();
+                borderPropertyPane.setTop(scrollPane);
+                borderPropertyPane.setBottom(pMenu);
+                Scene tenantScene = new Scene(borderPropertyPane, 550, 550);
+                primaryStage.setTitle("All tenants"); // Set title
+                primaryStage.setScene(tenantScene);
             }
             else {
                 return tenantsVBox;

@@ -6,7 +6,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -110,8 +112,14 @@ public class AddPropertyView extends Application implements AppBase {
         // Hold buttons in an HBox
         BorderPane borderPropertyPane = new BorderPane(addPropertyPane);
         borderPropertyPane.setTop(vBoxProperty);
-        Scene propertyScene = new Scene(borderPropertyPane, 650, 850);
+        Scene propertyScene = new Scene(borderPropertyPane, 500, 550);
         primaryStage.setScene(propertyScene);
+
+        ScrollPane scrollPane = new ScrollPane(vBoxProperty);
+        scrollPane.setMaxWidth(Double.MAX_VALUE);
+        scrollPane.setMaxHeight(Double.MAX_VALUE);
+        scrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+        borderPropertyPane.setCenter(scrollPane);
 
         btnSubmit.setOnAction(event -> {
             propertyData.add(Integer.parseInt(tfNoBedRoom.getText()));
