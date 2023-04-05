@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -76,16 +77,26 @@ public class AddRentalView extends Application implements AppBase {
 
         Pane addRentalPane = new Pane();
         BorderPane borderPropertyPane = new BorderPane(addRentalPane);
-        borderPropertyPane.setTop(vBoxProperty);
+        borderPropertyPane.setTop(vBoxProperty);  
+
         Scene rentScene = new Scene(borderPropertyPane, 500, 550);
         primaryStage.setTitle("Rent an Appartment:");
         primaryStage.setScene(rentScene);
+
+        ScrollPane scrollPane = new ScrollPane(vBoxProperty);
+        scrollPane.setMaxWidth(Double.MAX_VALUE);
+        scrollPane.setMaxHeight(Double.MAX_VALUE);
+        
+        borderPropertyPane.setCenter(scrollPane);
 
         btnMainMenu.setOnAction(event -> {
             primaryStage.setTitle("Project Phase 2 Demo");
             primaryStage.setScene(rentalController.getPreScene());
         });
 
+        btnSubmit.setOnAction(event -> {
+            
+        });
     }
     
 }
