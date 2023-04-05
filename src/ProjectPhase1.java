@@ -17,6 +17,7 @@ import model.Tenant;
 import utility.Constant;
 import view.AppBase;
 import view.Property.PropertyTypeView;
+import view.Rental.AddRentalView;
 import view.Property.DisplayPropertyView;
 import view.Tenant.AddTenantView;
 import view.Tenant.DisplayTenantView;
@@ -95,11 +96,16 @@ public class ProjectPhase1 extends Application implements AppBase {
 		 });
 
 
-		 btnRentUnit.setOnAction(new EventHandler<ActionEvent>() {
-	      @Override // Override the handle method
-	      public void handle(ActionEvent e) {
-	      }
-	    });
+		 btnRentUnit.setOnAction(e -> {
+			AddRentalView rentalView = new AddRentalView();
+			try {
+				rentalView.start(primaryStage);
+				rentalController.setPreScene(btnRentUnit.getScene());
+			}
+			catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		});
 	    
 	  /*  btnDisplayTenants.setOnAction(new EventHandler<ActionEvent>() {
 	      @Override // Override the handle method

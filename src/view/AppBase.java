@@ -1,6 +1,7 @@
 package view;
 
 import controller.PropertyController;
+import controller.RentalController;
 import controller.TenantController;
 
 /**
@@ -13,4 +14,5 @@ import controller.TenantController;
 public interface AppBase {
     PropertyController propertyController = new PropertyController();
     TenantController tenantController = new TenantController();
+    RentalController rentalController = new RentalController();
 }
