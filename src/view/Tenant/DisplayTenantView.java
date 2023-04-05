@@ -64,6 +64,17 @@ public class DisplayTenantView extends Application implements AppBase {
                 vBoxTenant.setAlignment(Pos.CENTER);
                 vBoxArray.add(vBoxTenant);
             }
+            fpanes.getChildren().addAll(vBoxArray);
+            // main menu button
+            Pane pMenu = new Pane();
+            hMainMenu.setPadding(new Insets(20,20,20,20));
+            pMenu.getChildren().add(hMainMenu);
+            // Build scene
+            BorderPane borderPropertyPane = new BorderPane(pMenu);
+            borderPropertyPane.setTop(fpanes);
+            Scene tenantScene = new Scene(borderPropertyPane, 650, 850);
+            primaryStage.setTitle("All tennnnnants"); // Set title
+            primaryStage.setScene(tenantScene);
         }
     }
 }
