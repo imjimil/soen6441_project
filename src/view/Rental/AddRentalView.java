@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -19,9 +20,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.geometry.Pos;
 import model.Lease;
+import model.Property;
 import model.Tenant;
 import view.AppBase;
 import view.TenantView;
+import view.Property.DisplayPropertyView;
 import view.Tenant.DisplayTenantView;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.text.Font;
@@ -31,6 +34,7 @@ public class AddRentalView extends Application implements AppBase {
 
     private TextField tfStartDay, tfStartMonth, tfStartYear, tfEndDay, tfEndMonth, tfEndYear;
     VBox tenantBox; 
+    ArrayList<VBox> propertyBox;
     @Override
     public void start(Stage primaryStage) throws Exception {
         
@@ -42,6 +46,12 @@ public class AddRentalView extends Application implements AppBase {
         Label statusMessage = new Label();
         HBox hStatus = new HBox(statusMessage);
 
+        //showing properties
+        ArrayList<Property> properties = propertyController.getProperties();
+        if(properties.size() > 0) {
+            DisplayPropertyView displayPropertyView = new DisplayPropertyView();
+            propertyBox = displayPropertyView.buildScene(properties, 0);
+        }
 
         //showing tenants
         ArrayList<Tenant> tenants = tenantController.getTenants();
@@ -86,7 +96,8 @@ public class AddRentalView extends Application implements AppBase {
 
         Button btnSubmit = new Button("Submit");
 
-        VBox vBoxProperty = new VBox(hMainMenu, tenantBox, hStatus, hAppartmentID, hTenantID, hStartDate, hEndDate, hTotalRent, hRentPaid, btnSubmit);
+        VBox vBoxProperty = new VBox(hMainMenu, new Separator(), tenantBox, new Separator(), hStatus, hAppartmentID, hTenantID, hStartDate, hEndDate, hTotalRent, hRentPaid, btnSubmit);
+        vBoxProperty.getChildren().addAll(1, propertyBox);
         vBoxProperty.setSpacing(25);
         vBoxProperty.setPadding(new Insets(95, 12, 15, 12));
         vBoxProperty.setAlignment(Pos.CENTER);

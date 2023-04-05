@@ -27,11 +27,12 @@ public class DisplayTenantView extends Application implements AppBase {
     
                 Label lblTenantNumber = new Label("Tenant " + (i + 1) + ":");
                 lblTenantNumber.setFont(new Font(20));
+                Label lblTenantID = new Label("ID: " + t.getTenantId());
                 Label lblTenantName = new Label("Name: " + t.getTenantName());
                 Label lblTenantPhone = new Label("Phone: " + t.getTenantPhone());
                 Label lblTenantEmail = new Label("Email: " + t.getTenantEmail());
     
-                VBox tenantInfoVBox = new VBox(lblTenantNumber, lblTenantName, lblTenantPhone, lblTenantEmail);
+                VBox tenantInfoVBox = new VBox(lblTenantNumber, lblTenantID, lblTenantName, lblTenantPhone, lblTenantEmail);
                 tenantInfoVBox.setSpacing(5);
                 tenantInfoVBox.setPadding(new Insets(10));
     
