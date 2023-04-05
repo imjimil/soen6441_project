@@ -55,11 +55,6 @@ public class DisplayPropertyView extends Application implements AppBase {
             hID.setSpacing(10);
             if(Constant.APARTMENT_CLASS_NAME.equals(properties.get(i).getClass().getSimpleName())) {
                 lblHeader.setText(i+1 + ". " + Constant.APARTMENT_CLASS_NAME);
-
-//                Text txtPropertyID = new Text(180, 180, "ID: " + (properties.get(i)).getID());
-//                hID = new HBox(txtPropertyID);
-//                hID.setSpacing(10);
-
                 Text txtCivicAddress = new Text(180, 180, "Civic address: " + ((Apartment) properties.get(i)).getCivicAddress());
                 hCivicAddress = new HBox(txtCivicAddress);
 
@@ -118,7 +113,7 @@ public class DisplayPropertyView extends Application implements AppBase {
         fpanes.getChildren().addAll(vBoxArray);
         // main menu button
         Pane pMenu = new Pane();
-        hTotal.setPadding(new Insets(20,20,20,20));
+//        hTotal.setPadding(new Insets(20,20,20,20));
         hTotal.setLayoutX(50);
         hTotal.setLayoutY(50);
         hRefresh.setLayoutX(50);

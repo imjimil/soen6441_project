@@ -112,7 +112,7 @@ public class AddPropertyView extends Application implements AppBase {
         // Hold buttons in an HBox
         BorderPane borderPropertyPane = new BorderPane(addPropertyPane);
         borderPropertyPane.setTop(vBoxProperty);
-        Scene propertyScene = new Scene(borderPropertyPane, 500, 550);
+        Scene propertyScene = new Scene(borderPropertyPane, 550, 750);
         primaryStage.setScene(propertyScene);
 
         ScrollPane scrollPane = new ScrollPane(vBoxProperty);

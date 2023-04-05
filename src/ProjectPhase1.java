@@ -80,11 +80,6 @@ public class ProjectPhase1 extends Application implements AppBase {
 			}
 	    });
 
-	    /*btnAddTenant.setOnAction(new EventHandler<ActionEvent>() {
-	      @Override // Override the handle method
-	      public void handle(ActionEvent e) {
-	      }
-	    });*/
 		 btnAddTenant.setOnAction(e -> {
 			 AddTenantView tenantView = new AddTenantView();
 			 try {
@@ -106,12 +101,7 @@ public class ProjectPhase1 extends Application implements AppBase {
 				ex.printStackTrace();
 			}
 		});
-	    
-	  /*  btnDisplayTenants.setOnAction(new EventHandler<ActionEvent>() {
-	      @Override // Override the handle method
-	      public void handle(ActionEvent e) {
-	      }
-	    });*/
+
 		 btnDisplayTenants.setOnAction(actionEvent -> {
 			 DisplayTenantView displayTntView = new DisplayTenantView();
 			 try {
