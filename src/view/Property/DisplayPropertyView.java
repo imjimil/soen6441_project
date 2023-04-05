@@ -23,8 +23,8 @@ import java.util.ArrayList;
 public class DisplayPropertyView extends Application implements AppBase {
     private String text = "";
 
-    public ArrayList<VBox> buildScene(ArrayList<Property> properties, int target) {
-        Stage secondStage = new Stage();
+    public ArrayList<VBox> buildScene(ArrayList<Property> properties, int target,
+                                      Button btnRefresh, Stage secondStage) {
         HBox hTotal;
         HBox hID = null;
         HBox hCivicAddress = null;
@@ -44,17 +44,21 @@ public class DisplayPropertyView extends Application implements AppBase {
         hTotal = new HBox(lblTotal);
 
         HBox hHeader;
+        HBox hRefresh = new HBox(btnRefresh);
         FlowPane fpanes = new FlowPane();
         VBox vBoxProperty = null;
         ArrayList<VBox> vBoxArray = new ArrayList<>();
         for (int i = 0; i < properties.size(); i++) {
             lblHeader = new Label();
+            Text txtPropertyID = new Text(180, 180, "ID: " + (properties.get(i)).getID());
+            hID = new HBox(txtPropertyID);
+            hID.setSpacing(10);
             if(Constant.APARTMENT_CLASS_NAME.equals(properties.get(i).getClass().getSimpleName())) {
                 lblHeader.setText(i+1 + ". " + Constant.APARTMENT_CLASS_NAME);
 
-                Text txtPropertyID = new Text(180, 180, "ID: " + (properties.get(i)).getID());
-                hID = new HBox(txtPropertyID);
-                hID.setSpacing(10);
+//                Text txtPropertyID = new Text(180, 180, "ID: " + (properties.get(i)).getID());
+//                hID = new HBox(txtPropertyID);
+//                hID.setSpacing(10);
 
                 Text txtCivicAddress = new Text(180, 180, "Civic address: " + ((Apartment) properties.get(i)).getCivicAddress());
                 hCivicAddress = new HBox(txtCivicAddress);
@@ -117,12 +121,15 @@ public class DisplayPropertyView extends Application implements AppBase {
         hTotal.setPadding(new Insets(20,20,20,20));
         hTotal.setLayoutX(50);
         hTotal.setLayoutY(50);
+        hRefresh.setLayoutX(50);
+        hRefresh.setLayoutY(100);
        
-        pMenu.getChildren().addAll(hTotal);
+        pMenu.getChildren().addAll(hTotal, hRefresh);
 
         if(target == 1) {
-            ScrollPane scrollPane = new ScrollPane(fpanes);
+            ScrollPane scrollPane = new ScrollPane(pMenu);
             BorderPane borderPropertyPane = new BorderPane(scrollPane);
+            borderPropertyPane.setTop(fpanes);
             Scene propertyScene = new Scene(borderPropertyPane, 500, 550);
 
             secondStage.setTitle("All properties");
@@ -138,15 +145,21 @@ public class DisplayPropertyView extends Application implements AppBase {
     @Override
     public void start(Stage primaryStage) {
         ArrayList<Property> properties = propertyController.getProperties();
+        Stage secondStage = new Stage();
         if(properties.size() > 0) {
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    Button btnRefresh = new Button("Refresh list");
+
+                    btnRefresh.setOnAction(actionEvent -> {
+                        buildScene(properties,1, btnRefresh, secondStage);
+                    });
                     try {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                buildScene(properties, 1); 
+                                buildScene(properties, 1, btnRefresh, secondStage);
                             }    
                         });
                     }
