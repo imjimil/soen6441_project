@@ -22,6 +22,9 @@ import model.Lease;
 import model.Tenant;
 import view.AppBase;
 import view.TenantView;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.text.Font;
+
 
 public class AddRentalView extends Application implements AppBase {
 
@@ -37,9 +40,25 @@ public class AddRentalView extends Application implements AppBase {
         Label statusMessage = new Label();
         HBox hStatus = new HBox(statusMessage);
 
+        //tenant box
+        VBox tenantBox = new VBox();
+        tenantBox.setSpacing(10);
+        tenantBox.setPadding(new Insets(10));
+        tenantBox.setAlignment(Pos.CENTER_LEFT);
+
+
         //showing tenants
         TenantController tenantController = new TenantController();
         ArrayList<Tenant> tenants = tenantController.getTenants();
+        Label lblTenantCount = new Label("Total Tenants: " + tenants.size());
+        for (int i = 0; i < tenants.size(); i++) {
+            Tenant tenant = tenants.get(i);
+            String tenantInfo = (i + 1) + ". " + tenant.getID() + " | " + tenant.getTenantName() + " | " + tenant.getTenantEmail() + " | " + tenant.getTenantPhone();
+            Label tenantLabel = new Label(tenantInfo);
+            tenantLabel.setFont(Font.font("Verdana", 12));
+            tenantBox.getChildren().add(tenantLabel);
+        }
+
 
         Text txtAppartmentID = new Text(80, 80, "Appartment ID you want to lease: ");
         TextField tfAppartmentID = new TextField();
@@ -76,7 +95,7 @@ public class AddRentalView extends Application implements AppBase {
         HBox hRentPaid = new HBox(txtRentPaid, cbRentPaid);
 
         Button btnSubmit = new Button("Submit");
-        VBox vBoxProperty = new VBox(hMainMenu, hStatus, hAppartmentID, hTenantID, hStartDate, hEndDate, hTotalRent, hRentPaid, btnSubmit);
+        VBox vBoxProperty = new VBox(hMainMenu,lblTenantCount, tenantBox, hStatus, hAppartmentID, hTenantID, hStartDate, hEndDate, hTotalRent, hRentPaid, btnSubmit);
 
         vBoxProperty.setSpacing(25);
         vBoxProperty.setPadding(new Insets(95, 12, 15, 12));
@@ -93,7 +112,7 @@ public class AddRentalView extends Application implements AppBase {
         ScrollPane scrollPane = new ScrollPane(vBoxProperty);
         scrollPane.setMaxWidth(Double.MAX_VALUE);
         scrollPane.setMaxHeight(Double.MAX_VALUE);
-        
+        scrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
         borderPropertyPane.setCenter(scrollPane);
 
         btnMainMenu.setOnAction(event -> {

@@ -2,15 +2,14 @@ package view.Tenant;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import model.*;
-import utility.Constant;
+import model.Tenant;
 import view.AppBase;
 
 import java.util.ArrayList;
@@ -18,8 +17,6 @@ import java.util.ArrayList;
 public class DisplayTenantView extends Application implements AppBase {
     @Override
     public void start(Stage primaryStage) {
-        Label statusMessage = new Label();
-        statusMessage.setText(tenantController.getTenants().toString());
         ArrayList<Tenant> tenants = tenantController.getTenants();
 
         Button btnMainMenu = new Button("Main Menu");
@@ -29,50 +26,38 @@ public class DisplayTenantView extends Application implements AppBase {
             primaryStage.setScene(tenantController.getPreScene());
         });
 
-        if(tenants.size() > 0) {
-            HBox hTenantName = null;
-            HBox hTenantPhone = null;
-            HBox hTenantEmail = null;
-            Label lblHeader;
-            HBox hHeader;
-            FlowPane fpanes = new FlowPane();
-            VBox vBoxTenant = null;
-            ArrayList<VBox> vBoxArray = new ArrayList<>();
+        if (tenants.size() > 0) {
+            VBox tenantsVBox = new VBox();
+            tenantsVBox.setSpacing(10);
 
             for (int i = 0; i < tenants.size(); i++) {
-                lblHeader = new Label();
-                lblHeader.setText("Tenants LIST:");
-                Text txtTenantName = new Text(180, 180, "Tenant Name: " + ((Tenant) tenants.get(i)).getTenantName());
-                txtTenantName.setStyle("-fx-text-fill: red;");
-                hTenantName = new HBox(txtTenantName);
-                hTenantName.setSpacing(10);
+                Tenant t = tenants.get(i);
 
-                Text txtTenantPhone = new Text(80, 80, "Tenant Pone: "+((Tenant) tenants.get(i)).getTenantPhone());
-                hTenantPhone = new HBox(txtTenantPhone);
-                hTenantPhone.setSpacing(10);
+                Label lblTenantNumber = new Label("Tenant " + (i + 1) + ":");
+                lblTenantNumber.setFont(new Font(20));
+                Label lblTenantName = new Label("Name: " + t.getTenantName());
+                Label lblTenantPhone = new Label("Phone: " + t.getTenantPhone());
+                Label lblTenantEmail = new Label("Email: " + t.getTenantEmail());
 
-                Text txtTenantEmail = new Text(80, 80, "Tenant Email: "+((Tenant) tenants.get(i)).getTenantEmail());
-                hTenantEmail = new HBox(txtTenantEmail);
-                hTenantEmail.setSpacing(10);
+                VBox tenantInfoVBox = new VBox(lblTenantNumber, lblTenantName, lblTenantPhone, lblTenantEmail);
+                tenantInfoVBox.setSpacing(5);
+                tenantInfoVBox.setPadding(new Insets(10));
 
-                hHeader = new HBox(lblHeader);
-                hHeader.setSpacing(10);
-                vBoxTenant = new VBox(hHeader, hTenantName, hTenantPhone, hTenantEmail);
-
-                vBoxTenant.setSpacing(25);
-                vBoxTenant.setPadding(new Insets(35, 12, 15, 20));
-                vBoxTenant.setAlignment(Pos.CENTER);
-                vBoxArray.add(vBoxTenant);
+                tenantsVBox.getChildren().add(tenantInfoVBox);
             }
-            fpanes.getChildren().addAll(vBoxArray);
+
+            ScrollPane scrollPane = new ScrollPane(tenantsVBox);
+
             // main menu button
             Pane pMenu = new Pane();
-            hMainMenu.setPadding(new Insets(20,20,20,20));
+            hMainMenu.setPadding(new Insets(20));
             pMenu.getChildren().add(hMainMenu);
+
             // Build scene
-            BorderPane borderPropertyPane = new BorderPane(pMenu);
-            borderPropertyPane.setTop(fpanes);
-            Scene tenantScene = new Scene(borderPropertyPane, 650, 850);
+            BorderPane borderPropertyPane = new BorderPane();
+            borderPropertyPane.setTop(scrollPane);
+            borderPropertyPane.setBottom(pMenu);
+            Scene tenantScene = new Scene(borderPropertyPane, 550, 550);
             primaryStage.setTitle("All tenants"); // Set title
             primaryStage.setScene(tenantScene);
         }
