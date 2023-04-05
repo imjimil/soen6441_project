@@ -1,6 +1,8 @@
 package view;
 
 import controller.PropertyController;
+import controller.TenantController;
+
 /**
  * Project Phase 2
  * Student 1: 	Quoc Phong Ngo 				- 40230574
@@ -10,4 +12,5 @@ import controller.PropertyController;
  */
 public interface AppBase {
     PropertyController propertyController = new PropertyController();
+    TenantController tenantController = new TenantController();
 }

@@ -18,6 +18,8 @@ import utility.Constant;
 import view.AppBase;
 import view.Property.PropertyTypeView;
 import view.Property.DisplayPropertyView;
+import view.Tenant.AddTenantView;
+import view.Tenant.DisplayTenantView;
 import view.TenantView;
 
 import java.util.ArrayList;
@@ -83,61 +85,14 @@ public class ProjectPhase1 extends Application implements AppBase {
 	      }
 	    });*/
 		 btnAddTenant.setOnAction(e -> {
-					 Tenant tenantModel = new Tenant();
-					 TenantView tenantView = new TenantView(tenantModel);
-					 ArrayList<Object> tenantData = new ArrayList<Object>();
-			 		propertyController.setPreScene(btnAddProperty.getScene());
-
-					 Button btnMainMenu = new Button("Main Menu");
-					 HBox hMainMenu = new HBox(btnMainMenu);
-					 Label statusMessage = new Label();
-					 HBox hStatus = new HBox(statusMessage);
-
-					 Text txtTenantName = new Text(80, 80, "TenantName");
-					 TextField tfTenantName = new TextField();
-					 HBox hTenantName = new HBox(txtTenantName, tfTenantName);
-
-					 Text txtTenantPhone = new Text(80, 80, "Tenant PhoneNo:");
-					 TextField tfTenantPhone = new TextField();
-					 HBox hTenantPhone = new HBox(txtTenantPhone, tfTenantPhone);
-
-					 Text txtEmailID = new Text(80, 80, "Tenant EmailID:");
-					 TextField tfEmailID = new TextField();
-					 HBox hEmailID = new HBox(txtEmailID, tfEmailID);
-
-					 Button btnSubmit = new Button("Submit");
-					 VBox vBoxProperty = new VBox(hMainMenu, hStatus, hTenantName, hTenantPhone, hEmailID, btnSubmit);
-					 vBoxProperty.setSpacing(25);
-					 vBoxProperty.setPadding(new Insets(95, 12, 15, 12));
-					 vBoxProperty.setAlignment(Pos.CENTER);
-					 Pane addPropertyPane = new Pane();
-					 // Hold buttons in an HBox
-					 BorderPane borderPropertyPane = new BorderPane(addPropertyPane);
-					 borderPropertyPane.setTop(vBoxProperty);
-					 Scene apartmentScene = new Scene(borderPropertyPane, 500, 350);
-					 primaryStage.setTitle("Add an Teannat"); // Set title
-					 primaryStage.setScene(apartmentScene);
-
-			 btnMainMenu.setOnAction(event -> {
-				 primaryStage.setTitle("Project Phase 2 Demo");
-				 primaryStage.setScene(propertyController.getPreScene());
-			 });
-
-					 btnSubmit.setOnAction(event -> {
-						 tenantData.add(tfTenantName.getText());
-						 tenantData.add(tfTenantPhone.getText());
-						 tenantData.add(tfEmailID.getText());
-						 //result.put("A", propertyData);
-
-						 PropertyController propertyController = new PropertyController();
-						 boolean returnResult = propertyController.addNewTenant(tenantData);
-						 if(returnResult) {
-							 //statusMessage.setText(tenantData.toString());
-						 statusMessage.setText("Added new Tenant successfully!");
-						 statusMessage.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
-						 }
-					 });
-				 });
+			 AddTenantView tenantView = new AddTenantView();
+			 try {
+				 tenantView.start(primaryStage);
+				 tenantController.setPreScene(btnAddTenant.getScene());
+			 } catch (Exception ex) {
+				 ex.printStackTrace();
+			 }
+		 });
 
 
 		 btnRentUnit.setOnAction(new EventHandler<ActionEvent>() {
@@ -152,54 +107,13 @@ public class ProjectPhase1 extends Application implements AppBase {
 	      }
 	    });*/
 		 btnDisplayTenants.setOnAction(actionEvent -> {
-			 Label statusMessage = new Label();
-			 statusMessage.setText(propertyController.getTenants().toString());
-			 ArrayList<Tenant> tenants = propertyController.getTenants();
-
-			 Button btnMainMenu = new Button("Main Menu");
-			 HBox hMainMenu = new HBox(btnMainMenu);
-			 btnMainMenu.setOnAction(event -> {
-				 primaryStage.setTitle("Project Phase 2 Demo");
-				 primaryStage.setScene(propertyController.getPreScene());
-			 });
-
-			 if(tenants.size() > 0) {
-				 HBox hTenantName = null;
-				 HBox hTenantPhone = null;
-				 HBox hTenantEmail = null;
-				 Label lblHeader;
-				 HBox hHeader;
-				 FlowPane fpanes = new FlowPane();
-				 VBox vBoxTenant = null;
-				 ArrayList<VBox> vBoxArray = new ArrayList<>();
-
-				 for (int i = 0; i < tenants.size(); i++) {
-					lblHeader = new Label();
-					lblHeader.setText("Tenants LIST:");
-				 	Text txtTenantName = new Text(180, 180, "Tenant Name: " + ((Tenant) tenants.get(i)).getTenantName());
-					txtTenantName.setStyle("-fx-text-fill: red;");
-					hTenantName = new HBox(txtTenantName);
-					hTenantName.setSpacing(10);
-
-					 Text txtTenantPhone = new Text(80, 80, "Tenant Pone: "+((Tenant) tenants.get(i)).getTenantPhone());
-					 hTenantPhone = new HBox(txtTenantPhone);
-					 hTenantPhone.setSpacing(10);
-
-					 Text txtTenantEmail = new Text(80, 80, "Tenant Email: "+((Tenant) tenants.get(i)).getTenantEmail());
-					 hTenantEmail = new HBox(txtTenantEmail);
-					 hTenantEmail.setSpacing(10);
-
-					 hHeader = new HBox(lblHeader);
-					 hHeader.setSpacing(10);
-					 vBoxTenant = new VBox(hHeader, hTenantName, hTenantPhone, hTenantEmail);
-
-					 vBoxTenant.setSpacing(25);
-					 vBoxTenant.setPadding(new Insets(35, 12, 15, 20));
-					 vBoxTenant.setAlignment(Pos.CENTER);
-					 vBoxArray.add(vBoxTenant);
-				 }
+			 DisplayTenantView displayTntView = new DisplayTenantView();
+			 try {
+				 displayTntView.start(primaryStage);
+			 } catch (Exception ex) {
+				 ex.printStackTrace();
 			 }
-				 });
+		 } );
 
 		 btnDisplayProperties.setOnAction(actionEvent -> {
 			 DisplayPropertyView displayPropertyView = new DisplayPropertyView();
