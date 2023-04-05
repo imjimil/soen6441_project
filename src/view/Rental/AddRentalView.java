@@ -22,6 +22,7 @@ import model.Lease;
 import model.Tenant;
 import view.AppBase;
 import view.TenantView;
+import view.Tenant.DisplayTenantView;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.text.Font;
 
@@ -29,9 +30,10 @@ import javafx.scene.text.Font;
 public class AddRentalView extends Application implements AppBase {
 
     private TextField tfStartDay, tfStartMonth, tfStartYear, tfEndDay, tfEndMonth, tfEndYear;
-
+    VBox tenantBox; 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        
         Lease lease = new Lease();
         ArrayList<Object> info = new ArrayList<>();
 
@@ -40,25 +42,13 @@ public class AddRentalView extends Application implements AppBase {
         Label statusMessage = new Label();
         HBox hStatus = new HBox(statusMessage);
 
-        //tenant box
-        VBox tenantBox = new VBox();
-        tenantBox.setSpacing(10);
-        tenantBox.setPadding(new Insets(10));
-        tenantBox.setAlignment(Pos.CENTER_LEFT);
-
 
         //showing tenants
-        TenantController tenantController = new TenantController();
         ArrayList<Tenant> tenants = tenantController.getTenants();
-        Label lblTenantCount = new Label("Total Tenants: " + tenants.size());
-        for (int i = 0; i < tenants.size(); i++) {
-            Tenant tenant = tenants.get(i);
-            String tenantInfo = (i + 1) + ". " + tenant.getID() + " | " + tenant.getTenantName() + " | " + tenant.getTenantEmail() + " | " + tenant.getTenantPhone();
-            Label tenantLabel = new Label(tenantInfo);
-            tenantLabel.setFont(Font.font("Verdana", 12));
-            tenantBox.getChildren().add(tenantLabel);
+        if(tenants.size() > 0) {
+            DisplayTenantView displayTenantView = new DisplayTenantView();
+            tenantBox = displayTenantView.displayTenants(primaryStage, tenants, 0);
         }
-
 
         Text txtAppartmentID = new Text(80, 80, "Appartment ID you want to lease: ");
         TextField tfAppartmentID = new TextField();
@@ -95,8 +85,8 @@ public class AddRentalView extends Application implements AppBase {
         HBox hRentPaid = new HBox(txtRentPaid, cbRentPaid);
 
         Button btnSubmit = new Button("Submit");
-        VBox vBoxProperty = new VBox(hMainMenu,lblTenantCount, tenantBox, hStatus, hAppartmentID, hTenantID, hStartDate, hEndDate, hTotalRent, hRentPaid, btnSubmit);
 
+        VBox vBoxProperty = new VBox(hMainMenu, tenantBox, hStatus, hAppartmentID, hTenantID, hStartDate, hEndDate, hTotalRent, hRentPaid, btnSubmit);
         vBoxProperty.setSpacing(25);
         vBoxProperty.setPadding(new Insets(95, 12, 15, 12));
         vBoxProperty.setAlignment(Pos.CENTER);

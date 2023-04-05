@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class DisplayTenantView extends Application implements AppBase {
 
-    public void displayTenants(Stage primaryStage, ArrayList<Tenant> tenants) {
+    public VBox displayTenants(Stage primaryStage, ArrayList<Tenant> tenants, int target) {
     
         if (tenants.size() > 0) {
             VBox tenantsVBox = new VBox();
@@ -37,7 +37,9 @@ public class DisplayTenantView extends Application implements AppBase {
     
                 tenantsVBox.getChildren().add(tenantInfoVBox);
             }
-    
+
+            if(target == 1) {
+                
             ScrollPane scrollPane = new ScrollPane(tenantsVBox);
     
             // main menu button
@@ -58,11 +60,16 @@ public class DisplayTenantView extends Application implements AppBase {
             Scene tenantScene = new Scene(borderPropertyPane, 550, 550);
             primaryStage.setTitle("All tenants"); // Set title
             primaryStage.setScene(tenantScene);
-        }
+            }
+            else {
+                return tenantsVBox;
+            }
+        } 
+        return null;
     }
     @Override
     public void start(Stage primaryStage) {
         ArrayList<Tenant> tenants = tenantController.getTenants();
-        displayTenants(primaryStage, tenants);
+        displayTenants(primaryStage, tenants, 1);
     }
 }
