@@ -1,8 +1,9 @@
 package view.Rental;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
-import controller.TenantController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -25,9 +26,9 @@ import model.Tenant;
 import view.AppBase;
 import view.TenantView;
 import view.Property.DisplayPropertyView;
+import view.Property.PropertyTypeView;
 import view.Tenant.DisplayTenantView;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.text.Font;
 
 
 public class AddRentalView extends Application implements AppBase {
@@ -35,6 +36,7 @@ public class AddRentalView extends Application implements AppBase {
     private TextField tfStartDay, tfStartMonth, tfStartYear, tfEndDay, tfEndMonth, tfEndYear;
     VBox tenantBox; 
     ArrayList<VBox> propertyBox;
+    ArrayList<Lease> totalLeases = new ArrayList<>();
     @Override
     public void start(Stage primaryStage) throws Exception {
         
@@ -123,7 +125,52 @@ public class AddRentalView extends Application implements AppBase {
         });
 
         btnSubmit.setOnAction(event -> {
-            
+            ArrayList<Object> savedInfo = new ArrayList<>();
+            //parse start date
+            int startYear = Integer.parseInt(tfStartYear.getText());
+            int startMonth = Integer.parseInt(tfStartMonth.getText());
+            int startDay = Integer.parseInt(tfStartDay.getText());
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(startYear, startMonth - 1, startDay);
+            Date startDate = calendar.getTime();
+
+            // parse end date
+            int endYear = Integer.parseInt(tfEndYear.getText());
+            int endMonth = Integer.parseInt(tfEndMonth.getText());
+            int endDay = Integer.parseInt(tfEndDay.getText());
+            Calendar endCalendar = Calendar.getInstance();
+            endCalendar.set(endYear, endMonth - 1, endDay);
+            Date endDate = endCalendar.getTime();
+
+            int selectedPropertyID = Integer.parseInt(tfAppartmentID.getText());
+            int selectedTenantID = Integer.parseInt(tfTenantID.getText());
+            int totalRent = Integer.parseInt(tfTotalRent.getText());
+            boolean rentPaid = cbRentPaid.isSelected();
+
+            PropertyTypeView propertyTypeView = new PropertyTypeView();
+            Property selectedPropertyObject = propertyTypeView.getObjectByID(selectedPropertyID, properties);
+            Tenant tenant = new Tenant();
+            Tenant selectedTenantObject = tenant.getObjectByID(selectedTenantID, tenants);
+
+            savedInfo.add(startDate);
+            savedInfo.add(endDate);
+            savedInfo.add(totalRent);
+            savedInfo.add(rentPaid);
+            savedInfo.add(selectedTenantObject);
+            savedInfo.add(selectedPropertyObject);
+
+            Lease addedLease = lease.create(savedInfo);
+            System.out.println(addedLease.display());
+            totalLeases.add(addedLease);
+
+            //now add that lease to tenant object field.
+            selectedTenantObject.setLeases(addedLease);
+            //make property unavailable
+            selectedPropertyObject.setStatus(false);
+            selectedPropertyObject.setTenent(selectedTenantObject);
+
+            statusMessage.setText("Property Rented!");
+            statusMessage.setStyle("-fx-text-fill: red; -fx-font-size: 16px;");
         });
     }
     
