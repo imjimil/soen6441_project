@@ -29,11 +29,6 @@ public class InterestInUnitView extends Application implements AppBase {
         Button btnMainMenu = new Button("Main Menu");
         HBox hMainMenu = new HBox(btnMainMenu);
 
-        btnMainMenu.setOnAction(event -> {
-            primaryStage.setTitle("Project Phase 2 Demo");
-            primaryStage.setScene(propertyController.getPreScene());
-        });
-
         Label statusMessage = new Label();
         HBox hStatus = new HBox(statusMessage);
 
@@ -60,14 +55,6 @@ public class InterestInUnitView extends Application implements AppBase {
         TextField tfTenantID = new TextField();
         HBox hTenantID = new HBox(txtTenantID, tfTenantID);
 
-//        Text txtTotalRent = new Text(80, 80, "Total Rent: ");
-//        TextField tfTotalRent = new TextField();
-//        HBox hTotalRent = new HBox(txtTotalRent, tfTotalRent);
-//
-//        Text txtRentPaid = new Text(80, 80, "Rent Paid: ");
-//        CheckBox cbRentPaid = new CheckBox();
-//        HBox hRentPaid = new HBox(txtRentPaid, cbRentPaid);
-
         Button btnSubmit = new Button("Submit");
 
         if(tenantBox != null) {
@@ -93,12 +80,12 @@ public class InterestInUnitView extends Application implements AppBase {
 
             btnMainMenu.setOnAction(event -> {
                 primaryStage.setTitle("Project Phase 2 Demo");
-                primaryStage.setScene(rentalController.getPreScene());
+                primaryStage.setScene(propertyController.getPreScene());
             });
 
             btnSubmit.setOnAction(event -> {
                 if(!tfAppartmentID.getText().isEmpty() && !tfTenantID.getText().isEmpty()) {
-                    String interestedData = tfAppartmentID.getText() + "-" + tfTenantID.getText();
+                    String interestedData = tfTenantID.getText() + "-" + tfAppartmentID.getText();
                     boolean returnResult = propertyController.interestedInAUnit(interestedData, tenants);
                     if(returnResult) {
                         statusMessage.setText("Added interested unit successfully!");

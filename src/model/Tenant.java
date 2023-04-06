@@ -137,7 +137,7 @@ public class Tenant extends TenantObservable implements ITenantLease {
 				interestedUnits.add(selectedProperty);
 				notifyObserver(this);
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("An error occurred, please try again!!!");
 		}
 	}

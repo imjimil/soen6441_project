@@ -32,28 +32,34 @@ public class AddPropertyView extends Application implements AppBase {
         Label statusMessage = new Label();
         HBox hStatus = new HBox(statusMessage);
 
-        Text txtNoBedRoom = new Text(80, 80, "Number of bed room:");
+        Label lblNoBedRoom = new Label("Number of bed room:");
+        lblNoBedRoom.setPadding(new Insets(0,10,0,0));
         TextField tfNoBedRoom = new TextField();
-        HBox hBedRoom = new HBox(txtNoBedRoom, tfNoBedRoom);
-        Text txtNoBathRoom = new Text(80, 80, "Number of bath room:");
+        HBox hBedRoom = new HBox(lblNoBedRoom, tfNoBedRoom);
+        Label lblNoBathRoom = new Label("Number of bath room:");
+        lblNoBathRoom.setPadding(new Insets(0,10,0,0));
         TextField tfNoBathRoom = new TextField();
-        HBox hBathRoom = new HBox(txtNoBathRoom, tfNoBathRoom);
+        HBox hBathRoom = new HBox(lblNoBathRoom, tfNoBathRoom);
 
-        Text txtFootage = new Text(80, 80, "Square Footage:");
+        Label lblFootage = new Label("Square Footage:");
+        lblFootage.setPadding(new Insets(0,10,0,0));
         TextField tfFootage = new TextField();
-        HBox hFootage = new HBox(txtFootage, tfFootage);
+        HBox hFootage = new HBox(lblFootage, tfFootage);
 
-        Text txtStreetName = new Text(80, 80, "Street Name:");
+        Label lblStreetName = new Label("Street Name:");
+        lblStreetName.setPadding(new Insets(0,10,0,0));
         TextField tfStreetName = new TextField();
-        HBox hStreet = new HBox(txtStreetName, tfStreetName);
+        HBox hStreet = new HBox(lblStreetName, tfStreetName);
 
-        Text txtCity = new Text(80, 80, "City:");
+        Label lblCity = new Label("City:");
+        lblCity.setPadding(new Insets(0,10,0,0));
         TextField tfCity = new TextField();
-        HBox hCity = new HBox(txtCity, tfCity);
+        HBox hCity = new HBox(lblCity, tfCity);
 
-        Text txtPostalCode = new Text(80, 80, "Postal Code:");
+        Label lblPostalCode = new Label("Postal Code:");
+        lblPostalCode.setPadding(new Insets(0,10,0,0));
         TextField tfPostalCode = new TextField();
-        HBox hPostalCode = new HBox(txtPostalCode, tfPostalCode);
+        HBox hPostalCode = new HBox(lblPostalCode, tfPostalCode);
 
         Button btnSubmit = new Button("Submit");
         VBox vBoxProperty = null;

@@ -1,20 +1,10 @@
-import controller.PropertyController;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.Apartment;
-import model.Property;
-import model.Tenant;
-import utility.Constant;
 import view.AppBase;
 import view.Property.InterestInUnitView;
 import view.Property.PropertyTypeView;
@@ -22,9 +12,6 @@ import view.Rental.AddRentalView;
 import view.Property.DisplayPropertyView;
 import view.Tenant.AddTenantView;
 import view.Tenant.DisplayTenantView;
-import view.TenantView;
-
-import java.util.ArrayList;
 
 /**
  * Project Phase 2
@@ -34,7 +21,7 @@ import java.util.ArrayList;
  * 
  */
 
-public class ProjectPhase1 extends Application implements AppBase {
+public class ProjectPhase2 extends Application implements AppBase {
 	 @Override // Override the start method in the Application class
 	  public void start(Stage primaryStage) {
 	    Pane pane = new Pane();

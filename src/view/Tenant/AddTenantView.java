@@ -37,17 +37,20 @@ public class AddTenantView extends Application implements AppBase {
             Label statusMessage = new Label();
             HBox hStatus = new HBox(statusMessage);
 
-            Text txtTenantName = new Text(80, 80, "TenantName");
+            Label lblTenantName = new Label("Tenant Name:");
+            lblTenantName.setPadding(new Insets(0,10,0,0));
             TextField tfTenantName = new TextField();
-            HBox hTenantName = new HBox(txtTenantName, tfTenantName);
+            HBox hTenantName = new HBox(lblTenantName, tfTenantName);
 
-            Text txtTenantPhone = new Text(80, 80, "Tenant PhoneNo:");
+            Label lblTenantPhone = new Label("Tenant PhoneNo:");
+            lblTenantPhone.setPadding(new Insets(0,10,0,0));
             TextField tfTenantPhone = new TextField();
-            HBox hTenantPhone = new HBox(txtTenantPhone, tfTenantPhone);
+            HBox hTenantPhone = new HBox(lblTenantPhone, tfTenantPhone);
 
-            Text txtEmailID = new Text(80, 80, "Tenant EmailID:");
+            Label lblEmailID = new Label("Tenant Email Address:");
+            lblEmailID.setPadding(new Insets(0,10,0,0));
             TextField tfEmailID = new TextField();
-            HBox hEmailID = new HBox(txtEmailID, tfEmailID);
+            HBox hEmailID = new HBox(lblEmailID, tfEmailID);
 
             Button btnSubmit = new Button("Submit");
             VBox vBoxProperty = new VBox(hMainMenu, hStatus, hTenantName, hTenantPhone, hEmailID, btnSubmit);
