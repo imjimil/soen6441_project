@@ -48,6 +48,10 @@ public abstract class Property implements IProperty {
 		this.status = stat;
 	}
 
+	public boolean getStatus() {
+		return status;
+	}
+
 	public int getNumberOfBedRoom() {
 		return numberOfBedRoom;
 	}

@@ -35,7 +35,7 @@ public class AddRentalView extends Application implements AppBase {
 
     private TextField tfStartDay, tfStartMonth, tfStartYear, tfEndDay, tfEndMonth, tfEndYear;
     VBox tenantBox; 
-    ArrayList<VBox> propertyBox;
+    VBox propertyBox;
     ArrayList<Lease> totalLeases = new ArrayList<>();
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -53,7 +53,7 @@ public class AddRentalView extends Application implements AppBase {
         if(properties.size() > 0) {
             DisplayPropertyView displayPropertyView = new DisplayPropertyView();
             Button btnRefresh = new Button();
-            propertyBox = displayPropertyView.buildScene(properties, 0, btnRefresh, null);
+            propertyBox = new DisplayVacantProperty().displayVacantProperty(primaryStage, properties, 0);
         }
 
         //showing tenants
@@ -100,7 +100,7 @@ public class AddRentalView extends Application implements AppBase {
         Button btnSubmit = new Button("Submit");
 
         VBox vBoxProperty = new VBox(hMainMenu, new Separator(), tenantBox, new Separator(), hStatus, hAppartmentID, hTenantID, hStartDate, hEndDate, hTotalRent, hRentPaid, btnSubmit);
-        vBoxProperty.getChildren().addAll(1, propertyBox);
+        vBoxProperty.getChildren().add(1, propertyBox);
         vBoxProperty.setSpacing(25);
         vBoxProperty.setPadding(new Insets(95, 12, 15, 12));
         vBoxProperty.setAlignment(Pos.CENTER);

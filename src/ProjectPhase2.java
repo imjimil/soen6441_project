@@ -9,6 +9,8 @@ import view.AppBase;
 import view.Property.InterestInUnitView;
 import view.Property.PropertyTypeView;
 import view.Rental.AddRentalView;
+import view.Rental.DisplayRentedProperty;
+import view.Rental.DisplayVacantProperty;
 import view.Property.DisplayPropertyView;
 import view.Tenant.AddTenantView;
 import view.Tenant.DisplayTenantView;
@@ -84,6 +86,26 @@ public class ProjectPhase2 extends Application implements AppBase {
 			try {
 				rentalView.start(primaryStage);
 				rentalController.setPreScene(btnRentUnit.getScene());
+			}
+			catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		});
+
+		btnVacantUnits.setOnAction(e -> {
+			DisplayVacantProperty displayVacentProperty = new DisplayVacantProperty();
+			try {
+				displayVacentProperty.start(primaryStage);
+			}
+			catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		});
+
+		btnRentedUnits.setOnAction(e -> {
+			DisplayRentedProperty displayRentedProperty = new DisplayRentedProperty();
+			try {
+				displayRentedProperty.start(primaryStage);
 			}
 			catch(Exception ex) {
 				ex.printStackTrace();
