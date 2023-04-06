@@ -76,6 +76,10 @@ public class Lease implements ITenantLease {
 		return tenantInfo;
 	}
 
+	public Property getPropertyInfo() {
+		return propertyInfo;
+	}
+
 	public void setTenantInfo(Tenant tenantInfo) {
 		this.tenantInfo = tenantInfo;
 	}

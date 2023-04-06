@@ -9,6 +9,7 @@ import view.AppBase;
 import view.Property.InterestInUnitView;
 import view.Property.PropertyTypeView;
 import view.Rental.AddRentalView;
+import view.Rental.DisplayLeases;
 import view.Rental.DisplayRentedProperty;
 import view.Rental.DisplayVacantProperty;
 import view.Property.DisplayPropertyView;
@@ -129,6 +130,15 @@ public class ProjectPhase2 extends Application implements AppBase {
 				 ex.printStackTrace();
 			 }
 		 });
+
+		 btnAllLeases.setOnAction(actionEvent -> {
+			DisplayLeases displayLease = new DisplayLeases();
+			try {
+				displayLease.start(primaryStage);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		});
 
 		 btnExpressInterest.setOnAction(actionEvent -> {
 			 InterestInUnitView interestInUnitView = new InterestInUnitView();

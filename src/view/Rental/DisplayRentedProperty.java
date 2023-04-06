@@ -110,7 +110,7 @@ public class DisplayRentedProperty extends Application implements AppBase {
             }
         } 
         else {
-            System.out.println("No vacant property.");
+            System.out.println("No rented property.");
         }
         return null;
     }

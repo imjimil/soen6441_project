@@ -37,6 +37,12 @@ public class AddRentalView extends Application implements AppBase {
     VBox tenantBox; 
     VBox propertyBox;
     ArrayList<Lease> totalLeases = new ArrayList<>();
+
+    //return all leases
+    public ArrayList<Lease> getLeases() {
+        return this.totalLeases;
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         
@@ -162,7 +168,6 @@ public class AddRentalView extends Application implements AppBase {
             Lease addedLease = lease.create(savedInfo);
             System.out.println(addedLease.display());
             totalLeases.add(addedLease);
-
             //now add that lease to tenant object field.
             selectedTenantObject.setLeases(addedLease);
             //make property unavailable
