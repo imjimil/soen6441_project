@@ -54,7 +54,7 @@ public class TenantView implements TenantObserver {
 			result = selectedTenantID + "-" + selectedPropertyID;
 
 			return result;
-		}catch(Exception e){
+		} catch(Exception e){
 			System.out.println("An error occurred,please try again!!!");
 			return "";
 		}

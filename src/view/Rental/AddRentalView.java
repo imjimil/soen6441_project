@@ -59,7 +59,7 @@ public class AddRentalView extends Application implements AppBase {
         if(properties.size() > 0) {
             DisplayPropertyView displayPropertyView = new DisplayPropertyView();
             Button btnRefresh = new Button();
-            propertyBox = new DisplayVacantProperty().displayVacantProperty(primaryStage, properties, 0);
+            propertyBox = new DisplaySpecificProperty().displayVacantProperty(primaryStage, properties, 0, 1);
         }
 
         //showing tenants

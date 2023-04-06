@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -5,13 +8,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import model.Property;
 import view.AppBase;
 import view.Property.InterestInUnitView;
 import view.Property.PropertyTypeView;
 import view.Rental.AddRentalView;
 import view.Rental.DisplayLeases;
-import view.Rental.DisplayRentedProperty;
-import view.Rental.DisplayVacantProperty;
+import view.Rental.DisplaySpecificProperty;
 import view.Property.DisplayPropertyView;
 import view.Tenant.AddTenantView;
 import view.Tenant.DisplayTenantView;
@@ -94,7 +97,7 @@ public class ProjectPhase2 extends Application implements AppBase {
 		});
 
 		btnVacantUnits.setOnAction(e -> {
-			DisplayVacantProperty displayVacentProperty = new DisplayVacantProperty();
+			DisplaySpecificProperty displayVacentProperty = new DisplaySpecificProperty();
 			try {
 				displayVacentProperty.start(primaryStage);
 			}
@@ -104,9 +107,11 @@ public class ProjectPhase2 extends Application implements AppBase {
 		});
 
 		btnRentedUnits.setOnAction(e -> {
-			DisplayRentedProperty displayRentedProperty = new DisplayRentedProperty();
+			//utilizing same function to generate different views.
+			DisplaySpecificProperty displayRentedProperty = new DisplaySpecificProperty();
+			ArrayList<Property> properties = propertyController.getProperties();
 			try {
-				displayRentedProperty.start(primaryStage);
+				displayRentedProperty.displayVacantProperty(primaryStage, properties, 1, 0);
 			}
 			catch(Exception ex) {
 				ex.printStackTrace();

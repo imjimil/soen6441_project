@@ -20,9 +20,9 @@ import model.Property;
 import utility.Constant;
 import view.AppBase;
 
-public class DisplayVacantProperty extends Application implements AppBase {
+public class DisplaySpecificProperty extends Application implements AppBase {
 
-    public VBox displayVacantProperty(Stage primaryStage, ArrayList<Property> properties, int target) {
+    public VBox displayVacantProperty(Stage primaryStage, ArrayList<Property> properties, int target, int displayType) {
         Label lblPropertyType = new Label();
         Label lblCivicAddress = new Label();
         Label lblAptNo = new Label();
@@ -36,7 +36,7 @@ public class DisplayVacantProperty extends Application implements AppBase {
             for (int i = 0; i < properties.size(); i++) {
                 Property p = properties.get(i);
     
-                if(p.getStatus() == true) {
+                if(displayType == 1 ? p.getStatus() == true : p.getStatus() == false) {
                     Label lblTenantNumber = new Label("Property " + (i + 1) + ":");
                     lblTenantNumber.setFont(new Font(20));
                     Label lblPropertyID = new Label("ID: " + p.getID());
@@ -118,7 +118,7 @@ public class DisplayVacantProperty extends Application implements AppBase {
     @Override
     public void start(Stage primaryStage) {
         ArrayList<Property> properties = propertyController.getProperties();
-        displayVacantProperty(primaryStage, properties, 1);
+        displayVacantProperty(primaryStage, properties, 1, 1);
     }
 }
     
