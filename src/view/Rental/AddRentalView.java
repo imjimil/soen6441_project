@@ -36,11 +36,11 @@ public class AddRentalView extends Application implements AppBase {
     private TextField tfStartDay, tfStartMonth, tfStartYear, tfEndDay, tfEndMonth, tfEndYear;
     VBox tenantBox; 
     VBox propertyBox;
-    ArrayList<Lease> totalLeases = new ArrayList<>();
+    public static ArrayList<Lease> totalLeases = new ArrayList<>();
 
     //return all leases
     public ArrayList<Lease> getLeases() {
-        return this.totalLeases;
+        return totalLeases;
     }
 
     @Override
