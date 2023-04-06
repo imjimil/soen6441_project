@@ -142,11 +142,10 @@ public class DisplayPropertyView extends Application implements AppBase {
         ArrayList<Property> properties = propertyController.getProperties();
         Stage secondStage = new Stage();
         if(properties.size() > 0) {
-            Thread t = new Thread(new Runnable() {
+            Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
                     Button btnRefresh = new Button("Refresh list");
-
                     btnRefresh.setOnAction(actionEvent -> {
                         buildScene(properties,1, btnRefresh, secondStage);
                     });
@@ -155,7 +154,7 @@ public class DisplayPropertyView extends Application implements AppBase {
                             @Override
                             public void run() {
                                 buildScene(properties, 1, btnRefresh, secondStage);
-                            }    
+                            }
                         });
                     }
                     catch (Exception ex) {
@@ -163,7 +162,12 @@ public class DisplayPropertyView extends Application implements AppBase {
                     }
                 }
             });
-            t.start();
+            thread.start();
+
+            secondStage.setOnCloseRequest(event -> {
+                thread.interrupt();
+                System.out.println("Thread stopped.");
+            });
         }
     }
 }

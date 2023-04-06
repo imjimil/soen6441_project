@@ -16,10 +16,12 @@ public class PropertyController {
     ArrayList<Property> properties = new ArrayList<>();
     private PropertyTypeView propertyTypeView;
     private Property propertyModel;
+    private Tenant tenantModel;
     private Scene preScene;
     public PropertyController() {
         propertyTypeView = new PropertyTypeView();
         propertyModel = new Apartment();
+        tenantModel = new Tenant();
     }
     public void setPreScene(Scene preScene) {
         this.preScene = preScene;
@@ -50,5 +52,16 @@ public class PropertyController {
         }
 
         return  isSuccess;
+    }
+
+    public boolean interestedInAUnit(String interestedData, ArrayList<Tenant> tenants) {
+        boolean isSuccess = true;
+        if(!interestedData.isEmpty()) {
+            tenantModel.interestedInAUnit(interestedData, tenants, this.properties);
+        } else {
+            isSuccess = false;
+        }
+
+        return isSuccess;
     }
 }

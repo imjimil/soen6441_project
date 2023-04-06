@@ -123,7 +123,7 @@ public class Tenant extends TenantObservable implements ITenantLease {
 	}
 	
 	public void interestedInAUnit(String inputData, ArrayList<Tenant> tenants, ArrayList<Property> properties) {
-		try{
+		try {
 			if(!inputData.isEmpty()) {
 				String [] arrData = inputData.split("-");
 				int tenantId = Integer.parseInt(arrData[0]);
@@ -137,8 +137,8 @@ public class Tenant extends TenantObservable implements ITenantLease {
 				interestedUnits.add(selectedProperty);
 				notifyObserver(this);
 			}
-		}catch(Exception e){
-			System.out.println("An error occurred,please try again!!!");
+		} catch(Exception e) {
+			System.out.println("An error occurred, please try again!!!");
 		}
 	}
 	

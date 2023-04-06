@@ -16,6 +16,7 @@ import model.Property;
 import model.Tenant;
 import utility.Constant;
 import view.AppBase;
+import view.Property.InterestInUnitView;
 import view.Property.PropertyTypeView;
 import view.Rental.AddRentalView;
 import view.Property.DisplayPropertyView;
@@ -115,6 +116,16 @@ public class ProjectPhase1 extends Application implements AppBase {
 			 DisplayPropertyView displayPropertyView = new DisplayPropertyView();
 			 try {
 				 displayPropertyView.start(primaryStage);
+			 } catch (Exception ex) {
+				 ex.printStackTrace();
+			 }
+		 });
+
+		 btnExpressInterest.setOnAction(actionEvent -> {
+			 InterestInUnitView interestInUnitView = new InterestInUnitView();
+			 try {
+				 propertyController.setPreScene(btnExpressInterest.getScene());
+				 interestInUnitView.start(primaryStage);
 			 } catch (Exception ex) {
 				 ex.printStackTrace();
 			 }
