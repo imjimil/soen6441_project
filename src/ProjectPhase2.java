@@ -12,9 +12,7 @@ import model.Property;
 import view.AppBase;
 import view.Property.InterestInUnitView;
 import view.Property.PropertyTypeView;
-import view.Rental.AddRentalView;
-import view.Rental.DisplayLeases;
-import view.Rental.DisplaySpecificProperty;
+import view.Rental.*;
 import view.Property.DisplayPropertyView;
 import view.Tenant.AddTenantView;
 import view.Tenant.DisplayPotentialTenantsView;
@@ -132,6 +130,24 @@ public class ProjectPhase2 extends Application implements AppBase {
 			 DisplayPropertyView displayPropertyView = new DisplayPropertyView();
 			 try {
 				 displayPropertyView.start(primaryStage);
+			 } catch (Exception ex) {
+				 ex.printStackTrace();
+			 }
+		 });
+
+		 btnIsPaidRentUnits.setOnAction(actionEvent -> {
+			 DisplayRentPaidLeases displayRentPaidorNo = new DisplayRentPaidLeases();
+			 try {
+				 displayRentPaidorNo.start(primaryStage);
+			 } catch (Exception ex) {
+				 ex.printStackTrace();
+			 }
+		 });
+
+		 btnEndingLeases.setOnAction(actionEvent -> {
+			 DisplayEndingLeases displayEndLs = new DisplayEndingLeases();
+			 try {
+				 displayEndLs.start(primaryStage);
 			 } catch (Exception ex) {
 				 ex.printStackTrace();
 			 }
