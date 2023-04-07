@@ -1,26 +1,24 @@
 package controller;
 
 import javafx.scene.Scene;
-import model.Apartment;
-import model.Property;
-import model.PropertyFactory;
 import model.Tenant;
-import utility.PropertyType;
-import view.Property.PropertyTypeView;
-import view.TenantView;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 public class TenantController {
     ArrayList<Tenant> tenants = new ArrayList<>();
-    private TenantView tenantView;
     private Tenant tenantModel;
     private Scene preScene;
     public TenantController() {
         //tenantView = new TenantView();
         tenantModel = new Tenant();
     }
+
+    public Tenant getTenantModel() {
+        return this.tenantModel;
+    }
+
     public void setPreScene(Scene preScene) {
         this.preScene = preScene;
     }

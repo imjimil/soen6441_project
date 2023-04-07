@@ -11,9 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import model.Lease;
-import model.Property;
-import model.Tenant;
+import model.*;
 import view.AppBase;
 import view.Tenant.DisplayTenantView;
 
@@ -24,8 +22,6 @@ public class InterestInUnitView extends Application implements AppBase {
     ArrayList<VBox> propertyBox;
     @Override
     public void start(Stage primaryStage) {
-        ArrayList<Object> info = new ArrayList<>();
-
         Button btnMainMenu = new Button("Main Menu");
         HBox hMainMenu = new HBox(btnMainMenu);
 

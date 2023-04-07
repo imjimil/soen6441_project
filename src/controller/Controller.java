@@ -11,22 +11,22 @@ import model.Tenant;
 import utility.PropertyType;
 import view.Property.PropertyTypeView;
 import view.RentalView;
-import view.TenantView;
+//import view.TenantView;
 
 public class Controller {
 	private PropertyTypeView propertyTypeView;
-	private TenantView tenantView;
+//	private TenantView tenantView;
 	private RentalView rentalView;
 	private Property propertyModel;
 	private Tenant tenantModel;
 
-	public Controller(PropertyTypeView propertyTypeView, TenantView tenantView, RentalView rentalView, Property propertyModel, Tenant tenantModel) {
-		this.propertyTypeView = propertyTypeView;
-		this.propertyModel = propertyModel;
-		this.tenantView = tenantView;
-		this.rentalView = rentalView;
-		this.tenantModel = tenantModel;
-	}
+//	public Controller(PropertyTypeView propertyTypeView, TenantView tenantView, RentalView rentalView, Property propertyModel, Tenant tenantModel) {
+//		this.propertyTypeView = propertyTypeView;
+//		this.propertyModel = propertyModel;
+//		this.tenantView = tenantView;
+//		this.rentalView = rentalView;
+//		this.tenantModel = tenantModel;
+//	}
 	
 	public void mainFunction() {
 		Scanner scanner = new Scanner(System.in);
@@ -73,7 +73,7 @@ public class Controller {
 			case 2:
 				// Add a tenant
 				ArrayList<Object> tenantInfo = new ArrayList<>();
-				tenantInfo = tenantView.getTenantInfo();
+//				tenantInfo = tenantView.getTenantInfo();
 				Tenant tenant = new Tenant();
 				Tenant newTenant = tenant.create(tenantInfo);
 				tenants.add(newTenant);
@@ -112,7 +112,7 @@ public class Controller {
 			case 4:
 				// Display tenants
 				if(tenants.size() > 0) {
-					tenantView.displayAllTenants(tenants);
+//					tenantView.displayAllTenants(tenants);
 				} else {
 					System.out.println("No tenants found.");
 				}
@@ -149,8 +149,8 @@ public class Controller {
 				break;
 			case 9:
 				// Express an interest in a unit
-				String interestedData = tenantView.interestedInAUnit(properties, tenants);
-				tenantModel.interestedInAUnit(interestedData, tenants, properties);
+//				String interestedData = tenantView.interestedInAUnit(properties, tenants);
+//				tenantModel.interestedInAUnit(interestedData, tenants, properties);
 				
 				break;
 			case 10:

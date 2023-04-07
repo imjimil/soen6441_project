@@ -27,10 +27,7 @@ public class AddTenantView extends Application implements AppBase {
     @Override
     public void start(Stage primaryStage) {
         {
-            Tenant tenantModel = new Tenant();
-            view.TenantView tenantView = new view.TenantView(tenantModel);
             ArrayList<Object> tenantData = new ArrayList<Object>();
-           // tenantController.setPreScene(btnAddTenant.getScene());
 
             Button btnMainMenu = new Button("Main Menu");
             HBox hMainMenu = new HBox(btnMainMenu);

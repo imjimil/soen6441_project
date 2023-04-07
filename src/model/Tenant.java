@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Project Phase 1
+ * Project Phase 2
  * Student 1: 	Quoc Phong Ngo 				- 40230574
  * Student 2: 	Jimil Suchitkumar Prajapati - 40205477
  * Student 3:   Anitha Ramakrishnan			- 40231724
@@ -26,6 +26,8 @@ public class Tenant extends TenantObservable implements ITenantLease {
 	private ArrayList<Property> interestedUnits;
 	
 	private Property property;
+
+	private ArrayList<Tenant> tenantList = new ArrayList<>();
 	
 	public Tenant() {
 		super();
@@ -42,6 +44,10 @@ public class Tenant extends TenantObservable implements ITenantLease {
 		this.tenantEmail = tenantEmail;
 		this.leases = new ArrayList<>();
 		this.interestedUnits = new ArrayList<>();
+	}
+
+	public ArrayList<Tenant> getTenantList() {
+		return this.tenantList;
 	}
 	
 	public int getTenantId() {
@@ -134,7 +140,18 @@ public class Tenant extends TenantObservable implements ITenantLease {
 				this.tenantName = selectedTenant.getTenantName();
 				// load property object
 				Property selectedProperty = property.getPropertyByID(propertyId, properties);
-				interestedUnits.add(selectedProperty);
+				this.interestedUnits.add(selectedProperty);
+				selectedTenant.setInterestedUnits(this.interestedUnits);
+				if(tenantList.size() > 0) {
+					for(Tenant tnt: tenantList) {
+						if(tnt.getID() != selectedTenant.getID()) {
+							this.tenantList.add(selectedTenant);
+						}
+					}
+				} else {
+					this.tenantList.add(selectedTenant);
+				}
+
 				notifyObserver(this);
 			}
 		} catch (Exception e) {

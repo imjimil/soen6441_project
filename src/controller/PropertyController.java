@@ -7,7 +7,6 @@ import model.PropertyFactory;
 import model.Tenant;
 import utility.PropertyType;
 import view.Property.PropertyTypeView;
-import view.TenantView;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -28,6 +27,10 @@ public class PropertyController {
     }
     public Scene getPreScene() {
         return this.preScene;
+    }
+
+    public Tenant getTenantModel() {
+        return this.tenantModel;
     }
     public ArrayList<Property> getProperties() {
         return this.properties;

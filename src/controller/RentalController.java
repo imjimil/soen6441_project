@@ -4,7 +4,6 @@ import javafx.scene.Scene;
 import model.Lease;
 import model.Tenant;
 import view.RentalView;
-import view.TenantView;
 
 import java.util.ArrayList;
 

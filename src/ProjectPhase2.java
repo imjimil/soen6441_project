@@ -17,6 +17,7 @@ import view.Rental.DisplayLeases;
 import view.Rental.DisplaySpecificProperty;
 import view.Property.DisplayPropertyView;
 import view.Tenant.AddTenantView;
+import view.Tenant.DisplayPotentialTenantsView;
 import view.Tenant.DisplayTenantView;
 
 /**
@@ -155,7 +156,18 @@ public class ProjectPhase2 extends Application implements AppBase {
 			 }
 		 });
 
-	    // Create a scene and place it in the stage
+		 btnPotentialTenants.setOnAction(actionEvent -> {
+			 DisplayPotentialTenantsView potentialTenantsView = new DisplayPotentialTenantsView();
+			 try {
+				 tenantController.setPreScene(btnPotentialTenants.getScene());
+				 potentialTenantsView.start(primaryStage);
+			 } catch (Exception ex) {
+				 ex.printStackTrace();
+			 }
+		 });
+
+
+		 // Create a scene and place it in the stage
 	    Scene scene = new Scene(borderPane, 800, 350);
 	    primaryStage.setTitle("Project Phase 2 Demo"); // Set title
 	    primaryStage.setScene(scene); // Place the scene in the stage
