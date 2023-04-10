@@ -32,11 +32,11 @@ public class Driver {
         set2.add(new Disciplines(2, "IE"));
         set2.add(new Disciplines(3, "IT"));
         
-        System.out.println(set1.equals(set2)); // true becuase all ids are same
+        System.out.println(set1.equals(set2)); // true because all ids are same
         
         set2.add(new Disciplines(4, "Dave")); 
         
-        System.out.println(set1.equals(set2)); // flase because set2>set1
+        System.out.println(set1.equals(set2)); // false because set2>set1
         
         System.out.print("set1- "); 
         set1.display(); // {1,2,3}
@@ -47,6 +47,6 @@ public class Driver {
         Disciplines removedPerson = set1.remove(2);
         set1.display(); // {1,3}
 
-        System.out.println(set1.peek(2)); //false because it's removed.
+        System.out.println(set1.peek(2)); //false because it is removed.
     }
 }
