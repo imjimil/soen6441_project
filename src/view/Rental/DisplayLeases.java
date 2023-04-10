@@ -54,6 +54,7 @@ public class DisplayLeases extends Application implements AppBase {
                 HBox hMainMenu = new HBox(btnMainMenu);
                 btnMainMenu.setOnAction(event -> {
                     // go back to previous scene
+                    primaryStage.setTitle("Project Phase 2 Demo");
                     primaryStage.setScene(tenantController.getPreScene());
                 });
                 Pane pMenu = new Pane();
