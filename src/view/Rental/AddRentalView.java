@@ -24,15 +24,12 @@ import model.Lease;
 import model.Property;
 import model.Tenant;
 import view.AppBase;
-import view.TenantView;
 import view.Property.DisplayPropertyView;
 import view.Property.PropertyTypeView;
 import view.Tenant.DisplayTenantView;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 
-
 public class AddRentalView extends Application implements AppBase {
-
     private TextField tfStartDay, tfStartMonth, tfStartYear, tfEndDay, tfEndMonth, tfEndYear;
     VBox tenantBox; 
     VBox propertyBox;
@@ -47,7 +44,6 @@ public class AddRentalView extends Application implements AppBase {
     public void start(Stage primaryStage) throws Exception {
         
         Lease lease = new Lease();
-        ArrayList<Object> info = new ArrayList<>();
 
         Button btnMainMenu = new Button("Main Menu");
         HBox hMainMenu = new HBox(btnMainMenu);
