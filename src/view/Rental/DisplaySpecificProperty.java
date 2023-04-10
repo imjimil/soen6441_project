@@ -100,8 +100,8 @@ public class DisplaySpecificProperty extends Application implements AppBase {
         
                 // Build scene
                 BorderPane borderPropertyPane = new BorderPane();
-                borderPropertyPane.setTop(scrollPane);
-                borderPropertyPane.setBottom(pMenu);
+                borderPropertyPane.setCenter(scrollPane);
+                borderPropertyPane.setTop(pMenu);
                 Scene vacantPropertyScene = new Scene(borderPropertyPane, 550, 550);
                 primaryStage.setTitle("All Vacant properties"); // Set title
                 primaryStage.setScene(vacantPropertyScene);

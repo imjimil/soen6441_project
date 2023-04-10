@@ -81,8 +81,8 @@ public class DisplayRentPaidLeases extends Application implements AppBase {
         
                 // Build scene
                 BorderPane borderPropertyPane = new BorderPane();
-                borderPropertyPane.setTop(scrollPane);
-                borderPropertyPane.setBottom(pMenu);
+                borderPropertyPane.setCenter(scrollPane);
+                borderPropertyPane.setTop(pMenu);
                 Scene leaseScene = new Scene(borderPropertyPane, 550, 550);
                 primaryStage.setTitle("All Paid/Not Paid leases"); // Set title
                 primaryStage.setScene(leaseScene);

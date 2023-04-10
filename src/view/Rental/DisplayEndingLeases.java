@@ -85,8 +85,8 @@ public class DisplayEndingLeases extends Application implements AppBase {
         
                 // Build scene
                 BorderPane borderPropertyPane = new BorderPane();
-                borderPropertyPane.setTop(scrollPane);
-                borderPropertyPane.setBottom(pMenu);
+                borderPropertyPane.setCenter(scrollPane);
+                borderPropertyPane.setTop(pMenu);
                 Scene leaseScene = new Scene(borderPropertyPane, 550, 550);
                 primaryStage.setTitle("All Ending leases"); // Set title
                 primaryStage.setScene(leaseScene);
