@@ -63,7 +63,8 @@ public class DisplaySpecificProperty extends Application implements AppBase {
                     Label lblStreetName = new Label("Street Name: "+((Property) p).getStreetName());
                     Label lblCity = new Label("City: "+((Property) p).getCity());
                     Label lblPostalCode = new Label("Postal Code: "+((Property) p).getPostalCode());
-                    Label lblStatus = new Label("status: "+((Property) p).getStatus());
+                    String stt = ((Property) p).getStatus() ? "Available" : "Not available";
+                    Label lblStatus = new Label("Status: "+ stt);
 
                     if(Constant.APARTMENT_CLASS_NAME.equals(p.getClass().getSimpleName())) {
                         propertyInfoVBox = new VBox(lblPropertyType, lblPropertyID, lblCivicAddress, lblAptNo, lblBedRoom, lblBathRoom, lblSquareFootage, lblStreetName, lblCity, lblPostalCode, lblStatus);
