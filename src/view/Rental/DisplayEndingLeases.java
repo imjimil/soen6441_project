@@ -76,6 +76,7 @@ public class DisplayEndingLeases extends Application implements AppBase {
                 HBox hMainMenu = new HBox(btnMainMenu);
                 btnMainMenu.setOnAction(event -> {
                     // go back to previous scene
+                    primaryStage.setTitle("Project Phase 2 Demo");
                     primaryStage.setScene(tenantController.getPreScene());
                 });
                 Pane pMenu = new Pane();
@@ -87,7 +88,7 @@ public class DisplayEndingLeases extends Application implements AppBase {
                 borderPropertyPane.setTop(scrollPane);
                 borderPropertyPane.setBottom(pMenu);
                 Scene leaseScene = new Scene(borderPropertyPane, 550, 550);
-                primaryStage.setTitle("All leases"); // Set title
+                primaryStage.setTitle("All Ending leases"); // Set title
                 primaryStage.setScene(leaseScene);
             }
             else {
